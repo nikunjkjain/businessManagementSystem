@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Product">
+ 
+    <resultMap id="productResult" type="Product">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="unitPrice" column="unitPrice"/>
+        <result property="unitMeasure" column="unitMeasure"/>  
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="productResult">
+        SELECT * FROM product;
+    </select>
+ 
+    <select id="getProductById" parameterType="int" resultMap="productResult">
+        SELECT * FROM product WHERE id = #{id};
+    </select>
+ 
+    <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product (name, unitPrice, unitMeasure) VALUES (#{name}, #{unitPrice}, #{unitMeasure});
+    </insert>
+ 
+    <update id="update" parameterType="Product">
+        UPDATE product
+        SET name = #{name}, unitPrice = #{unitPrice}, unitMeasure = #{unitMeasure}
+        WHERE id = #{id} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from product WHERE id = #{id}
+    </delete>
+</mapper>

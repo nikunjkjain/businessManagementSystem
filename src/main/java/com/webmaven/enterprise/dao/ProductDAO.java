@@ -1,0 +1,117 @@
+package com.webmaven.enterprise.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.webmaven.enterprise.bean.Product;
+
+public class ProductDAO {
+	
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
+	
+	
+	/**
+	 * Returns the list of all Products instances from the database.
+	 * 
+	 * @return the list of all Products instances from the database.
+	 */
+	public List<Product> selectAll() {
+		List<Product> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			list = session.selectList("Product.selectAll");
+		} finally {
+			session.close();
+		}
+		System.out.println("selectAll() --> " + list);
+		return list;
+
+	}
+
+	
+	/**
+	 * Select instance of Product from the database.
+	 * 
+	 * @param ProductId
+	 */
+	public Product getProductById(Integer ProductId) {
+		Product ProductDetails = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			ProductDetails = (Product) session.selectOne("Product.getProductById", ProductId);
+
+		} finally {
+			session.close();
+		}
+		return ProductDetails;
+	}
+
+	/**
+	 * Insert an instance of Person into the database.
+	 * 
+	 * @param login
+	 *            the instance to be persisted.
+	 */
+	public int insert(Product login) {
+		int id = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			id = session.insert("Product.insert", login);
+		} finally {
+			session.commit();
+			session.close();
+		}
+		System.out.println("insert(" + login + ") --> " + login.getId());
+		return id;
+	}
+
+	/**
+	 * Update an instance of Login into the database.
+	 * 
+	 * @param login
+	 *            the instance to be persisted.
+	 */
+	public void update(Product login) {
+		int id = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			id = session.update("Product.update", login);
+
+		} finally {
+			session.commit();
+			session.close();
+		}
+		System.out.println("update(" + login + ") --> updated");
+	}
+
+	/**
+	 * Delete an instance of Login from the database.
+	 * 
+	 * @param id
+	 *            value of the instance to be deleted.
+	 */
+	public int delete(int id) {
+
+		SqlSession session = sqlSessionFactory.openSession();
+		int rows = 0;
+		try {
+			rows = session.delete("Product.delete", id);
+		} finally {
+			session.commit();
+			session.close();
+		}
+		System.out.println("deleted Product(" + id + ")");
+		return rows;
+	}
+}

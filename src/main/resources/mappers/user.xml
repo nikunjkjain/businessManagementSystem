@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="User">
+ 
+    <resultMap id="userResult" type="User">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="mobileNo" column="mobileNo"/>
+        <result property="email" column="email"/>
+        <result property="address" column="address"/>
+        <result property="status" column="status"/>   
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="userResult">
+        SELECT * FROM user;
+    </select>
+ 
+    <select id="validateUser" parameterType="User" resultMap="userResult">
+        SELECT * FROM user WHERE username = #{username} and password = #{password} and status = 1;
+    </select>
+    
+    <select id="getUserById" parameterType="int" resultMap="userResult">
+        SELECT * FROM user WHERE id = #{id};
+    </select>
+ 
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username, password, name, mobileNo, email, address, status) VALUES (#{username}, #{password}, #{name}, #{mobileNo}, #{email}, #{address}, #{status});
+    </insert>
+ 
+    <update id="update" parameterType="User">
+        UPDATE user
+        SET password = #{password}, name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}
+        WHERE id = #{id} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from user WHERE id = #{id}
+    </delete>
+</mapper>
