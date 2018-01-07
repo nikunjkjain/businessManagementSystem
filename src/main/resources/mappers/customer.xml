@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Customer">
+ 
+    <resultMap id="customerResult" type="Customer">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="mobileNo" column="mobileNo"/>
+        <result property="altContactNo" column="altContactNo"/>
+        <result property="email" column="email"/>
+        <result property="companyName" column="companyName"/>
+        <result property="billingAddress" column="billingAddress"/>
+        <result property="status" column="status"/>   
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="customerResult">
+        SELECT * FROM customer;
+    </select>
+ 
+    <select id="getCustomerById" parameterType="int" resultMap="customerResult">
+        SELECT * FROM customer WHERE id = #{id};
+    </select>
+ 
+    <insert id="insert" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO customer (name, mobileNo, altContactNo, email, companyName, billingAddress, status) VALUES (#{name}, #{mobileNo}, #{altContactNo}, #{email}, #{companyName}, #{billingAddress}, #{status});
+    </insert>
+ 
+    <update id="update" parameterType="Customer">
+        UPDATE customer
+        SET name = #{name}, mobileNo = #{mobileNo}, altContactNo = #{altContactNo}, email = #{email}, companyName = #{companyName}, billingAddress = #{billingAddress}, status = #{status}
+        WHERE id = #{id} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from customer WHERE id = #{id}
+    </delete>
+</mapper>
