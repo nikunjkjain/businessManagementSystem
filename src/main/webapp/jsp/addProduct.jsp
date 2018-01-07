@@ -83,12 +83,6 @@
 												placeholder="unitMeasure">
 										</div>
 
-										<!-- <label for="inputEmail3" class="col-sm-2 control-label">Re-Password:</label>
-
-										<div class="col-sm-4">
-											<input type="password" class="form-control" id="repassword" name="repassword"
-												placeholder="Re-Password">
-										</div> -->
 									</div>
 								</div>
 								<!-- /.box-body -->

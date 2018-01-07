@@ -1,4 +1,4 @@
-package com.webmaven.enterprise.embeddedjetty;
+package com.webmaven.embeddedjetty;
 
 import java.io.IOException;
 

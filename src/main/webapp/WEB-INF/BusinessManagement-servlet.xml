@@ -8,15 +8,17 @@
    http://www.springframework.org/schema/mvc
    http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-	<context:component-scan base-package="com.webmaven"/>
-	<context:component-scan base-package="com.webmaven.enterprise.dao"/>
-	<context:component-scan base-package="com.webmaven.enterprise.bean"/>
-	<context:component-scan base-package="com.webmaven.enterprise.controller"/>
-	
-	<mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
-	
+	<context:component-scan base-package="com.webmaven" />
+	<context:component-scan base-package="com.webmaven.dao" />
+	<context:component-scan base-package="com.webmaven.bean" />
+	<context:component-scan base-package="com.webmaven.controller" />
+	<context:component-scan base-package="com.webmaven.util" />
+
+	<mvc:resources mapping="/resources/**" location="/resources/"
+		cache-period="31556926" />
+
 	<mvc:annotation-driven />
-	
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/" />
@@ -36,20 +38,38 @@
 		<property name="configLocation" value="classpath:mybatis-configuration.xml" />
 	</bean>
 
-	<bean id="userDao" class="com.webmaven.enterprise.dao.UserDAO">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean>
-	
-	<bean id="productDao" class="com.webmaven.enterprise.dao.ProductDAO">
+	<bean id="userDao" class="com.webmaven.dao.UserDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 
-	<bean id="userController" class="com.webmaven.enterprise.controller.UserController">
+	<bean id="productDao" class="com.webmaven.dao.ProductDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<bean id="customerDao" class="com.webmaven.dao.CustomerDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+	<bean id="userController" class="com.webmaven.controller.UserController">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
-	
-	<bean id="productController" class="com.webmaven.enterprise.controller.ProductController">
+
+	<bean id="productController" class="com.webmaven.controller.ProductController">
 		<property name="productDao" ref="productDao"></property>
 	</bean>
 
+	<bean id="customerController" class="com.webmaven.controller.CustomerController">
+		<property name="customerDao" ref="customerDao"></property>
+	</bean>
+
+	<bean id="jacksonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jacksonMessageConverter" />
+			</list>
+		</property>
+</bean>
 </beans>

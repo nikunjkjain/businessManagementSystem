@@ -1,4 +1,4 @@
-package com.webmaven.enterprise.dao;
+package com.webmaven.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.webmaven.enterprise.bean.Product;
+import com.webmaven.bean.Product;
 
 public class ProductDAO {
 	

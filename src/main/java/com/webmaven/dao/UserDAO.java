@@ -1,4 +1,4 @@
-package com.webmaven.enterprise.dao;
+package com.webmaven.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.webmaven.enterprise.bean.User;
+import com.webmaven.bean.User;
 
 public class UserDAO {
 	
@@ -43,16 +43,16 @@ public class UserDAO {
 	 * @param person
 	 *            the instance to be persisted.
 	 */
-	public User validateUser(User login) {
+	public User validateUser(User user) {
 		User validatedLogin = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			validatedLogin = (User) session.selectOne("User.validateUser", login);
+			validatedLogin = (User) session.selectOne("User.validateUser", user);
 
 		} finally {
 			session.close();
 		}
-		System.out.println("validateUser(" + login + ") --> " + validatedLogin);
+		System.out.println("validateUser(" + user + ") --> " + validatedLogin);
 		return validatedLogin;
 	}
 	

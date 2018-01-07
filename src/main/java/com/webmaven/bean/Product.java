@@ -1,5 +1,5 @@
 
-package com.webmaven.enterprise.bean;
+package com.webmaven.bean;
 
 public class Product {
 
