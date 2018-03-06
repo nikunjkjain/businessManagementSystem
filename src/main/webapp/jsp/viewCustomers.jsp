@@ -78,9 +78,20 @@
 												<td>${CustomerList.email}</td>
 												<td>${CustomerList.status}</td>
 												<td>
-												<a href="viewCustomer/${CustomerList.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a> 
-												<a href="editCustomer/${CustomerList.id}/" class="btn btn-info btn-xs">Edit <i class="fa fa-edit"></i></a>
-												<a class="btn btn-danger btn-xs modelLink" data-toggle="modal" data-target="#modal-danger" data-id="${CustomerList.id}"> Delete <i class="fa fa-remove"></i></a>
+												<a href="viewCustomer/${CustomerList.id}/" class="btn btn-info btn-xs"> Ledger <i class="fa fa-book"></i></a>
+												<a href="viewCustomer/${CustomerList.id}/" class="btn btn-primary btn-xs"> Payment <i class="fa fa-rupee"></i></a>
+												<div class="btn-group">
+	                  								<button type="button" class="btn btn-success btn-xs">Action</button>
+	                  								<button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown">
+								                    <span class="caret"></span>
+								                    <span class="sr-only">Toggle Dropdown</span>
+								                  	</button>
+								                	<ul class="dropdown-menu" role="menu">
+								                    <li><a href="viewCustomer/${CustomerList.id}/"><i class="fa fa-search-plus"></i>View</a></li>
+								                    <li><a href="editCustomer/${CustomerList.id}/"><i class="fa fa-edit"></i>Edit</a></li>
+								                    <li><a class="modelLink" data-toggle="modal" data-target="#modal-danger" data-id="${CustomerList.id}"><i class="fa fa-remove"></i>Delete</a></li>
+								                  </ul>
+								                </div>
 												</td>
 											</tr>
 										</c:forEach>

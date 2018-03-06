@@ -35,11 +35,6 @@ public class UserController {
 		this.userDao = userDao;
 	}
 	
-	@RequestMapping(value="/addSales", method=RequestMethod.GET)
-	public ModelAndView addSales(){
-		return new ModelAndView("addSales");
-	}
-	
 	@RequestMapping(value="/viewUsers", method=RequestMethod.GET)
 	public ModelAndView getAllUsers(HttpSession session) {
 		if(!utils.isValidSession(session))

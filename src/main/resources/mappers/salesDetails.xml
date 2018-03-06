@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="SalesDetails">
+ 
+    <resultMap id="salesDetailsResult" type="SalesDetails">
+        <result property="salesId" column="salesId"/>
+        <result property="productId" column="productId"/>
+        <result property="quantity" column="quantity"/>
+        <result property="rate" column="rate"/>
+        <result property="lessInQuantity" column="lessInQuantity"/>
+        <result property="bags" column="bags"/>
+        <result property="description" column="description"/>
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="salesDetailsResult">
+        SELECT * FROM sales_details;
+    </select>
+ 
+    <select id="getSalesDetailsBySalesId" parameterType="int" resultMap="salesDetailsResult">
+        SELECT * FROM sales_details WHERE id = #{salesId};
+    </select>
+ 
+    <insert id="insert" parameterType="java.util.List">
+        INSERT INTO sales_details (salesId, productId, quantity, rate, lessInQuantity, bags, description) 
+        	VALUES
+        <foreach collection="list" item="sd" separator=","> 
+        (#{sd.salesId}, #{sd.productId}, #{sd.quantity}, #{sd.rate}, #{sd.lessInQuantity}, #{sd.bags}, #{sd.description})
+        </foreach>
+    </insert>
+ 
+    <update id="update" parameterType="SalesDetails">
+        UPDATE sales_details
+        SET productId = #{productId}, quantity = #{quantity}, rate = #{rate}, lessInQuantity = #{lessInQuantity}, bags = #{bags}, description = #{description} WHERE salesId = #{salesId} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from sales_details WHERE salesId = #{salesId}
+    </delete>
+</mapper>

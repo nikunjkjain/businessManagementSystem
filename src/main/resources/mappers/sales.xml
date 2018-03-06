@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Sales">
+ 
+    <resultMap id="salesResult" type="Sales">
+        <result property="id" column="id"/>
+        <result property="customerId" column="customerId"/>
+        <result property="salesDate" column="salesDate"/>
+        <result property="amount" column="amount"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    
+    <select id="selectAll" resultMap="salesResult">
+        SELECT * FROM sales;
+    </select>
+ 
+    <select id="getSalesById" parameterType="int" resultMap="salesResult">
+        SELECT * FROM customer WHERE id = #{id};
+    </select>
+ 
+    <insert id="insert" parameterType="Sales" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sales (customerId, salesDate, amount, comment) VALUES (#{customerId}, #{salesDate}, #{amount}, #{comment});
+    </insert>
+ 
+    <update id="update" parameterType="Sales">
+        UPDATE sales
+        SET customerId = #{customerId}, salesDate = #{salesDate}, amount = #{amount}, comment = #{comment} WHERE id = #{id} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from sales WHERE id = #{id}
+    </delete>
+</mapper>

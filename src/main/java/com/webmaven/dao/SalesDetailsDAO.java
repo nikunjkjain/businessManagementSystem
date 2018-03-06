@@ -7,10 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.webmaven.bean.Sales;
-import com.webmaven.controller.SalesController;
+import com.webmaven.bean.SalesDetails;
 
-public class SalesDAO {
+public class SalesDetailsDAO {
 	
 	private static final Logger logger = Logger.getLogger(SalesDAO.class);
 	
@@ -23,16 +22,16 @@ public class SalesDAO {
 	
 	
 	/**
-	 * Returns the list of all sales instances from the database.
+	 * Returns the list of all SalesDetails instances from the database.
 	 * 
-	 * @return the list of all sales instances from the database.
+	 * @return the list of all SalesDetails instances from the database.
 	 */
-	public List<Sales> selectAll() {
-		List<Sales> list = null;
+	public List<SalesDetails> selectAll() {
+		List<SalesDetails> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
-			list = session.selectList("Sales.selectAll");
+			list = session.selectList("SalesDetails.selectAll");
 		} finally {
 			session.close();
 		}
@@ -43,59 +42,60 @@ public class SalesDAO {
 	
 	
 	/**
-	 * Select instance of Sales from the database.
+	 * Select instance of SalesDetails from the database.
 	 * 
-	 * @param SalesId
+	 * @param SalesDetailsId
 	 */
-	public Sales getSalesById(Integer SalesId) {
-		Sales SalesDetails = null;
+	public SalesDetails getSalesDetailsById(Integer SalesDetailsId) {
+		SalesDetails SalesDetailsDetails = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			SalesDetails = (Sales) session.selectOne("Sales.getSalesById", SalesId);
+			SalesDetailsDetails = (SalesDetails) session.selectOne("SalesDetails.getSalesDetailsById", SalesDetailsId);
 
 		} finally {
 			session.close();
 		}
-		return SalesDetails;
+		return SalesDetailsDetails;
 	}
 
 	/**
 	 * Insert an instance of Person into the database.
 	 * 
-	 * @param sales
+	 * @param salesDetails
 	 *            the instance to be persisted.
 	 */
-	public int insert(Sales sales) {
-		SqlSession session = sqlSessionFactory.openSession();
-
-		try {
-			session.insert("Sales.insert", sales);
-		} finally {
-			session.commit();
-			session.close();
-		}
-		logger.info("insert(" + sales + ")");
-		return sales.getId();
-	}
-
-	/**
-	 * Update an instance of Sales into the database.
-	 * 
-	 * @param sales
-	 *            the instance to be persisted.
-	 */
-	public void update(Sales sales) {
+	public int insert(List<SalesDetails> salesDetails) {
 		int id = -1;
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
-			id = session.update("Sales.update", sales);
+			id = session.insert("SalesDetails.insert", salesDetails);
+		} finally {
+			session.commit();
+			session.close();
+		}
+		logger.info("insert(" + salesDetails + ")");
+		return id;
+	}
+
+	/**
+	 * Update an instance of SalesDetails into the database.
+	 * 
+	 * @param SalesDetails
+	 *            the instance to be persisted.
+	 */
+	public void update(SalesDetails SalesDetails) {
+		int id = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			id = session.update("SalesDetails.update", SalesDetails);
 
 		} finally {
 			session.commit();
 			session.close();
 		}
-		logger.info("update(" + sales + ") --> updated");
+		logger.info("update(" + SalesDetails + ") --> updated");
 	}
 
 	/**
@@ -109,12 +109,12 @@ public class SalesDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		int rows = 0;
 		try {
-			rows = session.delete("Sales.delete", id);
+			rows = session.delete("SalesDetails.delete", id);
 		} finally {
 			session.commit();
 			session.close();
 		}
-		logger.info("deleted Sales(" + id + ")");
+		logger.info("deleted SalesDetails(" + id + ")");
 		return rows;
 	}
 }

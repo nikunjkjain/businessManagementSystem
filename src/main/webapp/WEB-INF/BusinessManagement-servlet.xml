@@ -10,7 +10,7 @@
 
 	<context:component-scan base-package="com.webmaven" />
 	<context:component-scan base-package="com.webmaven.dao" />
-	<context:component-scan base-package="com.webmaven.bean" />
+	<context:component-scan base-package="com.webmaven.bean" ></context:component-scan>
 	<context:component-scan base-package="com.webmaven.controller" />
 	<context:component-scan base-package="com.webmaven.util" />
 
@@ -49,6 +49,18 @@
 	<bean id="customerDao" class="com.webmaven.dao.CustomerDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
+	
+	<bean id="salesDao" class="com.webmaven.dao.SalesDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="salesDetailsDao" class="com.webmaven.dao.SalesDetailsDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<bean id="paymentDao" class="com.webmaven.dao.PaymentDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 
 	<bean id="userController" class="com.webmaven.controller.UserController">
 		<property name="userDao" ref="userDao"></property>
@@ -61,9 +73,21 @@
 	<bean id="customerController" class="com.webmaven.controller.CustomerController">
 		<property name="customerDao" ref="customerDao"></property>
 	</bean>
+	
+	<bean id="paymentController" class="com.webmaven.controller.PaymentController">
+		<property name="paymentDao" ref="paymentDao"></property>
+	</bean>
+	
+	<bean id="salesController" class="com.webmaven.controller.SalesController">
+		<property name="customerDao" ref="customerDao"></property>
+		<property name="productDao" ref="productDao"></property>
+		<property name="salesDetailsDao" ref="salesDetailsDao"></property>
+	</bean>
 
 	<bean id="jacksonMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	</bean>
+	
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
@@ -71,5 +95,6 @@
 				<ref bean="jacksonMessageConverter" />
 			</list>
 		</property>
-</bean>
+	</bean>
+	
 </beans>

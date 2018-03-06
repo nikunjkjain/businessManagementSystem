@@ -7,13 +7,14 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>BMS | Products</title>
+<title>BMS | Sales</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
 
 <%@include file="/jsp/jspf/headerScripts.jspf"%>
+<link rel="stylesheet" href="<c:url value ="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,116 +24,14 @@
   <![endif]-->
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript">
-		console.log("Loading Script");
-		var Sales = {};
-		var products = []
-		var i = 0;
-		Sales.products = products;
-		console.log("Script Loaded");
-		function callController() {
-			console.log("===> function callController");
-        	$.ajax({
-        		type: 'POST',
-        		dataType: 'html',
-        		contentType:'application/json',
-        		url: "insertSales",
-        		data:JSON.stringify(products),
-        		success: function(){
-        		console.log("===> function callController Success");
-        		},
-        		error: function(xhr, textStatus, errorThrown){
-        		console.log("===> function callController Error");
-        		console.log("xhr:"+xhr);
-        		console.log("textStatus:"+textStatus);
-        		console.log("errorThrown:"+errorThrown);
-        		},
-        		complete:function(){
-        			console.log("===> function callController completed");
-        			window.location.href="viewUsers";
-        		}
-        		});
-		};
-		
-        function Add() {
-        	console.log("===> function Add");
-            AddRow($("#srNo").val(), $("#product").val(), $("#quantity").val(), $("#rate").val(), $("#description").val());
-            $("#srNo").val("");
-            $("#product").val("");
-            $("#quantity").val("");
-            $("#rate").val("");
-            $("#description").val("");
-            console.log("<=== function Add");
-        };
 
-        function AddRow(srNo, product, quantity, rate, description) {
-        	console.log("===> function AddRow");
-        	var productDetails = {
-        		"srNo":srNo, 
-        		"product":product, 
-        		"quantity":quantity, 
-        		"rate":rate, 
-        		"description":description}
-        	
-        	Sales.products.push(productDetails);
-        	console.log("===> function AddRow Added to Sales Array");
-            //Get the reference of the Table's TBODY element.
-            i++;
-            var tBody = $("#tblCustomers > TBODY")[0];
-            
-            //Add Row.
-            row = tBody.insertRow(-1);
+<style type="text/css">
+#body{
+  overflow-x: auto;
+}
+</style>
 
-            //Add srNo cell.
-            var cell = $(row.insertCell(-1));
-            cell.html(srNo);
-
-            //Add product cell.
-            cell = $(row.insertCell(-1));
-            cell.html(product);
-            
-          //Add quantity cell.
-            cell = $(row.insertCell(-1));
-            cell.html(quantity);
-            
-          //Add rate cell.
-            cell = $(row.insertCell(-1));
-            cell.html(rate);
-            
-          //Add description cell.
-            cell = $(row.insertCell(-1));
-            cell.html(description);
-
-            //Add Button cell.
-            cell = $(row.insertCell(-1));
-            var btnRemove = $("<input />");
-            btnRemove.attr("type", "button");
-            btnRemove.attr("onclick", "Remove(this);");
-            btnRemove.val("Remove");
-            cell.append(btnRemove);
-            console.log("<=== function AddRow");
-        };
-
-        function Remove(button) {
-        	console.log("===> function Remove");
-            //Determine the reference of the Row using the Button.
-            var row = $(button).closest("TR");
-            var name = $("TD", row).eq(0).html();
-            if (confirm("Do you want to delete: " + srNo)) {
-
-                //Get the reference of the Table.
-                var table = $("#tblCustomers")[0];
-
-                //Delete the Table row using it's Index.
-                table.deleteRow(row[0].rowIndex);
-            }
-            console.log("<===  function Remove");
-        };
-        
-    </script>
 </head>
-
-
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 
@@ -146,52 +45,86 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Users</h1>
+				<h1>Sales</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Products</li>
+					<li class="active">Sales</li>
 				</ol>
 			</section>
 
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-12" >
 
 						<div class="box">
-							<div class="box-header">
-								<h3 class="box-title">
-									<a href="addProduct">Add Product <i class="fa fa-user-plus"></i></a>
-								</h3>
+							 <div class="box-header">
+								<label>Party Name: </label> 
+								<select id="customerId" name="customerId">
+									<option selected="selected"></option>
+									<c:forEach items="${customerList}" var="customerList">
+										<option value="${customerList.id}">${customerList.name}</option>
+									</c:forEach>
+								</select>
+								&nbsp;&nbsp;&nbsp;
+								<label>Sales Date: </label> 
+								<input type="date" name="salesDate" id="salesDate">
+								
+								&nbsp;&nbsp;&nbsp;
+								<label>Comment: </label> 
+								<input type="text" size="80" name="comment" id="comment">
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
-								<table id="tblCustomers" cellpadding="0" cellspacing="0"
+								<table id="tblCustomers"
 									border="1" class="table table-bordered">
 									<thead>
 										<tr>
-											<th>Sr No</th>
+											<th>Id</th>
 											<th>Product</th>
-											<th>Qty</th>
-											<th>Rate</th>
+											<th>Qty (kg)</th>
+											<th>Bags</th>
+											<th>Less (Kg)</th>
+											<th>Rate (&#x20B9;)</th>
 											<th>Desc</th>
-											<th>Action</th>
+											<th>Nt.Wt (kg)</th>
+											<th>Total (&#x20B9;)</th>
+											<th>+/-</th>
 										</tr>
 									</thead>
 									<tbody>
+										<tr>
+											<td><label id="id">-</label></td>
+											<td><select id="product" name="product">
+													<option selected="selected"></option>
+													<c:forEach items="${productList}" var="productList">
+														<option value="${productList.id}">${productList.name}</option>
+													</c:forEach>
+											</select></td>
+											<td><input class="col-md-12" type="number" id="quantity"
+												name="quantity" /></td>
+											<td><input class="col-md-12" type="number" id="bags"
+												name="bags" /></td>
+											<td><input class="col-md-12" type="number" id="less"
+												name="less" /></td>
+											<td><input class="col-md-12" type="number" id="rate"
+												name="rate" /></td>
+											<td><input class="col-md-12" type="text"
+												id="description" name="description" /></td>
+											<td><label id="ntWt">-</label></td>
+											<td><label id="total">-</label></td>
+											<td><input type="button" onclick="Add()" value="+" /></td>
+										</tr>
 									</tbody>
 									<tfoot>
 										<tr>
-											<td><input type="text" id="srNo" name="srNo"/></td>
-											<td><input type="text" id="product" name="product"/></td>
-											<td><input type="text" id="quantity" name="quantity"/></td>
-											<td><input type="text" id="rate" name="rate"/></td>
-											<td><input type="text" id="description" name="description"/></td>
-											<td><input type="button" onclick="Add()" value="Add" /></td>
+										<td ><input type="button" onclick="callController()" value="Call" /></td>
+										<td colspan="7" align="right"><b>Total Amount:</b></td>
+										<td ><input type="text" id="tamount" value="0"></td>
 										</tr>
-										<tr><td><input type="button" onclick="callController()" value="Call" /></td></tr>
 									</tfoot>
 								</table>
 							</div>
+							
 							<!-- /.box-body -->
 						</div>
 						<!-- /.box -->
@@ -252,6 +185,75 @@
         		$(".model-user").text(dataId)
     		}});
 		});
+</script>
+
+<!-- Page script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    //Timepicker
+    $('.timepicker').timepicker({
+      showInputs: false
+    })
+  })
 </script>
 
 </body>

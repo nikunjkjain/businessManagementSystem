@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Payment">
+ 
+    <resultMap id="paymentResult" type="Payment">
+        <result property="id" column="id"/>
+        <result property="customerId" column="customerId"/>
+        <result property="type" column="type"/>
+        <result property="mode" column="mode"/>
+        <result property="amount" column="amount"/>
+        <result property="date" column="date"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    
+    <select id="selectAll" resultMap="paymentResult">
+        SELECT * FROM payment;
+    </select>
+ 
+    <select id="getPaymentById" parameterType="int" resultMap="paymentResult">
+        SELECT * FROM payment WHERE id = #{id};
+    </select>
+ 
+    <insert id="insert" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO payment (customerId, type, mode, amount, date, comment) VALUES (#{customerId}, #{type}, #{mode}, #{amount}, #{date}, #{comment});
+    </insert>
+ 
+    <update id="update" parameterType="Payment">
+        UPDATE payment
+        SET customerId = #{customerId}, type = #{type}, mode = #{mode}, amount = #{amount}, date = #{date}, comment = #{comment} WHERE id = #{id} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from payment WHERE id = #{id}
+    </delete>
+</mapper>

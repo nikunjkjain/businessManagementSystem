@@ -7,12 +7,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.webmaven.bean.Sales;
-import com.webmaven.controller.SalesController;
+import com.webmaven.bean.Payment;
 
-public class SalesDAO {
+public class PaymentDAO {
 	
-	private static final Logger logger = Logger.getLogger(SalesDAO.class);
+	private static final Logger logger = Logger.getLogger(PaymentDAO.class);
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -23,16 +22,16 @@ public class SalesDAO {
 	
 	
 	/**
-	 * Returns the list of all sales instances from the database.
+	 * Returns the list of all Payment instances from the database.
 	 * 
-	 * @return the list of all sales instances from the database.
+	 * @return the list of all Payment instances from the database.
 	 */
-	public List<Sales> selectAll() {
-		List<Sales> list = null;
+	public List<Payment> selectAll() {
+		List<Payment> list = null;
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
-			list = session.selectList("Sales.selectAll");
+			list = session.selectList("Payment.selectAll");
 		} finally {
 			session.close();
 		}
@@ -43,59 +42,59 @@ public class SalesDAO {
 	
 	
 	/**
-	 * Select instance of Sales from the database.
+	 * Select instance of Payment from the database.
 	 * 
-	 * @param SalesId
+	 * @param PaymentId
 	 */
-	public Sales getSalesById(Integer SalesId) {
-		Sales SalesDetails = null;
+	public Payment getPaymentById(Integer PaymentId) {
+		Payment PaymentDetails = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			SalesDetails = (Sales) session.selectOne("Sales.getSalesById", SalesId);
+			PaymentDetails = (Payment) session.selectOne("Payment.getPaymentById", PaymentId);
 
 		} finally {
 			session.close();
 		}
-		return SalesDetails;
+		return PaymentDetails;
 	}
 
 	/**
 	 * Insert an instance of Person into the database.
 	 * 
-	 * @param sales
+	 * @param Payment
 	 *            the instance to be persisted.
 	 */
-	public int insert(Sales sales) {
+	public int insert(Payment Payment) {
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
-			session.insert("Sales.insert", sales);
+			session.insert("Payment.insert", Payment);
 		} finally {
 			session.commit();
 			session.close();
 		}
-		logger.info("insert(" + sales + ")");
-		return sales.getId();
+		logger.info("insert(" + Payment + ")");
+		return Payment.getId();
 	}
 
 	/**
-	 * Update an instance of Sales into the database.
+	 * Update an instance of Payment into the database.
 	 * 
-	 * @param sales
+	 * @param Payment
 	 *            the instance to be persisted.
 	 */
-	public void update(Sales sales) {
+	public void update(Payment Payment) {
 		int id = -1;
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
-			id = session.update("Sales.update", sales);
+			id = session.update("Payment.update", Payment);
 
 		} finally {
 			session.commit();
 			session.close();
 		}
-		logger.info("update(" + sales + ") --> updated");
+		logger.info("update(" + Payment + ") --> updated");
 	}
 
 	/**
@@ -109,12 +108,12 @@ public class SalesDAO {
 		SqlSession session = sqlSessionFactory.openSession();
 		int rows = 0;
 		try {
-			rows = session.delete("Sales.delete", id);
+			rows = session.delete("Payment.delete", id);
 		} finally {
 			session.commit();
 			session.close();
 		}
-		logger.info("deleted Sales(" + id + ")");
+		logger.info("deleted Payment(" + id + ")");
 		return rows;
 	}
 }

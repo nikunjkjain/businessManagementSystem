@@ -8,11 +8,17 @@
 		<typeAlias alias="User" type="com.webmaven.bean.User" />
 		<typeAlias alias="Product" type="com.webmaven.bean.Product" />
 		<typeAlias alias="Customer" type="com.webmaven.bean.Customer" />
+		<typeAlias alias="Sales" type="com.webmaven.bean.Sales" />
+		<typeAlias alias="SalesDetails" type="com.webmaven.bean.SalesDetails" />
+		<typeAlias alias="Payment" type="com.webmaven.bean.Payment" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mappers/user.xml" />
 		<mapper resource="mappers/product.xml" />
 		<mapper resource="mappers/customer.xml" />
+		<mapper resource="mappers/sales.xml" />
+		<mapper resource="mappers/salesDetails.xml" />
+		<mapper resource="mappers/payment.xml" />
 	</mappers>
 </configuration> 
