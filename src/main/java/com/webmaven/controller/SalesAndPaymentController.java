@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,19 +22,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.AddSales;
 import com.webmaven.bean.Customer;
+import com.webmaven.bean.Payment;
 import com.webmaven.bean.Product;
-import com.webmaven.bean.Sales;
+import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.SalesDetails;
 import com.webmaven.dao.CustomerDAO;
 import com.webmaven.dao.ProductDAO;
-import com.webmaven.dao.SalesDAO;
+import com.webmaven.dao.SalesAndPaymentDAO;
 import com.webmaven.dao.SalesDetailsDAO;
 import com.webmaven.util.Utility;
 
 @Controller
-public class SalesController {
+public class SalesAndPaymentController {
 	
-	private static final Logger logger = Logger.getLogger(SalesController.class);
+	private static final Logger logger = Logger.getLogger(SalesAndPaymentController.class);
 	private static final Utility utils = Utility.getInstance();
 	
 	@Autowired
@@ -42,7 +45,7 @@ public class SalesController {
     private CustomerDAO customerDao;
 	
 	@Autowired
-    private SalesDAO salesDao;
+    private SalesAndPaymentDAO salesAndPaymentDao;
 	
 	@Autowired
     private SalesDetailsDAO salesDetailsDao;
@@ -55,14 +58,22 @@ public class SalesController {
 		this.customerDao = customerDao;
 	}
 	
-	public void setSalesDao(SalesDAO salesDao) {
-		this.salesDao = salesDao;
+	public SalesAndPaymentDAO getSalesAndPaymentDao() {
+		return salesAndPaymentDao;
 	}
-	
+
+	public void setSalesAndPaymentDao(SalesAndPaymentDAO salesAndPaymentDao) {
+		this.salesAndPaymentDao = salesAndPaymentDao;
+	}
+
+	public SalesDetailsDAO getSalesDetailsDao() {
+		return salesDetailsDao;
+	}
+
 	public void setSalesDetailsDao(SalesDetailsDAO salesDetailsDao) {
 		this.salesDetailsDao = salesDetailsDao;
 	}
-	
+
 	@RequestMapping(value="/addSales", method=RequestMethod.GET)
 	public ModelAndView addSales(HttpSession session){
 		if(!utils.isValidSession(session))
@@ -84,8 +95,8 @@ public class SalesController {
 		int salesId = -1;
 		List<SalesDetails> salesDetails = null;
 		logger.info(addSales.toString());
-		Sales sales = getSalesObj(addSales);
-		salesId = salesDao.insert(sales);
+		SalesAndPayment sales = getSalesObj(addSales);
+		salesId = salesAndPaymentDao.insert(sales);
 		logger.info(sales.toString());
 
 		if(salesId != -1) {
@@ -96,11 +107,28 @@ public class SalesController {
 		logger.info(salesDetails);
 		return new ModelAndView("redirect:/viewUsers");
 	}
+	
+	
+	@RequestMapping(value="/insertPayment", method=RequestMethod.POST)
+	public ModelAndView insertPayment(@ModelAttribute("SalesAndPayment") SalesAndPayment Payment, HttpSession session){
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		salesAndPaymentDao.insert(Payment);
+		return new ModelAndView("redirect:/addPayment");
+	}
+	
+	@RequestMapping(value="/viewLedger/{id}/", method=RequestMethod.GET)
+	public ModelAndView insertSales(@PathVariable("id") int id, HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		List<SalesAndPayment> salesPaymenet = salesAndPaymentDao.getSalesByCustomerId(id);
+		return new ModelAndView("viewLedger", "salesPaymenet", salesPaymenet);
+	}
 
-	private Sales getSalesObj(AddSales[] addSalesObj) {
+	private SalesAndPayment getSalesObj(AddSales[] addSalesObj) {
 		if(addSalesObj != null) {
 			AddSales sales = addSalesObj[addSalesObj.length - 1];
-			return new Sales(sales.getCustomerId(), sales.getSalesDate(), sales.getTotalAmount(), sales.getComment());
+			return new SalesAndPayment(sales.getCustomerId(), sales.getDate(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
 		}
 		return null;
 	}

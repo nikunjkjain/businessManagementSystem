@@ -11,7 +11,7 @@ import com.webmaven.bean.SalesDetails;
 
 public class SalesDetailsDAO {
 	
-	private static final Logger logger = Logger.getLogger(SalesDAO.class);
+	private static final Logger logger = Logger.getLogger(SalesAndPaymentDAO.class);
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;

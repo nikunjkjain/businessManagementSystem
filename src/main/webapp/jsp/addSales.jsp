@@ -67,7 +67,7 @@
 								</select>
 								&nbsp;&nbsp;&nbsp;
 								<label>Sales Date: </label> 
-								<input type="date" name="salesDate" id="salesDate">
+								<input type="date" name="date" id="date">
 								
 								&nbsp;&nbsp;&nbsp;
 								<label>Comment: </label> 

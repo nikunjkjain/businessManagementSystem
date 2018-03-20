@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.webmaven.bean.Sales;
+import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.User;
 import com.webmaven.dao.UserDAO;
 import com.webmaven.util.BmsConstants;

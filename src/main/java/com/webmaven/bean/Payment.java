@@ -1,7 +1,5 @@
 package com.webmaven.bean;
 
-import java.util.Date;
-
 public class Payment{
 	
 	private int id;

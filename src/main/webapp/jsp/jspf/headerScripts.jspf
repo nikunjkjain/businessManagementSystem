@@ -200,9 +200,12 @@
 	function getElementsById() {
 		var details = {
 			"customerId" : document.getElementById('customerId').value,
-			"salesDate" : document.getElementById('salesDate').value,
+			"date" : document.getElementById('date').value,
 			"totalAmount" : document.getElementById('tamount').value,
-			"comment" : document.getElementById('comment').value
+			"comment" : document.getElementById('comment').value,
+			"type" : "sales",
+			"mode" : "cash",
+			"payment" : 0
 		}
 		products.push(details);
 		alert(JSON.stringify(products));

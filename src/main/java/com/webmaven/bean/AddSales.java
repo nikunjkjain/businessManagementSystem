@@ -16,9 +16,12 @@ public class AddSales implements Serializable{
 	private int bags = 0;
 	private double less = 0;
 	private int customerId = 0;
-	private String salesDate = "";
+	private String date = "";
 	private double totalAmount = 0;
 	private String comment = "";
+	private String type;
+	private String mode;
+	private int payment; 
 	
 	public int getId() {
 		return id;
@@ -68,11 +71,11 @@ public class AddSales implements Serializable{
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	public String getSalesDate() {
-		return salesDate;
+	public String getDate() {
+		return date;
 	}
-	public void setSalesDate(String salesDate) {
-		this.salesDate = salesDate;
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	public double getTotalAmount() {
@@ -87,13 +90,31 @@ public class AddSales implements Serializable{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getMode() {
+		return mode;
+	}
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+	public int getPayment() {
+		return payment;
+	}
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+	
 	@Override
 	public String toString() {
 		return "AddSales [id=" + id + ", rate=" + rate + ", product=" + product + ", description=" + description
 				+ ", quantity=" + quantity + ", bags=" + bags + ", less=" + less + ", customerId=" + customerId
-				+ ", salesDate=" + salesDate + ", totalAmount=" + totalAmount+ ", comment=" + comment + "]";
-	}
-	
-	
+				+ ", date=" + date + ", totalAmount=" + totalAmount + ", comment=" + comment + ", type=" + type
+				+ ", mode=" + mode + ", payment=" + payment + "]";
+	}	
 	
 }

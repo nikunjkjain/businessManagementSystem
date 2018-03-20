@@ -63,13 +63,13 @@ public class PaymentController {
 		return new ModelAndView("viewPayments", "PaymentList", PaymentList);
 	}
 	
-	@RequestMapping(value="/insertPayment", method=RequestMethod.POST)
+	/*@RequestMapping(value="/insertPayment", method=RequestMethod.POST)
 	public ModelAndView insertPayment(@ModelAttribute("Payment") Payment Payment, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		paymentDao.insert(Payment);
 		return new ModelAndView("redirect:/addPayment");
-	}
+	}*/
 	
 	@RequestMapping(value="/updatePayment", method=RequestMethod.POST)
 	public ModelAndView updatePayment(@ModelAttribute("Payment") Payment Payment, HttpSession session){
