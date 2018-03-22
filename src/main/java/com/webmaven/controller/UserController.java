@@ -44,12 +44,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ModelAndView welcome(){
+	public ModelAndView welcome(HttpSession session){
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
 		return new ModelAndView("login");
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public ModelAndView login(){
+	public ModelAndView login(HttpSession session){
 		return new ModelAndView("login");
 	}
 	
@@ -77,6 +79,8 @@ public class UserController {
 	public ModelAndView insertUser(@ModelAttribute("User") User user, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		user.setUpdatedBy(uDetails.getUsername());
 		userDao.insert(user);
 		return new ModelAndView("redirect:/viewUsers");
 	}
@@ -123,6 +127,7 @@ public class UserController {
 				if(user.getUsername().equals(userDetails.getUsername()) &&
 						user.getPassword().equals(userDetails.getPassword())){
 				session.setAttribute(BmsConstants.ISVALID, true);
+				session.setAttribute(BmsConstants.USERDETAILS, userDetails);
 				}else {
 					return new ModelAndView(LOGOUT_VIEW);
 				}

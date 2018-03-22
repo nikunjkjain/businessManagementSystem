@@ -32,11 +32,11 @@
     //$('#ledger1').DataTable()
     $('#ledger1').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
+      'lengthChange': true,
+      'searching'   : true,
       'ordering'    : false,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : true
     })
   })
   </script>

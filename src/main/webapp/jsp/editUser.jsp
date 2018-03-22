@@ -39,7 +39,8 @@
 				<h1>Edit User</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li><a href="viewUsers"><i class="fa fa-dashboard"></i>  Users</a></li>
+					<li><a href="viewUsers"><i class="fa fa-dashboard"></i>
+							Users</a></li>
 					<li class="active">Edit Users</li>
 				</ol>
 			</section>
@@ -64,64 +65,104 @@
 											<input type="text" class="form-control" id="name" name="name"
 												value="${userDetails.name}">
 										</div>
-										
+
 										<label for="inputEmail3" class="col-sm-2 control-label">Username:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="username" name="username"
-												value="${userDetails.username}">
+											<input type="text" class="form-control" id="username"
+												name="username" value="${userDetails.username}">
 										</div>
-										
+
 									</div>
 
 									<div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label">Password:</label>
 
 										<div class="col-sm-4">
-											<input type="password" class="form-control" id="password" name="password"
-												value="${userDetails.password}">
+											<input type="password" class="form-control" id="password"
+												name="password" value="${userDetails.password}">
 										</div>
 
 										<label for="inputEmail3" class="col-sm-2 control-label">Re-Password:</label>
 
 										<div class="col-sm-4">
-											<input type="password" class="form-control" id="repassword" name="repassword"
-												value="${userDetails.password}">
+											<input type="password" class="form-control" id="repassword"
+												name="repassword" value="${userDetails.password}">
 										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="mobileNo" class="col-sm-2 control-label">Mobile:</label>
+
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="mobileNo"
+												name="mobileNo" value="${userDetails.mobileNo}">
+										</div>
+										<label for="alternateNo" class="col-sm-2 control-label">Alternate
+											No:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="alternateNo"
+												name="alternateNo" value="${userDetails.alternateNo}">
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<label for="email" class="col-sm-2 control-label">Email:</label>
+
+										<div class="col-sm-4">
+											<input type="email" class="form-control" id="email"
+												name="email" value="${userDetails.email}">
+										</div>
+
+									</div>
+									<div class="form-group">
+
+										<label for="address" class="col-sm-2 control-label">Address:</label>
+
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="address"
+												name="address" value="${userDetails.address}" />
+										</div>
+
+										<input type="hidden" id="status" name="status"
+											value="${userDetails.status}" /> <input type="hidden" id="id"
+											name="id" value="${userDetails.id}" />
+
+									</div>
+									<div class="form-group">
+
+										<label for="comments" class="col-sm-2 control-label">Comments:</label>
+
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="comments"
+												name="comments" value="${userDetails.comments}" />
+										</div>
+
 									</div>
 									
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+										<label for="updatedBy" class="col-sm-2 control-label">updatedBy:</label>
 
 										<div class="col-sm-4">
-											<input type="email" class="form-control" id="email" name="email"
-												value="${userDetails.email}">
+											<input type="text" class="form-control" id="updatedBy"
+												name="updatedBy" value="${userDetails.updatedBy}" >
 										</div>
-										
-										<label for="inputEmail3" class="col-sm-2 control-label">Mobile:</label>
+
+										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
 
 										<div class="col-sm-4">
-											<input type="number" class="form-control" id="mobileNo" name="mobileNo"
-												value="${userDetails.mobileNo}">
+											<input type="text" class="form-control" id="updatedOn"
+												name="updatedOn" value="${userDetails.updatedOn}" disabled>
 										</div>
-										</div>
-										<div class="form-group">
-								
-										<label for="inputEmail3" class="col-sm-2 control-label">Address:</label>
-
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="address" name="address"
-												value="${userDetails.address}"/>
-										</div>
-										
-										<input type = "hidden" id="status" name="status" value="${userDetails.status}"/>
-										<input type = "hidden" id="id" name="id" value="${userDetails.id}"/>
-										
 									</div>
+
 								</div>
 								<!-- /.box-body -->
 								<div class="box-footer" align="center">
-									<button type="submit" class="btn btn-info">Update Details</button>
+									<button type="submit" class="btn btn-info">Update
+										Details</button>
 								</div>
 								<!-- /.box-footer -->
 							</form:form>

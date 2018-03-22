@@ -49,9 +49,9 @@
 
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">
-									<a href="addCustomer">View Ledger <i class="fa fa-user-plus"></i></a>
-								</h3>
+								<h4 class="box-title">
+									View Ledger
+								</h4>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -92,13 +92,13 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<th>Customer Id</th>
-											<th>Customer Name</th>
-											<th>Company Name</th>
-											<th>Mobile</th>
-											<th>Email</th>
-											<th>Status</th>
-											<th>Actions</th>
+											<th>Date</th>
+											<th>Particular</th>
+											<th>Vch Type</th>
+											<th>Vch No</th>
+											<th>Debit</th>
+											<th>Credit</th>
+											<th>Balance</th>
 										</tr>
 									</tfoot>
 								</table>

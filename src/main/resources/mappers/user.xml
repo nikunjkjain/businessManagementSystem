@@ -11,9 +11,15 @@
         <result property="password" column="password"/>
         <result property="name" column="name"/>
         <result property="mobileNo" column="mobileNo"/>
+        <result property="alternateNo" column="alternateNo"/>
         <result property="email" column="email"/>
         <result property="address" column="address"/>
-        <result property="status" column="status"/>   
+        <result property="status" column="status"/>
+        <result property="comments" column="comments"/>
+        <result property="updatedBy" column="updatedBy"/>
+        <result property="updatedOn" column="updatedOn"/>
+        
+           
     </resultMap>
  
     <select id="selectAll" resultMap="userResult">
@@ -29,12 +35,12 @@
     </select>
  
     <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (username, password, name, mobileNo, email, address, status) VALUES (#{username}, #{password}, #{name}, #{mobileNo}, #{email}, #{address}, #{status});
-    </insert>
+        INSERT INTO user (username, password, name, mobileNo, email, address, status, alternateNo, comments, updatedBy) VALUES (#{username}, #{password}, #{name}, #{mobileNo}, #{email}, #{address}, #{status}, #{alternateNo}, #{comments}, #{updatedBy});
+    </insert> 
  
     <update id="update" parameterType="User">
         UPDATE user
-        SET password = #{password}, name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}
+        SET password = #{password}, name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}, updatedBy = #{updatedBy}, alternateNo = #{alternateNo}, comments = #{comments}
         WHERE id = #{id} 
     </update>
  

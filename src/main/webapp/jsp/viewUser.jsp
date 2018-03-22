@@ -50,27 +50,26 @@
 						<!-- Horizontal Form -->
 						<div class="box box-info">
 							<div class="box-header with-border">
-								<h3 class="box-title"> User Details:</h3>
+								<h3 class="box-title">User Details:</h3>
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form:form action="#" method="post"
-								class="form-horizontal">
+							<form:form action="#" method="post" class="form-horizontal">
 								<div class="box-body">
 									<div class="form-group">
-									
+
 										<label for="name" class="col-sm-2 control-label">Name:</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="name" name="name"
 												value="${userDetails.name}" disabled>
 										</div>
-										
+
 										<label for="username" class="col-sm-2 control-label">Username:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="username" name="username"
-												value ="${userDetails.username}" disabled>
+											<input type="text" class="form-control" id="username"
+												name="username" value="${userDetails.username}" disabled>
 										</div>
 									</div>
 
@@ -78,45 +77,84 @@
 										<label for="password" class="col-sm-2 control-label">Password:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="password" name="password"
-												value="${userDetails.password}" disabled>
+											<input type="text" class="form-control" id="password"
+												name="password" value="${userDetails.password}" disabled>
 										</div>
 
-										<label for="inputEmail3" class="col-sm-2 control-label">User Id</label>
+										<label for="inputEmail3" class="col-sm-2 control-label">User
+											Id</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="id" name="id"
 												value="${userDetails.id}" disabled>
 										</div>
 									</div>
+
+									<div class="form-group">
+										
+										<label for="mobileNo" class="col-sm-2 control-label">Mobile:</label>
+
+										<div class="col-sm-4">
+											<input type="number" class="form-control" id="mobileNo"
+												name="mobileNo" value="${userDetails.mobileNo}" disabled>
+										</div>
+										
+										<label for="alternateNo" class="col-sm-2 control-label">Alternate No:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="alternateNo"
+												name="alternateNo" value="${userDetails.email}" disabled>
+										</div>
+
+									</div>
 									
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+										<label for="email" class="col-sm-2 control-label">Email:</label>
 
 										<div class="col-sm-4">
-											<input type="email" class="form-control" id="email" name="email"
-												value="${userDetails.email}" disabled>
+											<input type="email" class="form-control" id="email"
+												name="email" value="${userDetails.email}" disabled>
 										</div>
-										
-										<label for="inputEmail3" class="col-sm-2 control-label">Mobile:</label>
+									</div>
+									<div class="form-group">
 
-										<div class="col-sm-4">
-											<input type="number" class="form-control" id="mobileNo" name="mobileNo"
-												value="${userDetails.mobileNo}" disabled>
-										</div>
-										</div>
-										<div class="form-group">
-								
-										<label for="inputEmail3" class="col-sm-2 control-label">Address:</label>
+										<label for="address" class="col-sm-2 control-label">Address:</label>
 
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="address" name="address"
-												value="${userDetails.address}" disabled/>
+											<input type="text" class="form-control" id="address"
+												name="address" value="${userDetails.address}" disabled />
 										</div>
-										
-										<input type = "hidden" id="status" name="status" value="${userDetails.status}"/>
-										<input type = "hidden" id="id" name="id" value="${userDetails.id}" disabled/>
-										
+
+										<input type="hidden" id="status" name="status"
+											value="${userDetails.status}" /> <input type="hidden" id="id"
+											name="id" value="${userDetails.id}" disabled />
+
+									</div>
+									
+									<div class="form-group">
+
+										<label for="comments" class="col-sm-2 control-label">Comments:</label>
+
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="comments"
+												name="comments" value="${userDetails.comments}" disabled />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="updatedBy" class="col-sm-2 control-label">updatedBy:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedBy"
+												name="updatedBy" value="${userDetails.updatedBy}" disabled>
+										</div>
+
+										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedOn"
+												name="updatedOn" value="${userDetails.updatedOn}" disabled>
+										</div>
 									</div>
 								</div>
 								<!-- /.box-body -->
