@@ -14,6 +14,8 @@
         <result property="type" column="type"/>
         <result property="mode" column="mode"/>
         <result property="payment" column="payment"/>
+        <result property="updatedBy" column="updatedBy"/>
+        <result property="updatedOn" column="updatedOn"/>
     </resultMap>
     
     <select id="selectAll" resultMap="salesPaymentResult">
@@ -29,12 +31,13 @@
     </select>
  
     <insert id="insert" parameterType="SalesAndPayment" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sales_payment (customerId, date, amount, comment, type, mode, payment) VALUES (#{customerId}, #{date}, #{amount}, #{comment}, #{type}, #{mode}, #{payment});
+        INSERT INTO sales_payment (customerId, date, amount, comment, type, mode, payment, updatedBy, updatedOn) VALUES (#{customerId}, #{date}, #{amount}, #{comment}, #{type}, #{mode}, #{payment}, #{updatedBy}, #{updatedOn});
     </insert>
  
     <update id="update" parameterType="SalesAndPayment">
         UPDATE sales_payment
-        SET customerId = #{customerId}, date = #{date}, amount = #{amount}, comment = #{comment}, type = #{type}, mode = #{mode}, payment = #{payment} WHERE id = #{id} 
+        SET customerId = #{customerId}, date = #{date}, amount = #{amount}, comment = #{comment}, type = #{type}, mode = #{mode}, payment = #{payment}, updatedOn = #{updatedOn}, updatedBy = #{updatedBy} 
+        WHERE id = #{id} 
     </update>
  
     <delete id="delete" parameterType="int">

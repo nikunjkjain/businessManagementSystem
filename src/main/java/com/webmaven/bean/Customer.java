@@ -1,5 +1,7 @@
 package com.webmaven.bean;
 
+import java.util.Date;
+
 public class Customer {
 
 	private int id;
@@ -10,6 +12,8 @@ public class Customer {
 	private String companyName;
 	private String billingAddress;
 	private int status;
+	private String updatedBy = "";
+	private Date updatedOn = null;
 	
 	public int getId() {
 		return id;
@@ -59,12 +63,23 @@ public class Customer {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", mobileNo=" + mobileNo + ", altContactNo=" + altContactNo
 				+ ", email=" + email + ", companyName=" + companyName + ", billingAddress=" + billingAddress
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn + "]";
 	}
 
 }

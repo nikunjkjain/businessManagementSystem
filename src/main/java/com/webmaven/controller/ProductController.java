@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.Product;
+import com.webmaven.bean.User;
 import com.webmaven.dao.ProductDAO;
+import com.webmaven.util.BmsConstants;
 import com.webmaven.util.Utility;
 
 @Controller
@@ -52,6 +54,12 @@ public class ProductController {
 	public ModelAndView insertProduct(@ModelAttribute("Product") Product product, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			product.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
 		productDao.insert(product);
 		return new ModelAndView("redirect:/viewProducts");
 	}
@@ -60,6 +68,12 @@ public class ProductController {
 	public ModelAndView updateProduct(@ModelAttribute("Product") Product product, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			product.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
 		productDao.update(product);
 		return new ModelAndView("redirect:/viewProducts");
 	}
@@ -84,7 +98,7 @@ public class ProductController {
 	public ModelAndView deleteProduct(@PathVariable("id") int id, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		int productDetails = productDao.delete(id);
+			productDao.delete(id);
 		return new ModelAndView("redirect:/viewProducts");
 	}
 }

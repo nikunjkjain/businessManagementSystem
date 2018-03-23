@@ -9,7 +9,10 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="unitPrice" column="unitPrice"/>
-        <result property="unitMeasure" column="unitMeasure"/>  
+        <result property="unitMeasure" column="unitMeasure"/>
+        <result property="updatedBy" column="updatedBy"/>
+        <result property="updatedOn" column="updatedOn"/>
+          
     </resultMap>
  
     <select id="selectAll" resultMap="productResult">
@@ -21,12 +24,12 @@
     </select>
  
     <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO product (name, unitPrice, unitMeasure) VALUES (#{name}, #{unitPrice}, #{unitMeasure});
+        INSERT INTO product (name, unitPrice, unitMeasure, updatedBy, updatedOn) VALUES (#{name}, #{unitPrice}, #{unitMeasure}, #{updatedBy}, #{updatedOn});
     </insert>
  
     <update id="update" parameterType="Product">
         UPDATE product
-        SET name = #{name}, unitPrice = #{unitPrice}, unitMeasure = #{unitMeasure}
+        SET name = #{name}, unitPrice = #{unitPrice}, unitMeasure = #{unitMeasure}, updatedBy = #{updatedBy}, updatedOn = #{updatedOn}
         WHERE id = #{id} 
     </update>
  

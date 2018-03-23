@@ -11,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.User;
 import com.webmaven.dao.UserDAO;
 import com.webmaven.util.BmsConstants;
@@ -80,7 +78,11 @@ public class UserController {
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		user.setUpdatedBy(uDetails.getUsername());
+		if (uDetails != null) {
+			user.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
 		userDao.insert(user);
 		return new ModelAndView("redirect:/viewUsers");
 	}
@@ -89,6 +91,12 @@ public class UserController {
 	public ModelAndView updateUser(@ModelAttribute("User") User user, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			user.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
 		userDao.update(user);
 		return new ModelAndView("redirect:/viewUsers");
 	}
@@ -113,7 +121,7 @@ public class UserController {
 	public ModelAndView deleteUser(@PathVariable("id") int id, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		int userDetails = userDao.delete(id);
+			userDao.delete(id);
 		return new ModelAndView("redirect:/viewUsers");
 	}
 	

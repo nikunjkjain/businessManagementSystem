@@ -39,7 +39,8 @@
 				<h1>Edit Customer</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li><a href="viewCustomers"><i class="fa fa-dashboard"></i>  Customers</a></li>
+					<li><a href="viewCustomers"><i class="fa fa-dashboard"></i>
+							Customers</a></li>
 					<li class="active">Edit Customer</li>
 				</ol>
 			</section>
@@ -58,69 +59,96 @@
 								class="form-horizontal">
 								<div class="box-body">
 									<div class="form-group">
-										<label for="id" class="col-sm-2 control-label">Customer Id:</label>
+										<label for="id" class="col-sm-2 control-label">Customer
+											Id:</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="id" name="id"
 												value="${CustomerDetails.id}" disabled>
 										</div>
-										
-										<label for="name" class="col-sm-2 control-label">Customer Name:</label>
+
+										<label for="name" class="col-sm-2 control-label">Customer
+											Name:</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="name" name="name"
-												value ="${CustomerDetails.name}">
+												value="${CustomerDetails.name}">
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label for="mobileNo" class="col-sm-2 control-label">Mobile No:</label>
+										<label for="mobileNo" class="col-sm-2 control-label">Mobile
+											No:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="mobileNo" name="mobileNo"
-												value="${CustomerDetails.mobileNo}">
+											<input type="text" class="form-control" id="mobileNo"
+												name="mobileNo" value="${CustomerDetails.mobileNo}">
 										</div>
 
-										<label for="altContactNo" class="col-sm-2 control-label">Alt Contact No:</label>
+										<label for="altContactNo" class="col-sm-2 control-label">Alt
+											Contact No:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="altContactNo" name="altContactNo"
-												value="${CustomerDetails.altContactNo}">
+											<input type="text" class="form-control" id="altContactNo"
+												name="altContactNo" value="${CustomerDetails.altContactNo}">
 										</div>
 									</div>
-									
+
 									<div class="form-group">
 										<label for="email" class="col-sm-2 control-label">Email:</label>
 
 										<div class="col-sm-4">
-											<input type="email" class="form-control" id="email" name="email"
-												value="${CustomerDetails.email}">
+											<input type="email" class="form-control" id="email"
+												name="email" value="${CustomerDetails.email}">
 										</div>
-										
-										<label for="companyName" class="col-sm-2 control-label">Company Name:</label>
+
+										<label for="companyName" class="col-sm-2 control-label">Company
+											Name:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="companyName" name="companyName"
-												value="${CustomerDetails.companyName}">
+											<input type="text" class="form-control" id="companyName"
+												name="companyName" value="${CustomerDetails.companyName}">
 										</div>
-										</div>
-										<div class="form-group">
-								
-										<label for="billingAddress" class="col-sm-2 control-label">Billing Address:</label>
+									</div>
+									<div class="form-group">
+
+										<label for="billingAddress" class="col-sm-2 control-label">Billing
+											Address:</label>
 
 										<div class="col-sm-10">
-											<input type="text" class="form-control" id="billingAddress" name="billingAddress"
-												value="${CustomerDetails.billingAddress}"/>
+											<input type="text" class="form-control" id="billingAddress"
+												name="billingAddress"
+												value="${CustomerDetails.billingAddress}" />
 										</div>
-										
-										<input type = "hidden" id="status" name="status" value="${CustomerDetails.status}"/>
-										<input type = "hidden" id="id" name="id" value="${CustomerDetails.id}"/>
-										
+
+										<input type="hidden" id="status" name="status"
+											value="${CustomerDetails.status}" /> <input type="hidden"
+											id="id" name="id" value="${CustomerDetails.id}" />
+
+									</div>
+
+									<div class="form-group">
+										<label for="updatedBy" class="col-sm-2 control-label">updatedBy:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedBy"
+												name="updatedBy" value="${CustomerDetails.updatedBy}"
+												disabled>
+										</div>
+
+										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedOn"
+												name="updatedOn" value="${CustomerDetails.updatedOn}"
+												disabled>
+										</div>
 									</div>
 								</div>
 								<!-- /.box-body -->
 								<div class="box-footer" align="center">
-									<button type="submit" class="btn btn-info">Update Details</button>
+									<button type="submit" class="btn btn-info">Update
+										Details</button>
 								</div>
 								<!-- /.box-footer -->
 							</form:form>

@@ -50,44 +50,64 @@
 						<!-- Horizontal Form -->
 						<div class="box box-info">
 							<div class="box-header with-border">
-								<h3 class="box-title"> Product Details:</h3>
+								<h3 class="box-title">Product Details:</h3>
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form:form action="#" method="post"
-								class="form-horizontal">
+							<form:form action="#" method="post" class="form-horizontal">
 								<div class="box-body">
 									<div class="form-group">
-									
-										<label for="username" class="col-sm-2 control-label">Product Id:</label>
+
+										<label for="username" class="col-sm-2 control-label">Product
+											Id:</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="id" name="id"
-												value ="${productDetails.id}" disabled>
+												value="${productDetails.id}" disabled>
 										</div>
-									
+
 										<label for="name" class="col-sm-2 control-label">Name:</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="name" name="name"
 												value="${productDetails.name}" disabled>
 										</div>
-										
+
 									</div>
 
 									<div class="form-group">
 										<label for="unitPrice" class="col-sm-2 control-label">unitPrice:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="unitPrice" name="unitPrice"
-												value="${productDetails.unitPrice}" disabled>
+											<input type="text" class="form-control" id="unitPrice"
+												name="unitPrice" value="${productDetails.unitPrice}"
+												disabled>
 										</div>
 
 										<label for="unitMeasure" class="col-sm-2 control-label">unitMeasure</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="unitMeasure" name="unitMeasure"
-												value="${productDetails.unitMeasure}" disabled>
+											<input type="text" class="form-control" id="unitMeasure"
+												name="unitMeasure" value="${productDetails.unitMeasure}"
+												disabled>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="updatedBy" class="col-sm-2 control-label">updatedBy:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedBy"
+												name="updatedBy" value="${productDetails.updatedBy}"
+												disabled>
+										</div>
+
+										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedOn"
+												name="updatedOn" value="${productDetails.updatedOn}"
+												disabled>
 										</div>
 									</div>
 								</div>

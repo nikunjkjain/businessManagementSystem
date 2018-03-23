@@ -40,7 +40,7 @@
  
     <update id="update" parameterType="User">
         UPDATE user
-        SET password = #{password}, name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}, updatedBy = #{updatedBy}, alternateNo = #{alternateNo}, comments = #{comments}
+        SET password = #{password}, name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}, updatedBy = #{updatedBy}, alternateNo = #{alternateNo}, comments = #{comments}, updatedOn = #{updatedOn}
         WHERE id = #{id} 
     </update>
  

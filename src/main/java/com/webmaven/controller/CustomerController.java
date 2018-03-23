@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.Customer;
+import com.webmaven.bean.User;
 import com.webmaven.dao.CustomerDAO;
+import com.webmaven.util.BmsConstants;
 import com.webmaven.util.Utility;
 
 @Controller
@@ -48,18 +50,30 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value="/insertCustomer", method=RequestMethod.POST)
-	public ModelAndView insertCustomer(@ModelAttribute("Customer") Customer Customer, HttpSession session){
+	public ModelAndView insertCustomer(@ModelAttribute("Customer") Customer customer, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		customerDao.insert(Customer);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			customer.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
+		customerDao.insert(customer);
 		return new ModelAndView("redirect:/viewCustomers");
 	}
 	
 	@RequestMapping(value="/updateCustomer", method=RequestMethod.POST)
-	public ModelAndView updateCustomer(@ModelAttribute("Customer") Customer Customer, HttpSession session){
+	public ModelAndView updateCustomer(@ModelAttribute("Customer") Customer customer, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		customerDao.update(Customer);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			customer.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
+		customerDao.update(customer);
 		return new ModelAndView("redirect:/viewCustomers");
 	}
 	
@@ -83,7 +97,7 @@ public class CustomerController {
 	public ModelAndView deleteCustomer(@PathVariable("id") int id, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		int CustomerDetails = customerDao.delete(id);
+			customerDao.delete(id);
 		return new ModelAndView("redirect:/viewCustomers");
 	}
 	

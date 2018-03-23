@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.Product;
+import com.webmaven.controller.UserController;
 
 public class ProductDAO {
+	
+	private static final Logger logger = Logger.getLogger(ProductDAO.class);
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -71,7 +75,7 @@ public class ProductDAO {
 			session.commit();
 			session.close();
 		}
-		System.out.println("insert(" + login + ") --> " + login.getId());
+		logger.info("insert(" + login + ") --> " + login.getId());
 		return id;
 	}
 
@@ -92,7 +96,7 @@ public class ProductDAO {
 			session.commit();
 			session.close();
 		}
-		System.out.println("update(" + login + ") --> updated");
+		logger.info("update(" + login + ") --> updated");
 	}
 
 	/**
@@ -111,7 +115,7 @@ public class ProductDAO {
 			session.commit();
 			session.close();
 		}
-		System.out.println("deleted Product(" + id + ")");
+		logger.info("deleted Product(" + id + ")");
 		return rows;
 	}
 }

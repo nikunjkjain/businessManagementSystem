@@ -13,7 +13,9 @@
         <result property="email" column="email"/>
         <result property="companyName" column="companyName"/>
         <result property="billingAddress" column="billingAddress"/>
-        <result property="status" column="status"/>   
+        <result property="status" column="status"/>
+        <result property="updatedBy" column="updatedBy"/>
+        <result property="updatedOn" column="updatedOn"/>   
     </resultMap>
  
     <select id="selectAll" resultMap="customerResult">
@@ -25,12 +27,12 @@
     </select>
  
     <insert id="insert" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO customer (name, mobileNo, altContactNo, email, companyName, billingAddress, status) VALUES (#{name}, #{mobileNo}, #{altContactNo}, #{email}, #{companyName}, #{billingAddress}, #{status});
+        INSERT INTO customer (name, mobileNo, altContactNo, email, companyName, billingAddress, status, updatedBy, UpdatedOn) VALUES (#{name}, #{mobileNo}, #{altContactNo}, #{email}, #{companyName}, #{billingAddress}, #{status}, #{updatedBy}, #{updatedOn});
     </insert>
  
     <update id="update" parameterType="Customer">
         UPDATE customer
-        SET name = #{name}, mobileNo = #{mobileNo}, altContactNo = #{altContactNo}, email = #{email}, companyName = #{companyName}, billingAddress = #{billingAddress}, status = #{status}
+        SET name = #{name}, mobileNo = #{mobileNo}, altContactNo = #{altContactNo}, email = #{email}, companyName = #{companyName}, billingAddress = #{billingAddress}, status = #{status}, updatedBy = #{updatedBy}, updatedOn = #{updatedOn}
         WHERE id = #{id} 
     </update>
  

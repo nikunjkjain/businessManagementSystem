@@ -1,12 +1,16 @@
 
 package com.webmaven.bean;
 
+import java.util.Date;
+
 public class Product {
 
 	private int id;
 	private String name;
 	private int unitPrice;
 	private String unitMeasure;
+	private String updatedBy = "";
+	private Date updatedOn = null;
 	
 	public int getId() {
 		return id;
@@ -34,10 +38,26 @@ public class Product {
 		this.unitMeasure = unitMeasure;
 	}
 
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", unitPrice=" + unitPrice + ", unitMeasure=" + unitMeasure
-				+ "]";
+				+ ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn + "]";
 	}
 	
 }

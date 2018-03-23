@@ -26,10 +26,12 @@ import com.webmaven.bean.Payment;
 import com.webmaven.bean.Product;
 import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.SalesDetails;
+import com.webmaven.bean.User;
 import com.webmaven.dao.CustomerDAO;
 import com.webmaven.dao.ProductDAO;
 import com.webmaven.dao.SalesAndPaymentDAO;
 import com.webmaven.dao.SalesDetailsDAO;
+import com.webmaven.util.BmsConstants;
 import com.webmaven.util.Utility;
 
 @Controller
@@ -96,6 +98,13 @@ public class SalesAndPaymentController {
 		List<SalesDetails> salesDetails = null;
 		logger.info(addSales.toString());
 		SalesAndPayment sales = getSalesObj(addSales);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			sales.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
+		
 		salesId = salesAndPaymentDao.insert(sales);
 		logger.info(sales.toString());
 
@@ -110,10 +119,16 @@ public class SalesAndPaymentController {
 	
 	
 	@RequestMapping(value="/insertPayment", method=RequestMethod.POST)
-	public ModelAndView insertPayment(@ModelAttribute("SalesAndPayment") SalesAndPayment Payment, HttpSession session){
+	public ModelAndView insertPayment(@ModelAttribute("SalesAndPayment") SalesAndPayment payments, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		salesAndPaymentDao.insert(Payment);
+		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+		if (uDetails != null) {
+			payments.setUpdatedBy(uDetails.getUsername());
+		}else {
+			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
+		}
+		salesAndPaymentDao.insert(payments);
 		return new ModelAndView("redirect:/addPayment");
 	}
 	

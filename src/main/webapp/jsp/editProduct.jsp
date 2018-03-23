@@ -91,6 +91,24 @@
 										</div>
 									</div>
 									
+									<div class="form-group">
+										<label for="updatedBy" class="col-sm-2 control-label">updatedBy:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedBy"
+												name="updatedBy" value="${productDetails.updatedBy}"
+												disabled>
+										</div>
+
+										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
+
+										<div class="col-sm-4">
+											<input type="text" class="form-control" id="updatedOn"
+												name="updatedOn" value="${productDetails.updatedOn}"
+												disabled>
+										</div>
+									</div>
+									
 									<input type = "hidden" id="id" name="id" value="${productDetails.id}"/>
 									
 								</div>

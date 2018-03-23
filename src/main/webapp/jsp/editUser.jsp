@@ -147,7 +147,7 @@
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="updatedBy"
-												name="updatedBy" value="${userDetails.updatedBy}" >
+												name="updatedBy" value="${userDetails.updatedBy}" disabled>
 										</div>
 
 										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
