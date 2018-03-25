@@ -1,6 +1,7 @@
 package com.webmaven.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class AddSales implements Serializable{
 	
@@ -22,6 +23,8 @@ public class AddSales implements Serializable{
 	private String type;
 	private String mode;
 	private int payment; 
+	private String updatedBy = "";
+	private Date updatedOn = null;
 	
 	public int getId() {
 		return id;
@@ -109,12 +112,26 @@ public class AddSales implements Serializable{
 		this.payment = payment;
 	}
 	
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+	
 	@Override
 	public String toString() {
 		return "AddSales [id=" + id + ", rate=" + rate + ", product=" + product + ", description=" + description
 				+ ", quantity=" + quantity + ", bags=" + bags + ", less=" + less + ", customerId=" + customerId
 				+ ", date=" + date + ", totalAmount=" + totalAmount + ", comment=" + comment + ", type=" + type
-				+ ", mode=" + mode + ", payment=" + payment + "]";
+				+ ", mode=" + mode + ", payment=" + payment + ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn
+				+ "]";
 	}	
 	
 }

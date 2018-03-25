@@ -1,5 +1,7 @@
 package com.webmaven.bean;
 
+import java.util.Date;
+
 public class SalesDetails{
 	
 	private int salesId;
@@ -9,7 +11,13 @@ public class SalesDetails{
 	private double lessInQuantity;
 	private int bags;
 	private String description;
+	private String updatedBy = "";
+	private Date updatedOn = null;
 	
+	
+	public SalesDetails() {
+		
+	}
 	
 	public SalesDetails(int salesId, AddSales addSales) {
 		this.salesId = salesId;
@@ -19,6 +27,7 @@ public class SalesDetails{
 		this.lessInQuantity = addSales.getLess();
 		this.bags = addSales.getBags();
 		this.description = addSales.getDescription();
+		this.updatedBy = addSales.getUpdatedBy();
 	}
 	
 	public int getSalesId() {
@@ -64,10 +73,27 @@ public class SalesDetails{
 		this.description = description;
 	}
 
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
 	@Override
 	public String toString() {
 		return "SalesDetails [salesId=" + salesId + ", productId=" + productId + ", quantity=" + quantity + ", rate="
-				+ rate + ", lessInQuantity=" + lessInQuantity + ", bags=" + bags + ", description=" + description + "]";
+				+ rate + ", lessInQuantity=" + lessInQuantity + ", bags=" + bags + ", description=" + description
+				+ ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn + "]";
 	}
 	
 }

@@ -13,6 +13,8 @@
         <result property="lessInQuantity" column="lessInQuantity"/>
         <result property="bags" column="bags"/>
         <result property="description" column="description"/>
+        <result property="updatedBy" column="updatedBy"/>
+        <result property="updatedOn" column="updatedOn"/>
     </resultMap>
  
     <select id="selectAll" resultMap="salesDetailsResult">
@@ -20,20 +22,20 @@
     </select>
  
     <select id="getSalesDetailsBySalesId" parameterType="int" resultMap="salesDetailsResult">
-        SELECT * FROM sales_details WHERE id = #{salesId};
+        SELECT * FROM sales_details WHERE salesId = #{salesId};
     </select>
  
     <insert id="insert" parameterType="java.util.List">
-        INSERT INTO sales_details (salesId, productId, quantity, rate, lessInQuantity, bags, description) 
+        INSERT INTO sales_details (salesId, productId, quantity, rate, lessInQuantity, bags, description, updatedBy) 
         	VALUES
         <foreach collection="list" item="sd" separator=","> 
-        (#{sd.salesId}, #{sd.productId}, #{sd.quantity}, #{sd.rate}, #{sd.lessInQuantity}, #{sd.bags}, #{sd.description})
+        (#{sd.salesId}, #{sd.productId}, #{sd.quantity}, #{sd.rate}, #{sd.lessInQuantity}, #{sd.bags}, #{sd.description}, #{sd.updatedBy})
         </foreach>
     </insert>
  
     <update id="update" parameterType="SalesDetails">
         UPDATE sales_details
-        SET productId = #{productId}, quantity = #{quantity}, rate = #{rate}, lessInQuantity = #{lessInQuantity}, bags = #{bags}, description = #{description} WHERE salesId = #{salesId} 
+        SET productId = #{productId}, quantity = #{quantity}, rate = #{rate}, lessInQuantity = #{lessInQuantity}, bags = #{bags}, description = #{description}, updatedBy = #{updatedBy}, updatedOn = #{updatedOn} WHERE salesId = #{salesId} 
     </update>
  
     <delete id="delete" parameterType="int">

@@ -54,12 +54,7 @@ public class ProductController {
 	public ModelAndView insertProduct(@ModelAttribute("Product") Product product, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			product.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		product.setUpdatedBy(utils.getUserIdFromSession(session));
 		productDao.insert(product);
 		return new ModelAndView("redirect:/viewProducts");
 	}
@@ -68,12 +63,7 @@ public class ProductController {
 	public ModelAndView updateProduct(@ModelAttribute("Product") Product product, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			product.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		product.setUpdatedBy(utils.getUserIdFromSession(session));
 		productDao.update(product);
 		return new ModelAndView("redirect:/viewProducts");
 	}

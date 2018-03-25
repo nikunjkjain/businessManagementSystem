@@ -11,7 +11,7 @@ import com.webmaven.bean.SalesDetails;
 
 public class SalesDetailsDAO {
 	
-	private static final Logger logger = Logger.getLogger(SalesAndPaymentDAO.class);
+	private static final Logger logger = Logger.getLogger(SalesDetailsDAO.class);
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -46,11 +46,11 @@ public class SalesDetailsDAO {
 	 * 
 	 * @param SalesDetailsId
 	 */
-	public SalesDetails getSalesDetailsById(Integer SalesDetailsId) {
-		SalesDetails SalesDetailsDetails = null;
+	public List<SalesDetails> getSalesDetailsById(Integer SalesDetailsId) {
+		List<SalesDetails> SalesDetailsDetails = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			SalesDetailsDetails = (SalesDetails) session.selectOne("SalesDetails.getSalesDetailsById", SalesDetailsId);
+			SalesDetailsDetails = session.selectList("SalesDetails.getSalesDetailsBySalesId", SalesDetailsId);
 
 		} finally {
 			session.close();

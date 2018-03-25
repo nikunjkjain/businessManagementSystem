@@ -53,12 +53,7 @@ public class CustomerController {
 	public ModelAndView insertCustomer(@ModelAttribute("Customer") Customer customer, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			customer.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		customer.setUpdatedBy(utils.getUserIdFromSession(session));
 		customerDao.insert(customer);
 		return new ModelAndView("redirect:/viewCustomers");
 	}
@@ -67,12 +62,7 @@ public class CustomerController {
 	public ModelAndView updateCustomer(@ModelAttribute("Customer") Customer customer, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			customer.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		customer.setUpdatedBy(utils.getUserIdFromSession(session));
 		customerDao.update(customer);
 		return new ModelAndView("redirect:/viewCustomers");
 	}

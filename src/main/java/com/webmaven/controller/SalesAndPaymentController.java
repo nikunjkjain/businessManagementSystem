@@ -22,16 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.AddSales;
 import com.webmaven.bean.Customer;
-import com.webmaven.bean.Payment;
 import com.webmaven.bean.Product;
 import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.SalesDetails;
-import com.webmaven.bean.User;
 import com.webmaven.dao.CustomerDAO;
 import com.webmaven.dao.ProductDAO;
 import com.webmaven.dao.SalesAndPaymentDAO;
 import com.webmaven.dao.SalesDetailsDAO;
-import com.webmaven.util.BmsConstants;
 import com.webmaven.util.Utility;
 
 @Controller
@@ -90,6 +87,25 @@ public class SalesAndPaymentController {
 		return new ModelAndView("addSales", models);
 	}
 	
+	@RequestMapping(value="/editSales/{id}/", method=RequestMethod.GET)
+	public ModelAndView editSales(@PathVariable("id") int id, HttpSession session){
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		List<Product> productList = productDao.selectAll();
+		List<Customer> customerList = customerDao.selectAll();
+		List<SalesDetails> salesDetailsList = salesDetailsDao.getSalesDetailsById(id);
+		SalesAndPayment salesAndPayment = salesAndPaymentDao.getSalesById(id);
+
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("productList", productList);
+		models.put("customerList", customerList);
+		models.put("salesDetailsList", salesDetailsList);
+		models.put("salesAndPayment", salesAndPayment);
+		
+		logger.info("Going to Edit Sales View:");
+		return new ModelAndView("editSales", models);
+	}
+	
 	@RequestMapping(value="/insertSales", method=RequestMethod.POST)
 	public ModelAndView insertSales(@RequestBody AddSales[] addSales, HttpSession session) {
 		if (!utils.isValidSession(session))
@@ -98,18 +114,12 @@ public class SalesAndPaymentController {
 		List<SalesDetails> salesDetails = null;
 		logger.info(addSales.toString());
 		SalesAndPayment sales = getSalesObj(addSales);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			sales.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
-		
+		sales.setUpdatedBy(utils.getUserIdFromSession(session));
 		salesId = salesAndPaymentDao.insert(sales);
 		logger.info(sales.toString());
 
 		if(salesId != -1) {
-			salesDetails = getSalesDetailsObj(salesId, addSales);
+			salesDetails = getSalesDetailsObj(salesId, addSales, session);
 			salesDetailsDao.insert(salesDetails);
 		}
 		
@@ -122,18 +132,13 @@ public class SalesAndPaymentController {
 	public ModelAndView insertPayment(@ModelAttribute("SalesAndPayment") SalesAndPayment payments, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			payments.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		payments.setUpdatedBy(utils.getUserIdFromSession(session));
 		salesAndPaymentDao.insert(payments);
 		return new ModelAndView("redirect:/addPayment");
 	}
 	
 	@RequestMapping(value="/viewLedger/{id}/", method=RequestMethod.GET)
-	public ModelAndView insertSales(@PathVariable("id") int id, HttpSession session) {
+	public ModelAndView viewLegder(@PathVariable("id") int id, HttpSession session) {
 		if (!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		List<SalesAndPayment> salesPaymenet = salesAndPaymentDao.getSalesByCustomerId(id);
@@ -148,12 +153,14 @@ public class SalesAndPaymentController {
 		return null;
 	}
 	
-	private List<SalesDetails> getSalesDetailsObj(int salesId, AddSales[] addSalesObj) {
+	private List<SalesDetails> getSalesDetailsObj(int salesId, AddSales[] addSalesObj, HttpSession session) {
 		if(addSalesObj != null) {
+			String userId = utils.getUserIdFromSession(session);
 			AddSales[] newSalesArr = Arrays.copyOf(addSalesObj, addSalesObj.length-1);
 			List<SalesDetails> salesDetails = new ArrayList<SalesDetails>();
 			
 			for(AddSales addSales : newSalesArr) {
+				addSales.setUpdatedBy(userId);
 				salesDetails.add(new SalesDetails(salesId, addSales));
 			}
 			return salesDetails;

@@ -77,12 +77,7 @@ public class UserController {
 	public ModelAndView insertUser(@ModelAttribute("User") User user, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			user.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		user.setUpdatedBy(utils.getUserIdFromSession(session));
 		userDao.insert(user);
 		return new ModelAndView("redirect:/viewUsers");
 	}
@@ -91,12 +86,7 @@ public class UserController {
 	public ModelAndView updateUser(@ModelAttribute("User") User user, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			user.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
+		user.setUpdatedBy(utils.getUserIdFromSession(session));
 		userDao.update(user);
 		return new ModelAndView("redirect:/viewUsers");
 	}

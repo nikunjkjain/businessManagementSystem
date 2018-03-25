@@ -37,58 +37,54 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Ledger</h1>
+				<h1>Sales Details</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Ledger</li>
+					<li class="active">View Sales Details</li>
 				</ol>
 			</section>
+
 			<section class="content">
 				<div class="row">
 					<div class="col-xs-12">
 
 						<div class="box">
-							<!-- <div class="box-header">
-								<h4 class="box-title">
-									View Ledger
-								</h4>
-							</div> -->
+							<div class="box-header">
+								<!-- <h3 class="box-title">
+									<a href="addCustomer">Add Customer <i class="fa fa-user-plus"></i></a>
+								</h3> -->
+							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
-								<table id="ledger1" class="table table-bordered table-striped">
+								<table id="example1" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>Date</th>
-											<th>Particular</th>
-											<th>Vch Type</th>
-											<th>Vch No</th>
-											<th>Debit</th>
-											<th>Credit</th>
-											<th>Balance</th>
+											<th>Product</th>
+											<th>Quantity</th>
+											<th>Rate</th>
+											<th>Bags</th>
+											<th>Less</th>
+											<th>Total</th>
+											<th>Description</th>
+											<th>UpdatedBy</th>
+											<th>UpdatedOn</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${salesPaymenet}" var="salesPaymenet">
-											<c:set var="balCr" scope="session" value="0" />
-											<c:set var="balDr" scope="session" value="0" />
+										<c:forEach items="${salesDetails}" var="salesDetails">
+										<c:set var="total" scope="session" value="0" />
 											<tr>
-												<td>${salesPaymenet.date}</td>
-												<td>${salesPaymenet.comment}</td>
-												<td>${salesPaymenet.type}</td>
-												<td>${salesPaymenet.id}</td>
-												<c:if test="${salesPaymenet.type == 'receipt'}">
-													<td>0</td>
-													<td>${salesPaymenet.amount}</td>
-													<c:set var="balCr" value="${balCr + salesPaymenet.amount}" />
-													<td></td>
-												</c:if>
-												<c:if test="${salesPaymenet.type != 'receipt'}">
-													<td>${salesPaymenet.amount}</td>
-													<td>0</td>
-													<c:set var="balDr" value="${balDr + salesPaymenet.amount}" />
-													<td><a href="viewSalesDetails/${salesPaymenet.id}/">View Sales Details</a></td>
-												</c:if>
+												<td>${salesDetails.productId}</td>
+												<td>${salesDetails.quantity}</td>
+												<td>${salesDetails.rate}</td>
+												<td>${salesDetails.bags}</td>
+												<td>${salesDetails.lessInQuantity}</td>
+												<td>${(salesDetails.quantity - salesDetails.lessInQuantity) * salesDetails.rate}</td>
+												<td>${salesDetails.description}</td>
+												<td>${salesDetails.updatedBy}</td>
+												<td>${salesDetails.updatedOn}</td>
 											</tr>
+											<c:set var="total" value="${total + (salesDetails.quantity - salesDetails.lessInQuantity) * salesDetails.rate}" />
 										</c:forEach>
 									</tbody>
 									<tfoot>
@@ -96,10 +92,12 @@
 											<th></th>
 											<th></th>
 											<th></th>
-											<th>Grand Total</th>
-											<th>${balDr}</th>
-											<th>${balCr}</th>
-											<th>${balDr - balCr}</th>
+											<th></th>
+											<th>Grand total:</th>
+											<th>${total}</th>
+											<th></th>
+											<th></th>
+											<th></th>
 										</tr>
 									</tfoot>
 								</table>

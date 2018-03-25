@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.webmaven.bean.User;
 import com.webmaven.controller.UserController;
 
 public class Utility {
@@ -29,5 +30,16 @@ private static Utility instance;
     		isValid = true;
     	}
     	return isValid; 
+    }
+    
+    public String getUserIdFromSession (HttpSession session) {
+    	
+    	User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+    	
+    	if (uDetails != null)
+			return uDetails.getUsername();
+			
+		logger.warn("Got User Obj as Null hence retruning userName as Null");
+    	return null;
     }
 }
