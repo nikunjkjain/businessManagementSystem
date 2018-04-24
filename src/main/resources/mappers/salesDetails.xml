@@ -35,7 +35,7 @@
  
     <update id="update" parameterType="SalesDetails">
         UPDATE sales_details
-        SET productId = #{productId}, quantity = #{quantity}, rate = #{rate}, lessInQuantity = #{lessInQuantity}, bags = #{bags}, description = #{description}, updatedBy = #{updatedBy}, updatedOn = #{updatedOn} WHERE salesId = #{salesId} 
+        SET quantity = #{quantity}, rate = #{rate}, lessInQuantity = #{lessInQuantity}, bags = #{bags}, description = #{description}, updatedBy = #{updatedBy}, updatedOn = #{updatedOn} WHERE salesId = #{salesId} and productId = #{productId} 
     </update>
  
     <delete id="delete" parameterType="int">

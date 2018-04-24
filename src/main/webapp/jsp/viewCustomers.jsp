@@ -79,7 +79,7 @@
 												<td>${CustomerList.status}</td>
 												<td>
 												<a href="viewLedger/${CustomerList.id}/" class="btn btn-info btn-xs"> Ledger <i class="fa fa-book"></i></a>
-												<a href="viewCustomer/${CustomerList.id}/" class="btn btn-primary btn-xs"> Payment <i class="fa fa-rupee"></i></a>
+												<a href="addPayment/${CustomerList.id}/" class="btn btn-primary btn-xs"> Payment <i class="fa fa-rupee"></i></a>
 												<div class="btn-group">
 	                  								<button type="button" class="btn btn-success btn-xs">Action</button>
 	                  								<button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown">

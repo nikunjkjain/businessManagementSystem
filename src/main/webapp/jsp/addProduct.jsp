@@ -63,14 +63,14 @@
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="name" name="name"
-												placeholder="Name">
+												placeholder="Name" required="required">
 										</div>
 										
 										<label for="unitPrice" class="col-sm-2 control-label">unitPrice:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="unitPrice" name="unitPrice"
-												placeholder="unitPrice">
+											<input type="number" class="form-control" id="unitPrice" name="unitPrice"
+												placeholder="unitPrice" required="required">
 										</div>
 										
 									</div>
@@ -80,7 +80,7 @@
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="unitMeasure" name="unitMeasure"
-												placeholder="unitMeasure">
+												placeholder="unitMeasure" required="required">
 										</div>
 
 									</div>

@@ -52,6 +52,7 @@
 						<div class="box box-info">
 							<div class="box-header with-border">
 								<h3 class="box-title">Edit User Details:</h3>
+								<a href="changeUserPassword/${userDetails.id}/"><input type="button" class="btn btn-xs btn-info pull-right" value="Change Password?"></a>
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
@@ -75,7 +76,7 @@
 
 									</div>
 
-									<div class="form-group">
+									<%-- <div class="form-group">
 										<label for="inputEmail3" class="col-sm-2 control-label">Password:</label>
 
 										<div class="col-sm-4">
@@ -89,7 +90,7 @@
 											<input type="password" class="form-control" id="repassword"
 												name="repassword" value="${userDetails.password}">
 										</div>
-									</div>
+									</div> --%>
 
 									<div class="form-group">
 										<label for="mobileNo" class="col-sm-2 control-label">Mobile:</label>
@@ -169,7 +170,7 @@
 						</div>
 						<!-- /.box -->
 					</div>
-					<!--/.col (right) -->
+					<!--/.col (right) --></a> 
 				</div>
 				<!-- /.row -->
 			</section>

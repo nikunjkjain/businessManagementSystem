@@ -9,7 +9,7 @@ public class AddSales implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private int id = 0;
 	private double rate = 0;
 	private int product = 0;
 	private String description = "";
@@ -25,6 +25,8 @@ public class AddSales implements Serializable{
 	private int payment; 
 	private String updatedBy = "";
 	private Date updatedOn = null;
+	
+	
 	
 	public int getId() {
 		return id;

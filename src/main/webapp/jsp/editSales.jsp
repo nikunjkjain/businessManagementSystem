@@ -58,20 +58,15 @@
 
 						<div class="box">
 							 <div class="box-header">
-								<label>Party Name: </label> 
-								<select id="customerId" name="customerId">
-									<option selected="selected"></option>
-									<c:forEach items="${customerList}" var="customerList">
-										<option value="${customerList.id}">${customerList.name}</option>
-									</c:forEach>
-								</select>
+								<label>Party Name: </label>
+								<input type="text" value="${salesAndPayment.customerId}" name="customerId" id="customerId"> 
 								&nbsp;&nbsp;&nbsp;
 								<label>Sales Date: </label> 
-								<input type="date" name="date" id="date">
-								
+								<input type="date" name="date" id="date" value="${salesAndPayment.date}">
 								&nbsp;&nbsp;&nbsp;
 								<label>Comment: </label> 
-								<input type="text" size="80" name="comment" id="comment">
+								<input type="text" size="80" name="comment" id="comment" value="${salesAndPayment.comment}">
+								<input type="hidden" name="salesAndPaymentId" id="salesAndPaymentId" value="${salesAndPayment.id}">
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -79,7 +74,7 @@
 									border="1" class="table table-bordered">
 									<thead>
 										<tr>
-											<th>Id</th>
+											<th>Sr No</th>
 											<th>Product</th>
 											<th>Qty (kg)</th>
 											<th>Bags</th>
@@ -88,38 +83,36 @@
 											<th>Desc</th>
 											<th>Nt.Wt (kg)</th>
 											<th>Total (&#x20B9;)</th>
-											<th>+/-</th>
 										</tr>
 									</thead>
 									<tbody>
+									<c:set var="count" scope="session" value="0" />
+									<c:set var="grandTotal" scope="session" value="0" />
+									<c:set var="productTotal" scope="session" value="0" />
+									<c:set var="netWeight" scope="session" value="0" />
+									<c:forEach items="${salesDetailsList}" var="salesDetailsList">
+									<c:set var="count" value="${count + 1}" />
+									<c:set var="netWeight" value="${salesDetailsList.quantity - salesDetailsList.lessInQuantity}" />
+									<c:set var="productTotal" value="${(salesDetailsList.quantity - salesDetailsList.lessInQuantity) * salesDetailsList.rate}" />
+									<c:set var="grandTotal" value="${grandTotal + productTotal}" />
 										<tr>
-											<td><label id="id">-</label></td>
-											<td><select id="product" name="product">
-													<option selected="selected"></option>
-													<c:forEach items="${productList}" var="productList">
-														<option value="${productList.id}">${productList.name}</option>
-													</c:forEach>
-											</select></td>
-											<td><input class="col-md-12" type="number" id="quantity"
-												name="quantity" /></td>
-											<td><input class="col-md-12" type="number" id="bags"
-												name="bags" /></td>
-											<td><input class="col-md-12" type="number" id="less"
-												name="less" /></td>
-											<td><input class="col-md-12" type="number" id="rate"
-												name="rate" /></td>
-											<td><input class="col-md-12" type="text"
-												id="description" name="description" /></td>
-											<td><label id="ntWt">-</label></td>
-											<td><label id="total">-</label></td>
-											<td><input type="button" onclick="Add()" value="+" /></td>
+											<td><input class="col-md-12" type="number" id="num" name="num" readonly="readonly" value="${count}"/></td>
+											<td><input class="col-md-12 product" type="number" id="product${count}" name="product${count}" readonly="readonly" value="${salesDetailsList.productId}"/></td>
+											<td><input class="col-md-12 quantity" type="number" onChange = "updateRowInfo(${count});" id="quantity${count}" name="quantity${count}" value="${salesDetailsList.quantity}"/></td>
+											<td><input class="col-md-12 bags" type="number" id="bags${count}" name="bags${count}" value="${salesDetailsList.bags}"/></td>
+											<td><input class="col-md-12 less" type="number" onChange = "updateRowInfo(${count});" id="less${count}" name="less${count}" value="${salesDetailsList.lessInQuantity}"/></td>
+											<td><input class="col-md-12 rate" type="number" onChange = "updateRowInfo(${count});" id="rate${count}" name="rate${count}" value="${salesDetailsList.rate}"/></td>
+											<td><input class="col-md-12 description" type="text" id="description${count}" name="description${count}" value="${salesDetailsList.description}"/></td>
+											<td><input class="col-md-12 ntWt" type="text" id="ntWt${count}" name="ntWt${count}" readonly="readonly" value="${netWeight}"/></td>
+											<td><input class="col-md-12 total" type="text" id="total${count}" name="total${count}" readonly="readonly" value="${(salesDetailsList.quantity - salesDetailsList.lessInQuantity) * salesDetailsList.rate}"></td>
 										</tr>
+										</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
-										<td ><input type="button" onclick="callController()" value="Call" /></td>
+										<td ><input type="button" onclick="editSalesfun();" value="Call" /></td>
 										<td colspan="7" align="right"><b>Total Amount:</b></td>
-										<td ><input type="text" id="tamount" value="0"></td>
+										<td ><input class="col-md-12" type="number" id="tamount" value="${grandTotal}" readonly="readonly"></td>
 										</tr>
 									</tfoot>
 								</table>

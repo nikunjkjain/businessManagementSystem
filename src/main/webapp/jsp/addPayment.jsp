@@ -22,6 +22,13 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  <script type="text/javascript">
+   function setDate(){
+  	  document.getElementById('date').valueAsDate = new Date();
+  }
+  window.onload = setDate;
+  </script>
 </head>
 
 
@@ -59,17 +66,17 @@
 								class="form-horizontal">
 								<div class="box-body">
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Payment Date:</label>
+										<label for="date" class="col-sm-2 control-label">Payment Date:</label>
 
 										<div class="col-sm-4">
 											<input type="date" name="date" id="date">
 										</div>
 										
-										<label for="inputEmail3" class="col-sm-2 control-label">Party:</label>
+										<label for="Party" class="col-sm-2 control-label">Party:</label>
 
 										<div class="col-sm-4">
-										<select id="customerId" name="customerId">
-											<option selected="selected">Select Party</option>
+										<select id="customerId" name="customerId" required="required">
+											<option selected="selected" value="-1">Select Party</option>
 												<c:forEach items="${customerList}" var="customerList">
 													<option value="${customerList.id}">${customerList.name}</option>
 												</c:forEach>
@@ -79,7 +86,7 @@
 									</div>
 
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Type:</label>
+										<label for="payment" class="col-sm-2 control-label">Type:</label>
 
 										<div class="col-sm-4">
 											<select id="type" name="type">
@@ -88,7 +95,7 @@
 											</select>
 										</div>
 
-										<label for="inputEmail3" class="col-sm-2 control-label">Mode:</label>
+										<label for="mode" class="col-sm-2 control-label">Mode:</label>
 
 										<div class="col-sm-4">
 											<select id="mode" name="mode">
@@ -99,27 +106,21 @@
 									</div>
 									
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Amount:</label>
+										<label for="amount" class="col-sm-2 control-label">Amount:</label>
 
 										<div class="col-sm-4">
 											<input type="number" class="form-control" id="amount" name="amount"
-												placeholder="Amount">
+												placeholder="Amount" required="required">
 										</div>
 										
-										<!-- <label for="inputEmail3" class="col-sm-2 control-label">Mobile:</label>
-
-										<div class="col-sm-4">
-											<input type="number" class="form-control" id="mobileNo" name="mobileNo"
-												placeholder="Mobile No" maxlength="6">
-										</div> -->
 										</div>
 										<div class="form-group">
 								
-										<label for="inputEmail3" class="col-sm-2 control-label">Comment:</label>
+										<label for="Comment" class="col-sm-2 control-label">Comment:</label>
 
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="comment" name="comment"
-												placeholder="Comment">
+												placeholder="Comment" value="">
 										</div>
 									</div>
 								</div>

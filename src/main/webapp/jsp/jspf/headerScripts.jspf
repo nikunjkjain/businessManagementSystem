@@ -24,18 +24,18 @@
 <!-- Google Font -->
 <link rel="stylesheet" href="<c:url value ="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>">
 
-
-<script type="text/javascript">
-	console.log("Loading Script");
+ <script type="text/javascript">
+	
 	var products = [] // declaring an empty array
 	var i = 1;
 	var totalAmount = 0;
 	products = products;
-	console.log("Script Loaded");
+	
 	function callController() {
-		alert('call')
 		getElementsById();
+		
 		console.log("===> function callController");
+		
 		$.ajax({
 			type : 'POST',
 			dataType : 'html',
@@ -74,7 +74,7 @@
 		console.log("<=== function Add");
 	};
 
-	function AddRow(id, product, quantity, rate, description, bags, less) {
+	function AddElementsToArray(id, product, quantity, rate, description, bags, less){
 		console.log("===> function AddRow");
 		var productDetails = {
 			"id" : id,
@@ -87,6 +87,26 @@
 		}
 		products.push(productDetails);
 		console.log("===> function AddRow Added to Sales Array");
+	}
+	
+	function AddRow(id, product, quantity, rate, description, bags, less) {
+		
+		AddElementsToArray(id, product, quantity, rate, description, bags, less);
+		
+		//TODO:delete below  comments
+		/* console.log("===> function AddRow");
+		var productDetails = {
+			"id" : id,
+			"product" : product,
+			"quantity" : quantity,
+			"rate" : rate,
+			"description" : description,
+			"bags" : bags,
+			"less" : less
+		}
+		products.push(productDetails);
+		console.log("===> function AddRow Added to Sales Array"); */
+		
 		//Get the reference of the Table's TBODY element.
 		i++;
 		var tBody = $("#tblCustomers > TBODY")[0];
@@ -208,6 +228,7 @@
 			"payment" : 0
 		}
 		products.push(details);
-		alert(JSON.stringify(products));
+		console.log('Printing products Json in getElementsById');
+		console.log(JSON.stringify(products));
 	}
 </script>

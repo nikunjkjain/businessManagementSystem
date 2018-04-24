@@ -127,6 +127,29 @@ public class SalesAndPaymentController {
 		return new ModelAndView("redirect:/viewUsers");
 	}
 	
+	@RequestMapping(value="/editSalesDetails", method=RequestMethod.POST)
+	public ModelAndView editSalesDetails(@RequestBody AddSales[] addSales, HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		int salesId = -1;
+		int updateCount = 0;
+		List<SalesDetails> salesDetails = null;
+		logger.info(addSales.toString());
+		SalesAndPayment sales = getSalesObj(addSales, true);
+		sales.setUpdatedBy(utils.getUserIdFromSession(session));
+		updateCount = salesAndPaymentDao.update(sales);
+		logger.info(sales.toString());
+
+		if (updateCount == 1) {
+			salesId = sales.getId();
+			salesDetails = getSalesDetailsObj(salesId, addSales, session);
+			salesId = salesDetailsDao.update(salesDetails);
+		}
+
+		logger.info(salesDetails);
+		return new ModelAndView("redirect:/viewUsers");
+	}
+	
 	
 	@RequestMapping(value="/insertPayment", method=RequestMethod.POST)
 	public ModelAndView insertPayment(@ModelAttribute("SalesAndPayment") SalesAndPayment payments, HttpSession session){
@@ -145,12 +168,18 @@ public class SalesAndPaymentController {
 		return new ModelAndView("viewLedger", "salesPaymenet", salesPaymenet);
 	}
 
-	private SalesAndPayment getSalesObj(AddSales[] addSalesObj) {
+	private SalesAndPayment getSalesObj(AddSales[] addSalesObj, boolean isEditSales) {
 		if(addSalesObj != null) {
 			AddSales sales = addSalesObj[addSalesObj.length - 1];
-			return new SalesAndPayment(sales.getCustomerId(), sales.getDate(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
+			if(!isEditSales)
+				return new SalesAndPayment(sales.getCustomerId(), sales.getDate(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
+			return new SalesAndPayment(sales.getId(), sales.getCustomerId(), sales.getDate(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
 		}
 		return null;
+	}
+	
+	private SalesAndPayment getSalesObj(AddSales[] addSalesObj) {
+		return getSalesObj(addSalesObj, false);
 	}
 	
 	private List<SalesDetails> getSalesDetailsObj(int salesId, AddSales[] addSalesObj, HttpSession session) {

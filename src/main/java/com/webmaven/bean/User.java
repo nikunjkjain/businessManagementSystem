@@ -5,17 +5,17 @@ import java.util.Date;
 public class User {
 
 	private int id;
-	private String username;
-	private String password;
-	private String name;
-	private long mobileNo;
-	private String email;
-	private String address;
+	private String username="";
+	private String password="";
+	private String name="";
+	private long mobileNo=0;
+	private String email="";
+	private String address="";
 	private int status;
-	private String updatedBy;
+	private String updatedBy="";
 	private Date updatedOn;
-	private long alternateNo;
-	private String comments;
+	private long alternateNo=0;
+	private String comments="";
 	
 	public int getId() {
 		return id;

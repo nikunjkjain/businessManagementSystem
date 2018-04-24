@@ -1,5 +1,8 @@
 package com.webmaven.util;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -24,9 +27,10 @@ private static Utility instance;
     
     public boolean isValidSession(HttpSession session) {
     	Boolean sessVar = (Boolean) session.getAttribute(BmsConstants.ISVALID);
-    	logger.info("===> isValidSession :sessVar:"+sessVar );
+    	User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
+    	logger.info("===> isValidSession :sessVar:<"+sessVar+"> uDetails:<"+uDetails+">" );
     	boolean isValid = false;
-    	if(sessVar != null) {
+    	if(sessVar!=null && sessVar.booleanValue() && uDetails != null) {
     		isValid = true;
     	}
     	return isValid; 
@@ -42,4 +46,13 @@ private static Utility instance;
 		logger.warn("Got User Obj as Null hence retruning userName as Null");
     	return null;
     }
+    
+    public String getExceptionStackString (Exception e) {
+    	StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        String exceptionAsString = sw.toString();
+		return exceptionAsString;
+    }
+    
+    
 }

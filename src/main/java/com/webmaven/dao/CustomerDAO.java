@@ -4,11 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.Customer;
+import com.webmaven.controller.CustomerController;
+import com.webmaven.util.Utility;
 
 public class CustomerDAO {
+	
+	private static final Logger logger = Logger.getLogger(CustomerDAO.class);
+	private static final Utility utils = Utility.getInstance(); 
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -29,10 +35,12 @@ public class CustomerDAO {
 
 		try {
 			list = session.selectList("Customer.selectAll");
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.close();
 		}
-		System.out.println("selectAll() --> " + list);
+		logger.info("selectAll() --> " + list);
 		return list;
 
 	}
@@ -48,7 +56,9 @@ public class CustomerDAO {
 		try {
 			CustomerDetails = (Customer) session.selectOne("Customer.getCustomerById", CustomerId);
 
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.close();
 		}
 		return CustomerDetails;
@@ -66,11 +76,13 @@ public class CustomerDAO {
 
 		try {
 			id = session.insert("Customer.insert", customerDetails);
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.commit();
 			session.close();
 		}
-		System.out.println("insert(" + customerDetails + ") --> " + customerDetails.getId());
+		logger.info("insert(" + customerDetails + ") --> " + customerDetails.getId());
 		return id;
 	}
 
@@ -86,12 +98,13 @@ public class CustomerDAO {
 
 		try {
 			id = session.update("Customer.update", customerDetails);
-
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.commit();
 			session.close();
 		}
-		System.out.println("update(" + customerDetails + ") --> updated");
+		logger.info("update(" + customerDetails + ") --> updated");
 	}
 
 	/**
@@ -101,16 +114,17 @@ public class CustomerDAO {
 	 *            value of the instance to be deleted.
 	 */
 	public int delete(int id) {
-
 		SqlSession session = sqlSessionFactory.openSession();
 		int rows = 0;
 		try {
 			rows = session.delete("Customer.delete", id);
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.commit();
 			session.close();
 		}
-		System.out.println("deleted Customer(" + id + ")");
+		logger.info("deleted Customer(" + id + ")");
 		return rows;
 	}
 }

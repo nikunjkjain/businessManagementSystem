@@ -8,31 +8,18 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>BMS | Add User</title>
+<title>BMS | Change User Password</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
-
 <%@include file="/jsp/jspf/headerScripts.jspf"%>
-
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  
-  <script type="text/javascript">
-  	function check(){
-	     if($("#password").val() != $("#repassword").val())
-	     {
-	         alert("Password and Re-Password Should be same");
-	         return false;
-	     }
-	 }
-  </script>
-  
 </head>
 
 
@@ -49,10 +36,11 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Add User</h1>
+				<h1>Change User Password</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Add Users</li>
+					<li><a href="viewUsers"><i class="fa fa-dashboard"></i>Users</a></li>
+					<li class="active">Change User Password</li>
 				</ol>
 			</section>
 
@@ -62,93 +50,71 @@
 						<!-- Horizontal Form -->
 						<div class="box box-info">
 							<div class="box-header with-border">
-								<h3 class="box-title">Enter User Details</h3>
+								<h3 class="box-title">Change User Password:</h3>
+								<!-- <a href="changeUserPassword"><input type="button" class="btn btn-xs btn-info pull-right" value="Change Password?"></a> -->
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form:form action="insertUse" method="post" onsubmit="return validatePasswords()"
+							<form:form action="updateUserPassword" method="post"
 								class="form-horizontal">
 								<div class="box-body">
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Name:</label>
+										<label for="password" class="col-sm-2 control-label">Password:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="name" name="name"
-												placeholder="Name" required="required">
+											<input type="password" class="form-control" id="password"
+												name="password" value="">
 										</div>
-										
-										<label for="inputEmail3" class="col-sm-2 control-label">Username:</label>
+
+										<label for="repassword" class="col-sm-2 control-label">Re-Password:</label>
 
 										<div class="col-sm-4">
-											<input type="text" class="form-control" id="username" name="username"
-												placeholder="Username" required="required">
+											<input type="password" class="form-control" id="repassword"
+												name="repassword" value="">
 										</div>
 										
-										<input type="hidden" id="status" name="status" value="1"/>
+										<input type="hidden" id="status" name="status" value="${userDetails.status}" /> 
+										<input type="hidden" id="id" name="id" value="${userDetails.id}" />
+										
 									</div>
 
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Password:</label>
+										<label for="comments" class="col-sm-2 control-label">Comments:</label>
 
-										<div class="col-sm-4">
-											<input type="password" class="form-control" id="password" name="password"
-												placeholder="Password" required="required">
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="comments"
+												name="comments" value="${userDetails.comments}" />
 										</div>
 
-										<label for="inputEmail3" class="col-sm-2 control-label">Re-Password:</label>
-
-										<div class="col-sm-4">
-											<input type="password" class="form-control" id="repassword" name="repassword"
-												placeholder="Re-Password" required="required">
-										</div>
 									</div>
 									
 									<div class="form-group">
-										<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+										<label for="updatedBy" class="col-sm-2 control-label">updatedBy:</label>
 
 										<div class="col-sm-4">
-											<input type="email" class="form-control" id="email" name="email"
-												placeholder="Email">
+											<input type="text" class="form-control" id="updatedBy"
+												name="updatedBy" value="${userDetails.updatedBy}" disabled>
 										</div>
-										
-										<label for="inputEmail3" class="col-sm-2 control-label">Mobile:</label>
+
+										<label for="updatedOn" class="col-sm-2 control-label">updatedOn:</label>
 
 										<div class="col-sm-4">
-											<input type="number" class="form-control" id="mobileNo" name="mobileNo"
-												placeholder="Mobile No" maxlength="10" required="required">
-										</div>
-										</div>
-										
-										<div class="form-group">
-										
-										<label for="inputEmail3" class="col-sm-2 control-label">Alt Mobile:</label>
-
-										<div class="col-sm-4">
-											<input type="number" class="form-control" id="alternateNo" name="alternateNo"
-												placeholder="alternateNo" maxlength="10" value="0">
-										</div>
-										</div>
-										<div class="form-group">
-								
-										<label for="inputEmail3" class="col-sm-2 control-label">Address:</label>
-
-										<div class="col-sm-10">
-											<input type="text" class="form-control" id="address" name="address"
-												placeholder="Address" required="required">
+											<input type="text" class="form-control" id="updatedOn"
+												name="updatedOn" value="${userDetails.updatedOn}" disabled>
 										</div>
 									</div>
+
 								</div>
 								<!-- /.box-body -->
 								<div class="box-footer" align="center">
-									<button type="reset" class="btn btn-default">Reset</button>
-									<button type="submit" class="btn btn-info">Sign in</button>
+									<button type="submit" class="btn btn-info">Update Details</button>
 								</div>
 								<!-- /.box-footer -->
 							</form:form>
 						</div>
 						<!-- /.box -->
 					</div>
-					<!--/.col (right) -->
+					<!--/.col (right) --></a> 
 				</div>
 				<!-- /.row -->
 			</section>
@@ -165,6 +131,7 @@
 	</div>
 	<!-- ./wrapper -->
 	<%@include file="/jsp/jspf/footerScripts.jspf"%>
+
 
 </body>
 </html>

@@ -8,10 +8,12 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.Payment;
+import com.webmaven.util.Utility;
 
 public class PaymentDAO {
 	
 	private static final Logger logger = Logger.getLogger(PaymentDAO.class);
+	private static final Utility utils = Utility.getInstance();
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -32,7 +34,9 @@ public class PaymentDAO {
 
 		try {
 			list = session.selectList("Payment.selectAll");
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.close();
 		}
 		logger.info("selectAll() --> " + list);
@@ -52,7 +56,9 @@ public class PaymentDAO {
 		try {
 			PaymentDetails = (Payment) session.selectOne("Payment.getPaymentById", PaymentId);
 
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.close();
 		}
 		return PaymentDetails;
@@ -69,7 +75,9 @@ public class PaymentDAO {
 
 		try {
 			session.insert("Payment.insert", Payment);
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.commit();
 			session.close();
 		}
@@ -90,7 +98,9 @@ public class PaymentDAO {
 		try {
 			id = session.update("Payment.update", Payment);
 
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.commit();
 			session.close();
 		}
@@ -109,7 +119,9 @@ public class PaymentDAO {
 		int rows = 0;
 		try {
 			rows = session.delete("Payment.delete", id);
-		} finally {
+		} catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		}finally {
 			session.commit();
 			session.close();
 		}

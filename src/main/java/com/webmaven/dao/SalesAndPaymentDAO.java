@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.controller.SalesAndPaymentController;
+import com.webmaven.util.Utility;
 
 public class SalesAndPaymentDAO {
 	
 	private static final Logger logger = Logger.getLogger(SalesAndPaymentDAO.class);
+	private static final Utility utils = Utility.getInstance();
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -33,6 +35,8 @@ public class SalesAndPaymentDAO {
 
 		try {
 			list = session.selectList("SalesAndPayment.selectAll");
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
@@ -53,6 +57,8 @@ public class SalesAndPaymentDAO {
 		try {
 			SalesDetails = (SalesAndPayment) session.selectOne("SalesAndPayment.getSalesById", SalesId);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
@@ -70,6 +76,8 @@ public class SalesAndPaymentDAO {
 		try {
 			SalesDetails = session.selectList("SalesAndPayment.getSalesByCustomerId", customerId);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
@@ -87,6 +95,8 @@ public class SalesAndPaymentDAO {
 
 		try {
 			session.insert("SalesAndPayment.insert", sales);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
@@ -101,18 +111,20 @@ public class SalesAndPaymentDAO {
 	 * @param sales
 	 *            the instance to be persisted.
 	 */
-	public void update(SalesAndPayment sales) {
+	public int update(SalesAndPayment sales) {
 		int id = -1;
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
 			id = session.update("SalesAndPayment.update", sales);
-
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
 		}
 		logger.info("update(" + sales + ") --> updated");
+		return id;
 	}
 
 	/**
@@ -127,6 +139,8 @@ public class SalesAndPaymentDAO {
 		int rows = 0;
 		try {
 			rows = session.delete("SalesAndPayment.delete", id);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();

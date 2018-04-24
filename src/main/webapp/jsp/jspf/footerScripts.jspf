@@ -12,6 +12,10 @@
 <script src="<c:url value="resources/dist/js/adminlte.min.js"/>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="resources/dist/js/demo.js"/>"></script>
+
+<!-- below included the custom javascript folder -->
+<script type="text/javascript" src="<c:url value="resources/js/bms.js"/>"></script>
+
 <!-- page script -->
 <script>
   $(function () {

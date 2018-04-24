@@ -84,18 +84,25 @@ public class SalesDetailsDAO {
 	 * @param SalesDetails
 	 *            the instance to be persisted.
 	 */
-	public void update(SalesDetails SalesDetails) {
-		int id = -1;
+	public int update(List<SalesDetails> SalesDetails) {
+		int id = 0;
+		int count = 0;
 		SqlSession session = sqlSessionFactory.openSession();
 
 		try {
-			id = session.update("SalesDetails.update", SalesDetails);
-
+			for (SalesDetails sdetails : SalesDetails) {
+				count = session.update("SalesDetails.update", sdetails);
+				id = id + count;
+			}
+		} catch (Exception e) {
+			logger.info("Got Exception "+e.getStackTrace() +" while updating the details hence rolling back the transaction");
+			session.rollback();
 		} finally {
 			session.commit();
 			session.close();
 		}
 		logger.info("update(" + SalesDetails + ") --> updated");
+		return id;
 	}
 
 	/**

@@ -86,7 +86,10 @@
 													<td>${salesPaymenet.amount}</td>
 													<td>0</td>
 													<c:set var="balDr" value="${balDr + salesPaymenet.amount}" />
-													<td><a href="viewSalesDetails/${salesPaymenet.id}/">View Sales Details</a></td>
+													<td>
+														<a href="viewSalesDetails/${salesPaymenet.id}/">View </a>
+														<a href="editSales/${salesPaymenet.id}/"> Edit </a>
+													</td>
 												</c:if>
 											</tr>
 										</c:forEach>

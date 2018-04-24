@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.Product;
 import com.webmaven.controller.UserController;
+import com.webmaven.util.Utility;
 
 public class ProductDAO {
 	
 	private static final Logger logger = Logger.getLogger(ProductDAO.class);
+	private static final Utility utils = Utility.getInstance();
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -33,10 +35,12 @@ public class ProductDAO {
 
 		try {
 			list = session.selectList("Product.selectAll");
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
-		System.out.println("selectAll() --> " + list);
+		logger.info("selectAll() --> " + list);
 		return list;
 
 	}
@@ -53,6 +57,8 @@ public class ProductDAO {
 		try {
 			ProductDetails = (Product) session.selectOne("Product.getProductById", ProductId);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
@@ -71,6 +77,8 @@ public class ProductDAO {
 
 		try {
 			id = session.insert("Product.insert", login);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
@@ -92,6 +100,8 @@ public class ProductDAO {
 		try {
 			id = session.update("Product.update", login);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
@@ -111,6 +121,8 @@ public class ProductDAO {
 		int rows = 0;
 		try {
 			rows = session.delete("Product.delete", id);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();

@@ -18,8 +18,6 @@
         <result property="comments" column="comments"/>
         <result property="updatedBy" column="updatedBy"/>
         <result property="updatedOn" column="updatedOn"/>
-        
-           
     </resultMap>
  
     <select id="selectAll" resultMap="userResult">
@@ -40,7 +38,13 @@
  
     <update id="update" parameterType="User">
         UPDATE user
-        SET password = #{password}, name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}, updatedBy = #{updatedBy}, alternateNo = #{alternateNo}, comments = #{comments}, updatedOn = #{updatedOn}
+        SET name = #{name}, mobileNo = #{mobileNo}, email = #{email}, address = #{address}, status = #{status}, updatedBy = #{updatedBy}, alternateNo = #{alternateNo}, comments = #{comments}, updatedOn = #{updatedOn}
+        WHERE id = #{id} 
+    </update>
+    
+    <update id="updatePassword" parameterType="User">
+        UPDATE user
+        SET password = #{password}, updatedBy = #{updatedBy}, updatedOn = #{updatedOn}, comments = #{comments}
         WHERE id = #{id} 
     </update>
  

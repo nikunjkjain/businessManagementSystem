@@ -2,9 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+ <!-- This Mapper is not used need to delete this file -->
 <mapper namespace="Payment">
- 
     <resultMap id="paymentResult" type="Payment">
         <result property="id" column="id"/>
         <result property="customerId" column="customerId"/>

@@ -4,11 +4,16 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.User;
+import com.webmaven.util.Utility;
 
 public class UserDAO {
+	
+	private static final Logger logger = Logger.getLogger(UserDAO.class);
+	private static final Utility utils = Utility.getInstance();
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -29,10 +34,12 @@ public class UserDAO {
 
 		try {
 			list = session.selectList("User.selectAll");
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
-		System.out.println("selectAll() --> " + list);
+		logger.info("selectAll() --> " + list);
 		return list;
 
 	}
@@ -49,10 +56,12 @@ public class UserDAO {
 		try {
 			validatedLogin = (User) session.selectOne("User.validateUser", user);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
-		System.out.println("validateUser(" + user + ") --> " + validatedLogin);
+		logger.info("validateUser(" + user + ") --> " + validatedLogin);
 		return validatedLogin;
 	}
 	
@@ -68,6 +77,8 @@ public class UserDAO {
 		try {
 			userDetails = (User) session.selectOne("User.getUserById", userId);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.close();
 		}
@@ -83,14 +94,15 @@ public class UserDAO {
 	public int insert(User login) {
 		int id = -1;
 		SqlSession session = sqlSessionFactory.openSession();
-
 		try {
 			id = session.insert("User.insert", login);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
 		}
-		System.out.println("insert(" + login + ") --> " + login.getId());
+		logger.info("insert(" + login + ") --> " + login.getId());
 		return id;
 	}
 
@@ -107,11 +119,29 @@ public class UserDAO {
 		try {
 			id = session.update("User.update", login);
 
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
 		}
-		System.out.println("update(" + login + ") --> updated");
+		logger.info("update(" + login + ") --> updated");
+	}
+	
+	public void updateUserPassword(User user) {
+		int id = -1;
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			id = session.update("User.updatePassword", user);
+
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		} finally {
+			session.commit();
+			session.close();
+		}
+		logger.info("updateUserPassword(" + user + ") --> updated");
 	}
 
 	/**
@@ -126,11 +156,13 @@ public class UserDAO {
 		int rows = 0;
 		try {
 			rows = session.delete("User.delete", id);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
 		} finally {
 			session.commit();
 			session.close();
 		}
-		System.out.println("deleted User(" + id + ")");
+		logger.info("deleted User(" + id + ")");
 		return rows;
 	}
 }

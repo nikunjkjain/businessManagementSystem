@@ -35,49 +35,6 @@ public class SalesDetailsController {
 	public void setSalesDetailsDao(SalesDetailsDAO salesDetailsDao) {
 		this.salesDetailsDao = salesDetailsDao;
 	}
-
-	/*@RequestMapping(value="/viewCustomers", method=RequestMethod.GET)
-	public ModelAndView getAllCustomers(HttpSession session) {
-		if(!utils.isValidSession(session))
-			return new ModelAndView(LOGOUT_VIEW);
-		List<Customer>CustomerList = salesDetailsDao.selectAll();
-		return new ModelAndView("viewCustomers", "CustomerList", CustomerList);
-	}*/
-	
-	/*@RequestMapping(value="/addCustomer", method=RequestMethod.GET)
-	public ModelAndView addCustomer(HttpSession session){
-		if(!utils.isValidSession(session))
-			return new ModelAndView(LOGOUT_VIEW);
-		return new ModelAndView("addCustomer");
-	}*/
-	
-	/*@RequestMapping(value="/insertCustomer", method=RequestMethod.POST)
-	public ModelAndView insertCustomer(@ModelAttribute("Customer") Customer customer, HttpSession session){
-		if(!utils.isValidSession(session))
-			return new ModelAndView(LOGOUT_VIEW);
-		User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			customer.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}
-		salesDetailsDao.insert(customer);
-		return new ModelAndView("redirect:/viewCustomers");
-	}*/
-	
-	@RequestMapping(value="/updateSalesDetails", method=RequestMethod.POST)
-	public ModelAndView updateCustomer(@ModelAttribute("SalesDetails") SalesDetails salesDetails, HttpSession session){
-		if(!utils.isValidSession(session))
-			return new ModelAndView(LOGOUT_VIEW);
-		/*User uDetails = (User) session.getAttribute(BmsConstants.USERDETAILS);
-		if (uDetails != null) {
-			salesDetails.setUpdatedBy(uDetails.getUsername());
-		}else {
-			logger.warn("Got User Obj as Null hence setting updatedBy as Null");
-		}*/
-		salesDetailsDao.update(salesDetails);
-		return new ModelAndView("redirect:/viewCustomers");
-	}
 	
 	@RequestMapping(value="/editSalesDetails/{id}/", method=RequestMethod.GET)
 	public ModelAndView editSalesDetailsById(@PathVariable("id") int id, HttpSession session){

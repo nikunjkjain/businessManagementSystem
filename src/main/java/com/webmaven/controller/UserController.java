@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.webmaven.bean.Balance;
 import com.webmaven.bean.User;
 import com.webmaven.dao.UserDAO;
+import com.webmaven.dao.ViewsDAO;
 import com.webmaven.util.BmsConstants;
+import com.webmaven.util.EncryptDycrypt;
 import com.webmaven.util.Utility;
 
 @Controller
@@ -31,6 +34,13 @@ public class UserController {
 	
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
+	}
+	
+	@Autowired
+    private ViewsDAO viewsDao;
+	
+	public void setViewDao(ViewsDAO viewsDao) {
+		this.viewsDao = viewsDao;
 	}
 	
 	@RequestMapping(value="/viewUsers", method=RequestMethod.GET)
@@ -63,7 +73,9 @@ public class UserController {
 	public ModelAndView index(HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
-		return new ModelAndView("index");
+		List<Balance> balance;
+		balance = viewsDao.selectAll();
+		return new ModelAndView("index","balance", balance);
 	}
 	
 	@RequestMapping(value="/addUser", method=RequestMethod.GET)
@@ -74,10 +86,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/insertUser", method=RequestMethod.POST)
-	public ModelAndView insertUser(@ModelAttribute("User") User user, HttpSession session){
+	public ModelAndView insertUser(@ModelAttribute("User") User user, HttpSession session) throws Exception{
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		user.setUpdatedBy(utils.getUserIdFromSession(session));
+		String password = EncryptDycrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
+		user.setPassword(password);
 		userDao.insert(user);
 		return new ModelAndView("redirect:/viewUsers");
 	}
@@ -91,12 +105,31 @@ public class UserController {
 		return new ModelAndView("redirect:/viewUsers");
 	}
 	
+	@RequestMapping(value="/updateUserPassword", method=RequestMethod.POST)
+	public ModelAndView updateUserPassword(@ModelAttribute("User") User user, HttpSession session) throws Exception{
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		user.setUpdatedBy(utils.getUserIdFromSession(session));
+		String password = EncryptDycrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
+		user.setPassword(password);
+		userDao.updateUserPassword(user);
+		return new ModelAndView("redirect:/viewUsers");
+	}
+	
 	@RequestMapping(value="/editUser/{id}/", method=RequestMethod.GET)
 	public ModelAndView editUser(@PathVariable("id") int id, HttpSession session){
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		User userDetails = userDao.getUserById(id);
 		return new ModelAndView("editUser", "userDetails", userDetails);
+	}
+	
+	@RequestMapping(value="/changeUserPassword/{id}/", method=RequestMethod.GET)
+	public ModelAndView changeUserPassword(@PathVariable("id") int id, HttpSession session){
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		User userDetails = userDao.getUserById(id);
+		return new ModelAndView("changeUserPassword", "userDetails", userDetails);
 	}
 	
 	@RequestMapping(value="/viewUser/{id}/", method=RequestMethod.GET)
@@ -116,16 +149,25 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/validateUser", method=RequestMethod.POST)
-	public ModelAndView validateUser(@ModelAttribute("User") User user, HttpSession session){
+	public ModelAndView validateUser(@ModelAttribute("User") User user, HttpSession session) throws Exception{
+		if(user != null){
+			String password = EncryptDycrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
+			user.setPassword(password);
+		}
 		User userDetails = userDao.validateUser(user);
+		List<Balance> balance;
 		if(userDetails == null) {
 			return new ModelAndView(LOGOUT_VIEW);
 		}else {
 			if(user != null && userDetails != null) {
-				if(user.getUsername().equals(userDetails.getUsername()) &&
-						user.getPassword().equals(userDetails.getPassword())){
+				if(user.getUsername().equals(userDetails.getUsername())){
 				session.setAttribute(BmsConstants.ISVALID, true);
 				session.setAttribute(BmsConstants.USERDETAILS, userDetails);
+				session.setAttribute(BmsConstants.USERNAME, userDetails.getName());
+				session.setAttribute(BmsConstants.ID, userDetails.getId());
+				
+				balance = viewsDao.selectAll();
+				
 				}else {
 					return new ModelAndView(LOGOUT_VIEW);
 				}
@@ -133,7 +175,8 @@ public class UserController {
 				return new ModelAndView(LOGOUT_VIEW);
 			}
 		}
-		return new ModelAndView("redirect:/index");
+		//return new ModelAndView("redirect:/index");
+		return new ModelAndView("index","balance", balance);
 	}
 	
 }

@@ -61,6 +61,10 @@
 	<bean id="paymentDao" class="com.webmaven.dao.PaymentDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
+	
+	<bean id="viewsDao" class="com.webmaven.dao.ViewsDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 
 	<bean id="userController" class="com.webmaven.controller.UserController">
 		<property name="userDao" ref="userDao"></property>

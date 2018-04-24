@@ -2,6 +2,7 @@ package com.webmaven.controller;
 
 import static com.webmaven.util.BmsConstants.LOGOUT_VIEW;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,19 @@ public class PaymentController {
 		return new ModelAndView("addPayment", models);
 	}
 	
+	@RequestMapping(value="/addPayment/{id}/", method=RequestMethod.GET)
+	public ModelAndView addCustomerPayment(@PathVariable("id") int id, HttpSession session){
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		Customer customerList = customerDao.getCustomerById(id);
+		List<Customer> custList = new ArrayList<Customer>();
+		custList.add(customerList);
+		Map<String, List<?>> models = new HashMap<String, List<?>>();
+		models.put("customerList", custList);
+		logger.info("Going to add addPayment View:");
+		return new ModelAndView("addPayment", models);
+	}
+	
 	@RequestMapping(value="/viewPayments", method=RequestMethod.GET)
 	public ModelAndView getAllPayments(HttpSession session) {
 		if(!utils.isValidSession(session))
@@ -62,14 +76,6 @@ public class PaymentController {
 		List<Payment>PaymentList = paymentDao.selectAll();
 		return new ModelAndView("viewPayments", "PaymentList", PaymentList);
 	}
-	
-	/*@RequestMapping(value="/insertPayment", method=RequestMethod.POST)
-	public ModelAndView insertPayment(@ModelAttribute("Payment") Payment Payment, HttpSession session){
-		if(!utils.isValidSession(session))
-			return new ModelAndView(LOGOUT_VIEW);
-		paymentDao.insert(Payment);
-		return new ModelAndView("redirect:/addPayment");
-	}*/
 	
 	@RequestMapping(value="/updatePayment", method=RequestMethod.POST)
 	public ModelAndView updatePayment(@ModelAttribute("Payment") Payment Payment, HttpSession session){

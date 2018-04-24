@@ -109,6 +109,38 @@
       </div>
       <!-- /.row -->
 
+	<div class="col-md-6">
+	<div class="box">
+								<table id="ledger1" class="table table-bordered ">
+									<thead>
+										<tr>
+											<th>Customer Id</th>
+											<th>Name</th>
+											<th>Balance</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${balance}" var="balance">
+											<tr>
+												<td>${balance.customerId}</td>
+												<td>${balance.name}</td>
+												<td>${balance.balance}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>Customer Id</th>
+											<th>Name</th>
+											<th>Balance</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							</div>
+							<!-- /.box-body -->
+	
+
     </section>
     <!-- /.content -->
   </div>

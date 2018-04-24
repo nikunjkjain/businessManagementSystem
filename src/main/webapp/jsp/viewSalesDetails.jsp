@@ -49,11 +49,11 @@
 					<div class="col-xs-12">
 
 						<div class="box">
-							<div class="box-header">
-								<!-- <h3 class="box-title">
-									<a href="addCustomer">Add Customer <i class="fa fa-user-plus"></i></a>
-								</h3> -->
-							</div>
+							<%-- <div class="box-header">
+								<h3 class="box-title">
+									<a href="editSales/${salesDetails.salesId}/">Edit Sales<i class="fa fa-user-plus"></i></a>
+								</h3>
+							</div> --%>
 							<!-- /.box-header -->
 							<div class="box-body">
 								<table id="example1" class="table table-bordered table-striped">

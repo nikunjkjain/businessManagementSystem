@@ -11,6 +11,7 @@
 		<typeAlias alias="SalesAndPayment" type="com.webmaven.bean.SalesAndPayment" />
 		<typeAlias alias="SalesDetails" type="com.webmaven.bean.SalesDetails" />
 		<typeAlias alias="Payment" type="com.webmaven.bean.Payment" />
+		<typeAlias alias="Balance" type="com.webmaven.bean.Balance" />
 	</typeAliases>
 
 	<mappers>
@@ -20,5 +21,6 @@
 		<mapper resource="mappers/salesAndPayment.xml" />
 		<mapper resource="mappers/salesDetails.xml" />
 		<mapper resource="mappers/payment.xml" />
+		<mapper resource="mappers/balance.xml" />
 	</mappers>
 </configuration>

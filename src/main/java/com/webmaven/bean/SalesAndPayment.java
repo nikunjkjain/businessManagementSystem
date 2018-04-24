@@ -34,6 +34,17 @@ public class SalesAndPayment{
 		this.mode = mode;
 		this.payment = payment;
 	}
+
+	public SalesAndPayment(int id, int customerId, String date, double amount, String comment, String type, String mode, int payment) {
+		this.id = id;
+		this.customerId = customerId;
+		this.date = date;
+		this.amount = amount;
+		this.comment = comment;
+		this.type = type;
+		this.mode = mode;
+		this.payment = payment;
+	}
 	
 	public int getId() {
 		return id;

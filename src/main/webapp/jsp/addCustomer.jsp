@@ -64,7 +64,7 @@
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="name" name="name"
-												placeholder ="Customer Name">
+												placeholder ="Customer Name" required="required">
 										</div>
 									</div>
 
@@ -73,14 +73,14 @@
 
 										<div class="col-sm-4">
 											<input type="number" class="form-control" id="mobileNo" name="mobileNo"
-												placeholder ="Mobile No">
+												placeholder ="Mobile No" required="required">
 										</div>
 
 										<label for="altContactNo" class="col-sm-2 control-label">Alt Contact No:</label>
 
 										<div class="col-sm-4">
 											<input type="number" class="form-control" id="altContactNo" name="altContactNo"
-												placeholder ="Alternate Contact Number">
+												placeholder ="Alternate Contact Number" value="0">
 										</div>
 									</div>
 									
@@ -89,14 +89,14 @@
 
 										<div class="col-sm-4">
 											<input type="email" class="form-control" id="email" name="email"
-												placeholder ="Email id">
+												placeholder ="Email id" value="">
 										</div>
 										
 										<label for="companyName" class="col-sm-2 control-label">Company Name:</label>
 
 										<div class="col-sm-4">
 											<input type="text" class="form-control" id="companyName" name="companyName"
-												placeholder ="Company Name">
+												placeholder ="Company Name" required="required">
 										</div>
 										</div>
 										<div class="form-group">
@@ -105,7 +105,7 @@
 
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="billingAddress" name="billingAddress"
-												placeholder ="Billing Address"/>
+												placeholder ="Billing Address" required="required"/>
 										</div>
 										<input type = "hidden" id="status" name="status" value="1"/>
 									</div>
