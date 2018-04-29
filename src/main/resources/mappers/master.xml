@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="Master">
+ 
+    <resultMap id="masterResult" type="Master">
+        <result property="masterId" column="masterId"/>
+        <result property="masterName" column="masterName"/>
+        <result property="masterValue" column="masterValue"/>
+        <result property="status" column="status"/>
+    </resultMap>
+ 
+    <select id="selectAll" resultMap="masterResult">
+        SELECT * FROM master;
+    </select>
+    
+    <select id="selectAllFromMasterIdAndKey" resultMap="masterResult">
+        SELECT * FROM master where masterId = #{masterId} and masterKey = #{masterKey};
+    </select>
+    
+    <select id="selectAllFromMasterId" resultMap="masterResult">
+        SELECT * FROM master where masterId = #{masterId} and status = 1;
+    </select>
+    
+    <select id="selectDistinctMasterId" resultType="String">
+        SELECT distinct masterId FROM master;
+    </select>
+    
+</mapper>

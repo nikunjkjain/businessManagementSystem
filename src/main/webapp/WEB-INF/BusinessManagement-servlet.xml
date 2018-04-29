@@ -16,7 +16,7 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/"
 		cache-period="31556926" />
-
+		
 	<mvc:annotation-driven />
 
 	<bean
@@ -65,6 +65,10 @@
 	<bean id="viewsDao" class="com.webmaven.dao.ViewsDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
+	
+	<bean id="masterDao" class="com.webmaven.dao.MasterDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 
 	<bean id="userController" class="com.webmaven.controller.UserController">
 		<property name="userDao" ref="userDao"></property>
@@ -86,6 +90,10 @@
 		<property name="customerDao" ref="customerDao"></property>
 		<property name="productDao" ref="productDao"></property>
 		<property name="salesDetailsDao" ref="salesDetailsDao"></property>
+	</bean>
+
+	<bean id="utility" class="com.webmaven.util.Utility">
+		<property name="masterDao" ref="masterDao"></property>
 	</bean>
 
 	<bean id="jacksonMessageConverter"

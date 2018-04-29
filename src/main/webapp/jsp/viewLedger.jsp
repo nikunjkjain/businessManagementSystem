@@ -76,21 +76,32 @@
 												<td>${salesPaymenet.comment}</td>
 												<td>${salesPaymenet.type}</td>
 												<td>${salesPaymenet.id}</td>
-												<c:if test="${salesPaymenet.type == 'receipt'}">
+												<c:choose>
+												<c:when test="${salesPaymenet.payment == '1'}">
 													<td>0</td>
 													<td>${salesPaymenet.amount}</td>
 													<c:set var="balCr" value="${balCr + salesPaymenet.amount}" />
-													<td></td>
-												</c:if>
-												<c:if test="${salesPaymenet.type != 'receipt'}">
+												</c:when>
+												<c:otherwise>
 													<td>${salesPaymenet.amount}</td>
 													<td>0</td>
 													<c:set var="balDr" value="${balDr + salesPaymenet.amount}" />
+												</c:otherwise>
+											</c:choose>
+											<c:choose>
+												<c:when test="${salesPaymenet.type != 'SALES'}">
 													<td>
-														<a href="viewSalesDetails/${salesPaymenet.id}/">View </a>
-														<a href="editSales/${salesPaymenet.id}/"> Edit </a>
+														<a href="viewPaymentDetails/${salesPaymenet.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a> 
+														<a href="editPayment/${salesPaymenet.id}/" class="btn btn-info btn-xs">Edit <i class="fa fa-edit"></i></a>
 													</td>
-												</c:if>
+												</c:when>
+												<c:otherwise>
+													<td>
+														<a href="viewSalesDetails/${salesPaymenet.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a>
+														<a href="editSales/${salesPaymenet.id}/" class="btn btn-info btn-xs"> Edit <i class="fa fa-edit"></i></a>
+													</td>
+												</c:otherwise>
+											</c:choose>
 											</tr>
 										</c:forEach>
 									</tbody>

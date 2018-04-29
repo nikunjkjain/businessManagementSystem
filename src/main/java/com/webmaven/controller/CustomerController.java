@@ -25,8 +25,13 @@ import com.webmaven.util.Utility;
 public class CustomerController {
 	
 	private static final Logger logger = Logger.getLogger(CustomerController.class);
-	private static final Utility utils = Utility.getInstance();
 	
+	@Autowired
+	private Utility utils;
+	
+	public void setUtils(Utility utils) {
+		this.utils = utils;
+	}
 	@Autowired
     private CustomerDAO customerDao;
 	

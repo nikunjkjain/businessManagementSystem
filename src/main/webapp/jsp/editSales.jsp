@@ -59,7 +59,9 @@
 						<div class="box">
 							 <div class="box-header">
 								<label>Party Name: </label>
-								<input type="text" value="${salesAndPayment.customerId}" name="customerId" id="customerId"> 
+								<c:set var="cid">${salesAndPayment.customerId}</c:set>
+								<input type="text" value="${sessionScope.CVALKEY[cid]}" name="cId" id="cId" readonly="readonly">
+								<input type="hidden" name="customerId" id="customerId" value="${salesAndPayment.customerId}"> 
 								&nbsp;&nbsp;&nbsp;
 								<label>Sales Date: </label> 
 								<input type="date" name="date" id="date" value="${salesAndPayment.date}">
@@ -95,9 +97,11 @@
 									<c:set var="netWeight" value="${salesDetailsList.quantity - salesDetailsList.lessInQuantity}" />
 									<c:set var="productTotal" value="${(salesDetailsList.quantity - salesDetailsList.lessInQuantity) * salesDetailsList.rate}" />
 									<c:set var="grandTotal" value="${grandTotal + productTotal}" />
+									<c:set var="pid">${salesDetailsList.productId}</c:set>
 										<tr>
 											<td><input class="col-md-12" type="number" id="num" name="num" readonly="readonly" value="${count}"/></td>
-											<td><input class="col-md-12 product" type="number" id="product${count}" name="product${count}" readonly="readonly" value="${salesDetailsList.productId}"/></td>
+											<td><input class="col-md-12" type="text" id="product1${count}" name="product1${count}" readonly="readonly" value="${sessionScope.PVALKEY[pid]}"></td>
+											<input class = "product" type ="hidden" id="product${count}" name="product${count}" value="${salesDetailsList.productId}"/>
 											<td><input class="col-md-12 quantity" type="number" onChange = "updateRowInfo(${count});" id="quantity${count}" name="quantity${count}" value="${salesDetailsList.quantity}"/></td>
 											<td><input class="col-md-12 bags" type="number" id="bags${count}" name="bags${count}" value="${salesDetailsList.bags}"/></td>
 											<td><input class="col-md-12 less" type="number" onChange = "updateRowInfo(${count});" id="less${count}" name="less${count}" value="${salesDetailsList.lessInQuantity}"/></td>

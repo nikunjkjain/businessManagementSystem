@@ -15,7 +15,13 @@ import com.webmaven.util.Utility;
 public class ViewsDAO {
 	
 	private static final Logger logger = Logger.getLogger(ViewsDAO.class);
-	private static final Utility utils = Utility.getInstance();
+
+	@Autowired
+	private Utility utils;
+	
+	public void setUtils(Utility utils) {
+		this.utils = utils;
+	}
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;

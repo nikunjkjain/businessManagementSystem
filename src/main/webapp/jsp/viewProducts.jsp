@@ -63,6 +63,8 @@
 											<th>Name</th>
 											<th>UnitPrice</th>
 											<th>unit Measure</th>
+											<th>Updated by</th>
+											<th>Updated On</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -73,6 +75,8 @@
 												<td>${productList.name}</td>
 												<td>${productList.unitPrice}</td>
 												<td>${productList.unitMeasure}</td>
+												<td>${productList.updatedBy}</td>
+												<td>${productList.updatedOn}</td>
 												<td>
 												<a href="viewProduct/${productList.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a> 
 												<a href="editProduct/${productList.id}/" class="btn btn-info btn-xs">Edit <i class="fa fa-edit"></i></a>
@@ -87,6 +91,8 @@
 											<th>Name</th>
 											<th>UnitPrice</th>
 											<th>unit Measure</th>
+											<th>Updated by</th>
+											<th>Updated On</th>
 											<th>Actions</th>
 										</tr>
 									</tfoot>

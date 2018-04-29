@@ -74,7 +74,8 @@
 										<c:forEach items="${salesDetails}" var="salesDetails">
 										<c:set var="total" scope="session" value="0" />
 											<tr>
-												<td>${salesDetails.productId}</td>
+												<c:set var="pid">${salesDetails.productId}</c:set>
+												<td>${sessionScope.PVALKEY[pid]}</td>
 												<td>${salesDetails.quantity}</td>
 												<td>${salesDetails.rate}</td>
 												<td>${salesDetails.bags}</td>

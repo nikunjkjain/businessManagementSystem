@@ -54,7 +54,7 @@ function fillSalesDetailsInArray() {
 }
 
 function callEditSalesController(products) {
-	console.log("===> function callController");
+	console.log("===> function callEditSalesController");
 	$.ajax({
 		type : 'POST',
 		dataType : 'html',
@@ -65,7 +65,7 @@ function callEditSalesController(products) {
 			console.log("===> function callEditSalesController Success");
 		},
 		error : function(xhr, textStatus, errorThrown) {
-			console.log("===> function callController Error");
+			console.log("===> function callEditSalesController Error");
 			console.log("xhr:" + xhr);
 			console.log("textStatus:" + textStatus);
 			console.log("errorThrown:" + errorThrown);

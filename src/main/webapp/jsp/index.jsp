@@ -110,8 +110,12 @@
       <!-- /.row -->
 
 	<div class="col-md-6">
-	<div class="box">
-								<table id="ledger1" class="table table-bordered ">
+	<div class="box"><div class="box-header">
+								<h5 class="box-title">
+									Parties Balance Info
+								</h5>
+							</div>
+								<table id="ledger1" class="table table-bordered table-striped">
 									<thead>
 										<tr>
 											<th>Customer Id</th>

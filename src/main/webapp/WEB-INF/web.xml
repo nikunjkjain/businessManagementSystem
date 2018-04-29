@@ -17,4 +17,10 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<listener>
+		<listener-class>
+             com.webmaven.util.BmsContextListener 
+        </listener-class>
+   </listener>
+	
 </web-app>

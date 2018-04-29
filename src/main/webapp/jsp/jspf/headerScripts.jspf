@@ -223,8 +223,8 @@
 			"date" : document.getElementById('date').value,
 			"totalAmount" : document.getElementById('tamount').value,
 			"comment" : document.getElementById('comment').value,
-			"type" : "sales",
-			"mode" : "cash",
+			"type" : "SALES",
+			"mode" : "CASH",
 			"payment" : 0
 		}
 		products.push(details);

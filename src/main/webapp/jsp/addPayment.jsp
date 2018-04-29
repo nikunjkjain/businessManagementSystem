@@ -75,8 +75,8 @@
 										<label for="Party" class="col-sm-2 control-label">Party:</label>
 
 										<div class="col-sm-4">
-										<select id="customerId" name="customerId" required="required">
-											<option selected="selected" value="-1">Select Party</option>
+										<select required id="customerId" name="customerId">
+												<option value = "">Select Party</option>
 												<c:forEach items="${customerList}" var="customerList">
 													<option value="${customerList.id}">${customerList.name}</option>
 												</c:forEach>
@@ -87,11 +87,20 @@
 
 									<div class="form-group">
 										<label for="payment" class="col-sm-2 control-label">Type:</label>
-
 										<div class="col-sm-4">
 											<select id="type" name="type">
-											<option selected value = "receipt">Receipt</option>
-											<option value="payment">Payment</option>
+											<c:set value="${sessionScope.MKEYVAL['ADDPAY']}" var="mIdKeyValMap"></c:set>
+												<c:forEach items="${mIdKeyValMap}" var="mKeyValMap">
+												<c:set var="key" value="${mKeyValMap.key}"></c:set>
+													<c:choose>
+													    <c:when test="${key=='RECEIPT'}">
+													    	<option selected value="${key}">${key}</option>
+													    </c:when>    
+													    <c:otherwise>
+													    	<option value="${key}">${key}</option>
+													    </c:otherwise>
+													</c:choose>
+												</c:forEach>
 											</select>
 										</div>
 
@@ -99,8 +108,17 @@
 
 										<div class="col-sm-4">
 											<select id="mode" name="mode">
-												<option selected value = "cash">Cash</option>
-												<option value="cheque">Cheque</option>
+												<c:set value="${sessionScope.MKEYVAL['MODE']}" var="mIdKeyValMap"></c:set>
+												<c:forEach items="${mIdKeyValMap}" var="mKeyValMap">
+													<c:choose>
+													    <c:when test="${mKeyValMap.key=='CASH'}">
+													    	<option selected value="${mKeyValMap.key}">${mKeyValMap.key}</option>
+													    </c:when>    
+													    <c:otherwise>
+													    	<option value="${mKeyValMap.key}">${mKeyValMap.key}</option>
+													    </c:otherwise>
+													</c:choose>
+												</c:forEach>
 											</select>
 										</div>
 									</div>

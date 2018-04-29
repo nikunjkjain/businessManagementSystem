@@ -11,7 +11,7 @@ import javax.xml.bind.DatatypeConverter;
  * Please note that secret key and encrypted text is unreadable binary and hence 
  * in the following program we display it in hexadecimal format of the underlying bytes.
  */
-public class EncryptDycrypt {
+public class EncryptDecrypt {
  
 	public static final String SKey = "4F309D7EAEA1EA16D2E2A55F1B6E4E6F";
 	

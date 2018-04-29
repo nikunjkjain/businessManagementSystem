@@ -35,7 +35,13 @@ import com.webmaven.util.Utility;
 public class SalesAndPaymentController {
 	
 	private static final Logger logger = Logger.getLogger(SalesAndPaymentController.class);
-	private static final Utility utils = Utility.getInstance();
+
+	@Autowired
+	private Utility utils;
+	
+	public void setUtils(Utility utils) {
+		this.utils = utils;
+	}
 	
 	@Autowired
     private ProductDAO productDao;
@@ -156,6 +162,7 @@ public class SalesAndPaymentController {
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		payments.setUpdatedBy(utils.getUserIdFromSession(session));
+		payments.setPayment(Integer.parseInt(utils.getMasterIdAndKeyVal().get("ADDPAY").get(payments.getType())));
 		salesAndPaymentDao.insert(payments);
 		return new ModelAndView("redirect:/addPayment");
 	}

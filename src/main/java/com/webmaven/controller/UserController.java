@@ -16,19 +16,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.Balance;
+import com.webmaven.bean.Master;
 import com.webmaven.bean.User;
+import com.webmaven.dao.MasterDAO;
 import com.webmaven.dao.UserDAO;
 import com.webmaven.dao.ViewsDAO;
 import com.webmaven.util.BmsConstants;
-import com.webmaven.util.EncryptDycrypt;
+import com.webmaven.util.EncryptDecrypt;
 import com.webmaven.util.Utility;
 
 @Controller
 public class UserController {
 	
 	private static final Logger logger = Logger.getLogger(UserController.class);
-	private static final Utility utils = Utility.getInstance();
 	
+	@Autowired
+	private Utility utils;
+	
+	public void setUtils(Utility utils) {
+		this.utils = utils;
+	}
+
 	@Autowired
     private UserDAO userDao;
 	
@@ -41,6 +49,13 @@ public class UserController {
 	
 	public void setViewDao(ViewsDAO viewsDao) {
 		this.viewsDao = viewsDao;
+	}
+	
+	@Autowired
+    private MasterDAO masterDao;
+	
+	public void setMasterDao(MasterDAO masterDao) {
+		this.masterDao = masterDao;
 	}
 	
 	@RequestMapping(value="/viewUsers", method=RequestMethod.GET)
@@ -90,7 +105,7 @@ public class UserController {
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		user.setUpdatedBy(utils.getUserIdFromSession(session));
-		String password = EncryptDycrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
+		String password = EncryptDecrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
 		user.setPassword(password);
 		userDao.insert(user);
 		return new ModelAndView("redirect:/viewUsers");
@@ -110,7 +125,7 @@ public class UserController {
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		user.setUpdatedBy(utils.getUserIdFromSession(session));
-		String password = EncryptDycrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
+		String password = EncryptDecrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
 		user.setPassword(password);
 		userDao.updateUserPassword(user);
 		return new ModelAndView("redirect:/viewUsers");
@@ -151,7 +166,7 @@ public class UserController {
 	@RequestMapping(value="/validateUser", method=RequestMethod.POST)
 	public ModelAndView validateUser(@ModelAttribute("User") User user, HttpSession session) throws Exception{
 		if(user != null){
-			String password = EncryptDycrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
+			String password = EncryptDecrypt.getHexEncryptText(user.getPassword(), BmsConstants.AES_KEY);
 			user.setPassword(password);
 		}
 		User userDetails = userDao.validateUser(user);
@@ -165,9 +180,12 @@ public class UserController {
 				session.setAttribute(BmsConstants.USERDETAILS, userDetails);
 				session.setAttribute(BmsConstants.USERNAME, userDetails.getName());
 				session.setAttribute(BmsConstants.ID, userDetails.getId());
-				
+				utils.init();
+				session.setAttribute(BmsConstants.MKEYVAL, utils.getMasterIdAndKeyVal());
+				session.setAttribute(BmsConstants.MVALKEY, utils.getMasterIdAndValKey());
+				session.setAttribute(BmsConstants.PVALKEY, utils.getProductIdKeyMap());
+				session.setAttribute(BmsConstants.CVALKEY, utils.getCustomerIdKeyMap());
 				balance = viewsDao.selectAll();
-				
 				}else {
 					return new ModelAndView(LOGOUT_VIEW);
 				}
@@ -175,7 +193,6 @@ public class UserController {
 				return new ModelAndView(LOGOUT_VIEW);
 			}
 		}
-		//return new ModelAndView("redirect:/index");
 		return new ModelAndView("index","balance", balance);
 	}
 	

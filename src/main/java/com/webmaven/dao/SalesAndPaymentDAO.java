@@ -14,7 +14,13 @@ import com.webmaven.util.Utility;
 public class SalesAndPaymentDAO {
 	
 	private static final Logger logger = Logger.getLogger(SalesAndPaymentDAO.class);
-	private static final Utility utils = Utility.getInstance();
+
+	@Autowired
+	private Utility utils;
+	
+	public void setUtils(Utility utils) {
+		this.utils = utils;
+	}
 	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
@@ -92,7 +98,6 @@ public class SalesAndPaymentDAO {
 	 */
 	public int insert(SalesAndPayment sales) {
 		SqlSession session = sqlSessionFactory.openSession();
-
 		try {
 			session.insert("SalesAndPayment.insert", sales);
 		}catch(Exception e){
