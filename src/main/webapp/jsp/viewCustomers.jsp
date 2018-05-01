@@ -64,7 +64,6 @@
 											<th>Company Name</th>
 											<th>Mobile</th>
 											<th>Email</th>
-											<th>Status</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -76,7 +75,6 @@
 												<td>${CustomerList.companyName}</td>
 												<td>${CustomerList.mobileNo}</td>
 												<td>${CustomerList.email}</td>
-												<td>${CustomerList.status}</td>
 												<td>
 												<a href="viewLedger/${CustomerList.id}/" class="btn btn-info btn-xs"> Ledger <i class="fa fa-book"></i></a>
 												<a href="addPayment/${CustomerList.id}/" class="btn btn-primary btn-xs"> Payment <i class="fa fa-rupee"></i></a>
@@ -103,7 +101,6 @@
 											<th>Company Name</th>
 											<th>Mobile</th>
 											<th>Email</th>
-											<th>Status</th>
 											<th>Actions</th>
 										</tr>
 									</tfoot>

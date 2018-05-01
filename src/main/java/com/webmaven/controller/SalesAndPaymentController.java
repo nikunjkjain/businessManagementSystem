@@ -167,12 +167,47 @@ public class SalesAndPaymentController {
 		return new ModelAndView("redirect:/addPayment");
 	}
 	
+	@RequestMapping(value="/editPayment", method=RequestMethod.POST)
+	public ModelAndView editPayment(@ModelAttribute("SalesAndPayment") SalesAndPayment payments, HttpSession session){
+		if(!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		payments.setUpdatedBy(utils.getUserIdFromSession(session));
+		payments.setPayment(Integer.parseInt(utils.getMasterIdAndKeyVal().get("ADDPAY").get(payments.getType())));
+		salesAndPaymentDao.update(payments);
+		return new ModelAndView("redirect:/addPayment");
+	}
+	
 	@RequestMapping(value="/viewLedger/{id}/", method=RequestMethod.GET)
 	public ModelAndView viewLegder(@PathVariable("id") int id, HttpSession session) {
 		if (!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		List<SalesAndPayment> salesPaymenet = salesAndPaymentDao.getSalesByCustomerId(id);
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("salesPaymenet", salesPaymenet);
+		models.put("customerId", id);
 		return new ModelAndView("viewLedger", "salesPaymenet", salesPaymenet);
+	}
+	
+	@RequestMapping(value="/viewPaymentDetails/{id}/", method=RequestMethod.GET)
+	public ModelAndView viewPaymentDetails(@PathVariable("id") int id, HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		SalesAndPayment salesPaymenet = salesAndPaymentDao.getSalesById(id);
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("salesPaymenet", salesPaymenet);
+		return new ModelAndView("viewPaymentDetails", "salesPaymenet", salesPaymenet);
+	}
+	
+	@RequestMapping(value="/editPaymentDetails/{id}/", method=RequestMethod.GET)
+	public ModelAndView editPaymentDetails(@PathVariable("id") int id, HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		SalesAndPayment salesPaymenet = salesAndPaymentDao.getSalesById(id);
+		List<Customer> customerList = customerDao.selectAll();
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("salesPaymenet", salesPaymenet);
+		models.put("customerList", customerList);
+		return new ModelAndView("editPaymentDetails", models);
 	}
 
 	private SalesAndPayment getSalesObj(AddSales[] addSalesObj, boolean isEditSales) {

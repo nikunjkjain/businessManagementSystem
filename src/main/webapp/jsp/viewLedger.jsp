@@ -37,7 +37,8 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Ledger</h1>
+			<c:set var="cid">${id}</c:set>
+				<h1>${sessionScope.CVALKEY[cid]} Ledger</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Ledger</li>
@@ -64,7 +65,7 @@
 											<th>Vch No</th>
 											<th>Debit</th>
 											<th>Credit</th>
-											<th>Balance</th>
+											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -72,7 +73,7 @@
 											<c:set var="balCr" scope="session" value="0" />
 											<c:set var="balDr" scope="session" value="0" />
 											<tr>
-												<td>${salesPaymenet.date}</td>
+												<td>${salesPaymenet.date} ${salesPaymenet.customerId}</td>
 												<td>${salesPaymenet.comment}</td>
 												<td>${salesPaymenet.type}</td>
 												<td>${salesPaymenet.id}</td>
@@ -92,7 +93,7 @@
 												<c:when test="${salesPaymenet.type != 'SALES'}">
 													<td>
 														<a href="viewPaymentDetails/${salesPaymenet.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a> 
-														<a href="editPayment/${salesPaymenet.id}/" class="btn btn-info btn-xs">Edit <i class="fa fa-edit"></i></a>
+														<a href="editPaymentDetails/${salesPaymenet.id}/" class="btn btn-info btn-xs">Edit <i class="fa fa-edit"></i></a>
 													</td>
 												</c:when>
 												<c:otherwise>
@@ -113,7 +114,7 @@
 											<th>Grand Total</th>
 											<th>${balDr}</th>
 											<th>${balCr}</th>
-											<th>${balDr - balCr}</th>
+											<th>${balDr - balCr} &nbsp;&nbsp;&nbsp;&nbsp;(Net Balance)</th>
 										</tr>
 									</tfoot>
 								</table>
