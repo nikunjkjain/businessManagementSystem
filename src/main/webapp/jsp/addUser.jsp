@@ -66,7 +66,7 @@
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form:form action="insertUse" method="post" onsubmit="return validatePasswords()"
+							<form:form action="insertUser" method="post" onsubmit="return validatePasswords()"
 								class="form-horizontal">
 								<div class="box-body">
 									<div class="form-group">
