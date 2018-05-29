@@ -1,4 +1,4 @@
-<base href="<c:url value ="http://localhost:8080/businessManagementSystem/"/>"/>
+<base href="<c:url value ="http://kardhar.in/businessManagementSystem/"/>"/>
 
 <link rel="stylesheet" href="<c:url value ="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"/>">
 <!-- Font Awesome -->

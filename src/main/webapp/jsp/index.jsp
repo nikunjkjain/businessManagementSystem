@@ -46,7 +46,7 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-6" style="overflow: scroll;">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
@@ -109,7 +109,7 @@
       </div>
       <!-- /.row -->
 
-	<div class="col-md-6">
+	<div class="col-md-6" style="overflow: scroll;">
 	<div class="box"><div class="box-header">
 								<h5 class="box-title">
 									Parties Balance Info

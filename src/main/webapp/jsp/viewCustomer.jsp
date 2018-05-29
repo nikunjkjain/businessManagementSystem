@@ -45,8 +45,8 @@
 			</section>
 
 			<section class="content">
-				<div class="row">
-					<div class="col-md-12">
+				<div class="row" style="overflow: scroll;">
+					<div class="col-md-12" >
 						<!-- Horizontal Form -->
 						<div class="box box-info">
 							<div class="box-header with-border">

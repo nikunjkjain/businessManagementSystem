@@ -94,12 +94,14 @@
 													<td>
 														<a href="viewPaymentDetails/${salesPaymenet.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a> 
 														<a href="editPaymentDetails/${salesPaymenet.id}/" class="btn btn-info btn-xs">Edit <i class="fa fa-edit"></i></a>
+														<a class="btn btn-danger btn-xs modelLink" data-toggle="modal" data-target="#modal-danger" data-id="${salesPaymenet.id}">Delete <i class="fa fa-remove"></i></a>
 													</td>
 												</c:when>
 												<c:otherwise>
 													<td>
 														<a href="viewSalesDetails/${salesPaymenet.id}/" class="btn btn-success btn-xs"> View <i class="fa fa-search-plus"></i></a>
 														<a href="editSales/${salesPaymenet.id}/" class="btn btn-info btn-xs"> Edit <i class="fa fa-edit"></i></a>
+														<a class="btn btn-danger btn-xs modelLink" data-toggle="modal" data-target="#modal-danger" data-id="${salesPaymenet.id}">Delete <i class="fa fa-remove"></i></a>
 													</td>
 												</c:otherwise>
 											</c:choose>
@@ -138,8 +140,8 @@
 								<h4 class="modal-title">Delete Confirmation</h4>
 							</div>
 							<div class="modal-body">
-								<p>Are you sure you want to delete the Customer ?&hellip; </p>
-								<p class="model-Customer" data=""></p>
+								<p>Are you sure you want to delete Sales ?&hellip; </p>
+								<p class="model-ledger" data="abc"></p>
 							</div>
 							<div class="modal-footer" align="center">
 								<button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button>
@@ -168,13 +170,13 @@
 	<script>
 		$('.modelLink').click(function(){
     	var dataId=$(this).attr('data-id');
-    	$.ajax({url:"viewCustomers",
+    	$.ajax({url:"viewLedger/"+dataId+"/",
     			data:{ "dataId" : dataId },
     			cache:false,
     			success:
     			function(data){
-        		$(".confirm").attr('href',"deleteCustomer/"+dataId+"/")
-        		$(".model-Customer").text(dataId)
+        		$(".confirm").attr('href',"deleteSales/"+dataId+"/")
+        		$(".model-ledger").text(dataId)
     		}});
 		});
 </script>

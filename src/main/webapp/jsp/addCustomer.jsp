@@ -35,7 +35,7 @@
 		<%@include file="/jsp/jspf/sideMenu.jspf"%>
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="overflow: scroll;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>Add Customer</h1>
@@ -47,7 +47,7 @@
 
 			<section class="content">
 				<div class="row">
-					<div class="col-md-10">
+					<div class="col-md-10" style="overflow: scroll;">
 						<!-- Horizontal Form -->
 						<div class="box box-info">
 							<div class="box-header with-border">

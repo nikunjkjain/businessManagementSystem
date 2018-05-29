@@ -54,12 +54,14 @@
 
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12" >
+					<div class="col-xs-12" style="overflow: scroll;" >
 
 						<div class="box">
+						<form action = "javascript:callController()" method = "post">
 							 <div class="box-header">
+							 
 								<label>Party Name: </label> 
-								<select id="customerId" name="customerId">
+								<select required id="customerId" name="customerId">
 									<option selected="selected"></option>
 									<c:forEach items="${customerList}" var="customerList">
 										<option value="${customerList.id}">${customerList.name}</option>
@@ -67,11 +69,12 @@
 								</select>
 								&nbsp;&nbsp;&nbsp;
 								<label>Sales Date: </label> 
-								<input type="date" name="date" id="date">
+								<input type="date" name="date" id="date" required>
 								
 								&nbsp;&nbsp;&nbsp;
 								<label>Comment: </label> 
-								<input type="text" size="80" name="comment" id="comment">
+								<input type="text" size="80" name="comment" id="comment" required/>
+								
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -117,14 +120,15 @@
 									</tbody>
 									<tfoot>
 										<tr>
-										<td ><input type="button" onclick="callController()" value="Call" /></td>
+										<!-- <td ><input type="button" onclick="callController()" value="Call" /></td> -->
+										<td ><input type="submit" value="Submit" /></td>
 										<td colspan="7" align="right"><b>Total Amount:</b></td>
 										<td ><input type="text" id="tamount" value="0"></td>
 										</tr>
 									</tfoot>
 								</table>
 							</div>
-							
+							</form>
 							<!-- /.box-body -->
 						</div>
 						<!-- /.box -->

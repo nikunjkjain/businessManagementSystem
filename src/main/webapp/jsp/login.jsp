@@ -56,9 +56,9 @@
         <!-- /.col -->
       </div>
     </form:form>
-    <a href="index" class="text-center">I forgot my password</a>
+    <!-- <a href="index" class="text-center">I forgot my password</a>
     	<br>
-    <a href="index" class="text-center">Register a new membership</a>
+    <a href="index" class="text-center">Register a new membership</a> -->
   </div>
   <!-- /.login-box-body -->
 </div>

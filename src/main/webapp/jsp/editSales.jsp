@@ -26,8 +26,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <style type="text/css">
-#body{
-  overflow-x: auto;
+.row{
+  overflow-x:scroll;
 }
 </style>
 
@@ -54,7 +54,7 @@
 
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12" >
+					<div class="col-xs-12">
 
 						<div class="box">
 							 <div class="box-header">

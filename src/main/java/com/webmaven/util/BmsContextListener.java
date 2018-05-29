@@ -3,20 +3,18 @@ package com.webmaven.util;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.webmaven.dao.MasterDAO;
-
 public class BmsContextListener implements ServletContextListener{
 
-	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

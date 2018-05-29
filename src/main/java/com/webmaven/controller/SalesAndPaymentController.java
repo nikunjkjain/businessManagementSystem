@@ -133,6 +133,15 @@ public class SalesAndPaymentController {
 		return new ModelAndView("redirect:/viewUsers");
 	}
 	
+	@RequestMapping(value="/deleteSales/{id}/", method=RequestMethod.GET)
+	public ModelAndView deleteSales(@PathVariable("id") int id, HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+			salesDetailsDao.delete(id);
+			salesAndPaymentDao.delete(id);
+		return new ModelAndView("redirect:/viewCustomers");
+	}
+	
 	@RequestMapping(value="/editSalesDetails", method=RequestMethod.POST)
 	public ModelAndView editSalesDetails(@RequestBody AddSales[] addSales, HttpSession session) {
 		if (!utils.isValidSession(session))
