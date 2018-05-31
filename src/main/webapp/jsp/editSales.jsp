@@ -55,20 +55,58 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-xs-12">
-
-						<div class="box">
+						<div class="box box-primary" style="overflow: scroll;">
+						<form action = "javascript:editSalesfun()" method = "post">
 							 <div class="box-header">
-								<label>Party Name: </label>
+									<%-- <div class="form-group">
+										<label for="name" class="col-sm-1 control-label">SalesId:</label>
+										<div class="col-sm-1">
+											<input type="text" class="form-control"
+												name="salesAndPaymentId" id="salesAndPaymentId"
+												value="${salesAndPayment.id}" readonly="readonly">
+										</div>
+										<label for="partyName" class="col-sm-2 control-label">Name:</label>
+										<div class="col-sm-4">
+											<c:set var="cid" scope="session">${salesAndPayment.customerId}</c:set>
+											<input type="number" class="form-control"
+												value="${sessionScope.CVALKEY[cid]}" name="cId" id="cId"
+												readonly="readonly">
+												<input type="number" class="form-control"
+												value="${sessionScope.CVALKEY[cid]}" name="cId" id="cId"
+												readonly="readonly"> 
+												<input type="hidden"
+												name="customerId" id="customerId"
+												value="${salesAndPayment.customerId}" required>
+										</div>
+										<label for="sales date" class="col-sm-2 control-label">Sales
+											Date:</label>
+										<div class="col-sm-2">
+											<input class="form-control" type="date" name="date" id="date"
+												value="${salesAndPayment.date}" readonly="readonly">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label for="comments" class="col-sm-1 control-label">Commnets:</label>
+										<div class="col-sm-4">
+											<input class="form-control" type="text" name="comment" id="comment" value="${salesAndPayment.comment}">
+										</div>
+									</div> --%>
+
+							<div class="col-sm-12">
+							 	<label>Sales Id: </label>
+							 	<input type="text" name="salesAndPaymentId" id="salesAndPaymentId" value="${salesAndPayment.id}" readonly="readonly">
+							 	  <label>Party Name: </label>
 								<c:set var="cid">${salesAndPayment.customerId}</c:set>
 								<input type="text" value="${sessionScope.CVALKEY[cid]}" name="cId" id="cId" readonly="readonly">
-								<input type="hidden" name="customerId" id="customerId" value="${salesAndPayment.customerId}"> 
-								&nbsp;&nbsp;&nbsp;
+								<input type="hidden" name="customerId" id="customerId" value="${salesAndPayment.customerId}" required> 
 								<label>Sales Date: </label> 
-								<input type="date" name="date" id="date" value="${salesAndPayment.date}">
-								&nbsp;&nbsp;&nbsp;
+								<input type="date" name="date" id="date" value="${salesAndPayment.date}" required>
+							</div>
+							<div class="col-sm-12">
 								<label>Comment: </label> 
-								<input type="text" size="80" name="comment" id="comment" value="${salesAndPayment.comment}">
-								<input type="hidden" name="salesAndPaymentId" id="salesAndPaymentId" value="${salesAndPayment.id}">
+								<input type="text" size="70" name="comment" id="comment" value="${salesAndPayment.comment}">
+							</div>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -114,14 +152,15 @@
 									</tbody>
 									<tfoot>
 										<tr>
-										<td ><input type="button" onclick="editSalesfun();" value="Call" /></td>
+										<!-- <td><input type="button" onclick="editSalesfun();" value="Submit" /></td> -->
+										<td><input type="submit" value="Submit" /></td>
 										<td colspan="7" align="right"><b>Total Amount:</b></td>
 										<td ><input class="col-md-12" type="number" id="tamount" value="${grandTotal}" readonly="readonly"></td>
 										</tr>
 									</tfoot>
 								</table>
 							</div>
-							
+							</form>
 							<!-- /.box-body -->
 						</div>
 						<!-- /.box -->

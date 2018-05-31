@@ -45,10 +45,10 @@
 			</section>
 
 			<section class="content">
-				<div class="row" style="overflow: scroll;">
+				<div class="row">
 					<div class="col-xs-12">
 
-						<div class="box">
+						<div class="box box-primary" style="overflow: scroll;">
 							<div class="box-header">
 								<h3 class="box-title">
 									<a href="addCustomer">Add Customer <i class="fa fa-user-plus"></i></a>

@@ -45,10 +45,10 @@
 			</section>
 
 			<section class="content">
-				<div class="row" style="overflow: scroll;">
+				<div class="row">
 					<div class="col-md-8">
 						<!-- Horizontal Form -->
-						<div class="box box-info">
+						<div class="box box-primary" style="overflow: scroll;">
 							<div class="box-header with-border">
 								<h3 class="box-title">Product Details:</h3>
 							</div>

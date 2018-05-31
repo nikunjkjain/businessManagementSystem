@@ -54,9 +54,9 @@
 
 			<section class="content">
 				<div class="row">
-					<div class="col-md-8" style="overflow: scroll;">
+					<div class="col-md-8">
 						<!-- Horizontal Form -->
-						<div class="box box-info">
+						<div class="box box-primary" style="overflow: scroll;">
 							<div class="box-header with-border">
 								<h3 class="box-title">Enter Payment Details</h3>
 							</div>

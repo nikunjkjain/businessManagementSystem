@@ -23,14 +23,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   
-  <script type="text/javascript">
-   function setDate(){
-  	  document.getElementById('date').valueAsDate = new Date();
-  }
-  window.onload = setDate;
-  </script>
 </head>
-
 
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">

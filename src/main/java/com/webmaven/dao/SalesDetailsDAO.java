@@ -67,14 +67,13 @@ public class SalesDetailsDAO {
 	public int insert(List<SalesDetails> salesDetails) {
 		int id = -1;
 		SqlSession session = sqlSessionFactory.openSession();
-
+		logger.info("insert(" + salesDetails + ")");
 		try {
 			id = session.insert("SalesDetails.insert", salesDetails);
 		} finally {
 			session.commit();
 			session.close();
 		}
-		logger.info("insert(" + salesDetails + ")");
 		return id;
 	}
 

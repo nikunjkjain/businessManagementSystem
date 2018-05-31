@@ -48,7 +48,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 
-						<div class="box">
+						<div class="box" style="overflow: scroll;">
 							<!-- <div class="box-header">
 								<h4 class="box-title">
 									View Ledger
@@ -73,7 +73,7 @@
 											<c:set var="balCr" scope="session" value="0" />
 											<c:set var="balDr" scope="session" value="0" />
 											<tr>
-												<td>${salesPaymenet.date} ${salesPaymenet.customerId}</td>
+												<td>${salesPaymenet.date}</td>
 												<td>${salesPaymenet.comment}</td>
 												<td>${salesPaymenet.type}</td>
 												<td>${salesPaymenet.id}</td>

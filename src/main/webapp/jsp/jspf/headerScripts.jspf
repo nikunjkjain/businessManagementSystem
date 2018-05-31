@@ -1,4 +1,4 @@
-<base href="<c:url value ="http://kardhar.in/businessManagementSystem/"/>"/>
+<base href="<c:url value ="http://kardhar.in/bms/"/>"/>
 
 <link rel="stylesheet" href="<c:url value ="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"/>">
 <!-- Font Awesome -->
@@ -53,7 +53,7 @@
 			},
 			complete : function() {
 				console.log("===> function callController completed");
-				window.location.href = "viewUsers";
+				window.location.href = "viewCustomers";
 			}
 		});
 	};

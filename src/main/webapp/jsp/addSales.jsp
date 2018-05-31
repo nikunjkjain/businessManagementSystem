@@ -25,11 +25,12 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-<style type="text/css">
-#body{
-  overflow-x: auto;
-}
-</style>
+<script type="text/javascript">
+   function setDate(){
+  	  document.getElementById('date').valueAsDate = new Date();
+  }
+  window.onload = setDate;
+  </script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -54,15 +55,15 @@
 
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12" style="overflow: scroll;" >
+					<div class="col-xs-12">
 
-						<div class="box">
+						<div class="box box-primary" style="overflow: scroll;">
 						<form action = "javascript:callController()" method = "post">
 							 <div class="box-header">
 							 
 								<label>Party Name: </label> 
 								<select required id="customerId" name="customerId">
-									<option selected="selected"></option>
+									<option value="" selected="selected">Select Party</option>
 									<c:forEach items="${customerList}" var="customerList">
 										<option value="${customerList.id}">${customerList.name}</option>
 									</c:forEach>
@@ -73,7 +74,7 @@
 								
 								&nbsp;&nbsp;&nbsp;
 								<label>Comment: </label> 
-								<input type="text" size="80" name="comment" id="comment" required/>
+								<input type="text" size="80" name="comment" id="comment"/>
 								
 							</div>
 							<!-- /.box-header -->
@@ -104,18 +105,18 @@
 													</c:forEach>
 											</select></td>
 											<td><input class="col-md-12" type="number" id="quantity"
-												name="quantity" /></td>
+												name="quantity"/></td>
 											<td><input class="col-md-12" type="number" id="bags"
-												name="bags" /></td>
+												name="bags"/></td>
 											<td><input class="col-md-12" type="number" id="less"
-												name="less" /></td>
+												name="less" value="0"/></td>
 											<td><input class="col-md-12" type="number" id="rate"
-												name="rate" /></td>
+												name="rate"/></td>
 											<td><input class="col-md-12" type="text"
 												id="description" name="description" /></td>
 											<td><label id="ntWt">-</label></td>
 											<td><label id="total">-</label></td>
-											<td><input type="button" onclick="Add()" value="+" /></td>
+											<td><input type="button" onclick="Add()" value="+" required/></td>
 										</tr>
 									</tbody>
 									<tfoot>
@@ -123,7 +124,7 @@
 										<!-- <td ><input type="button" onclick="callController()" value="Call" /></td> -->
 										<td ><input type="submit" value="Submit" /></td>
 										<td colspan="7" align="right"><b>Total Amount:</b></td>
-										<td ><input type="text" id="tamount" value="0"></td>
+										<td ><input type="number" id="tamount" required></td>
 										</tr>
 									</tfoot>
 								</table>

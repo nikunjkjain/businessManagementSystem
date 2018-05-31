@@ -183,7 +183,7 @@ public class SalesAndPaymentController {
 		payments.setUpdatedBy(utils.getUserIdFromSession(session));
 		payments.setPayment(Integer.parseInt(utils.getMasterIdAndKeyVal().get("ADDPAY").get(payments.getType())));
 		salesAndPaymentDao.update(payments);
-		return new ModelAndView("redirect:/addPayment");
+		return new ModelAndView("redirect:/viewCustomers");
 	}
 	
 	@RequestMapping(value="/viewLedger/{id}/", method=RequestMethod.GET)

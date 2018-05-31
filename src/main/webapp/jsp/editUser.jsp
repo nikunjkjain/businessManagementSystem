@@ -47,9 +47,9 @@
 
 			<section class="content">
 				<div class="row">
-					<div class="col-md-8" style="overflow: scroll;">
+					<div class="col-md-8">
 						<!-- Horizontal Form -->
-						<div class="box box-info">
+						<div class="box box-primary" style="overflow: scroll;">
 							<div class="box-header with-border">
 								<h3 class="box-title">Edit User Details:</h3>
 								<a href="changeUserPassword/${userDetails.id}/"><input type="button" class="btn btn-xs btn-info pull-right" value="Change Password?"></a>
