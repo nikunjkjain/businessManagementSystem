@@ -14,10 +14,11 @@ public class AddSales implements Serializable{
 	private int product = 0;
 	private String description = "";
 	private double quantity = 0;
-	private int bags = 0;
+	private String bags = "";
 	private double less = 0;
 	private int customerId = 0;
 	private String date = "";
+	private String reminder;
 	private double totalAmount = 0;
 	private String comment = "";
 	private String type;
@@ -58,10 +59,10 @@ public class AddSales implements Serializable{
 	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
-	public int getBags() {
+	public String getBags() {
 		return bags;
 	}
-	public void setBags(int bags) {
+	public void setBags(String bags) {
 		this.bags = bags;
 	}
 	public double getLess() {
@@ -83,6 +84,12 @@ public class AddSales implements Serializable{
 		this.date = date;
 	}
 	
+	public String getReminder() {
+		return reminder;
+	}
+	public void setReminder(String reminder) {
+		this.reminder = reminder;
+	}
 	public double getTotalAmount() {
 		return totalAmount;
 	}
@@ -131,7 +138,7 @@ public class AddSales implements Serializable{
 	public String toString() {
 		return "AddSales [id=" + id + ", rate=" + rate + ", product=" + product + ", description=" + description
 				+ ", quantity=" + quantity + ", bags=" + bags + ", less=" + less + ", customerId=" + customerId
-				+ ", date=" + date + ", totalAmount=" + totalAmount + ", comment=" + comment + ", type=" + type
+				+ ", date=" + date + ", reminder=" + reminder + ", totalAmount=" + totalAmount + ", comment=" + comment + ", type=" + type
 				+ ", mode=" + mode + ", payment=" + payment + ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn
 				+ "]";
 	}	

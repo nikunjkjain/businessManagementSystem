@@ -40,6 +40,7 @@ function fillSalesDetailsInArray() {
 	var details = {
 			"customerId" : document.getElementById('customerId').value,
 			"date" : document.getElementById('date').value,
+			"reminder" : document.getElementById('reminder').value,
 			"totalAmount" : document.getElementById('tamount').value,
 			"comment" : document.getElementById('comment').value,
 			"type" : "SALES",

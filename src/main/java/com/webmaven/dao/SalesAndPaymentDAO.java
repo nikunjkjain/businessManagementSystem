@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.SalesAndPayment;
-import com.webmaven.controller.SalesAndPaymentController;
 import com.webmaven.util.Utility;
 
 public class SalesAndPaymentDAO {
@@ -49,6 +48,25 @@ public class SalesAndPaymentDAO {
 		logger.info("selectAll() --> " + list);
 		return list;
 
+	}
+	
+	/**
+	 * Returns the list of all sales instances from the database.
+	 * 
+	 * @return the list of all sales instances from the database.
+	 */
+	public List<SalesAndPayment> selectReminder() {
+		List<SalesAndPayment> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			list = session.selectList("SalesAndPayment.selectReminder");
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		} finally {
+			session.close();
+		}
+		logger.info("selectReminder() --> " + list);
+		return list;
 	}
 	
 	

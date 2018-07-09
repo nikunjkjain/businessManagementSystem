@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>BMS | Add Payment</title>
+<title>BMS | Edit Payment</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
@@ -39,10 +39,10 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Add Payment</h1>
+				<h1>Edit Payment</h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Add Payment</li>
+					<li class="active">Edit Payment</li>
 				</ol>
 			</section>
 
@@ -52,7 +52,7 @@
 						<!-- Horizontal Form -->
 						<div class="box box-primary" style="overflow: scroll;">
 							<div class="box-header with-border">
-								<h3 class="box-title">Enter Payment Details</h3>
+								<h3 class="box-title">Edit Payment Details</h3>
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
@@ -130,7 +130,11 @@
 											<input type="number" class="form-control" id="amount" name="amount"
 												value="${salesPaymenet.amount}" placeholder="Amount" required="required">
 										</div>
+										<label for="reminder" class="col-sm-2 control-label">Reminder:</label>
+												<div class="col-sm-2">
+											<input type="date" name="reminder" id="reminder" value="${salesPaymenet.reminder}">
 										
+										</div>
 										</div>
 										<div class="form-group">
 								

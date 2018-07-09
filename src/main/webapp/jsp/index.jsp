@@ -114,7 +114,44 @@
 				</div>
 				<!-- /.row -->
 
-				<div class="col-md-12">
+
+				<div class="col-md-6">
+					<div class="box box-primary" style="overflow: scroll;">
+						<div class="box-header with-border">
+							<h5 class="box-title">Today's Reminder</h5>
+						</div>
+						<div class="box-body">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Party Name</th>
+										<th>Type</th>
+										<th>Last Date</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${reminder}" var="reminder">
+										<c:set var="cid">${reminder.customerId}</c:set>
+										<tr>
+											<td>${sessionScope.CVALKEY[cid]}</td>
+											<td>${reminder.type}</td>
+											<td>${reminder.date}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Party Name</th>
+										<th>Type</th>
+										<th>Last Date</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
 					<div class="box box-primary" style="overflow: scroll;">
 						<div class="box-header with-border">
 							<h5 class="box-title">Parties Balance Info</h5>
@@ -148,6 +185,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<!-- /.box-body -->
 
 

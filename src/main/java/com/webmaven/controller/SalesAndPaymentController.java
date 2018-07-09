@@ -108,7 +108,7 @@ public class SalesAndPaymentController {
 		models.put("salesDetailsList", salesDetailsList);
 		models.put("salesAndPayment", salesAndPayment);
 		
-		logger.info("Going to Edit Sales View:");
+		logger.info("Going to Edit Sales View:" + salesAndPayment.toString());
 		return new ModelAndView("editSales", models);
 	}
 	
@@ -207,6 +207,18 @@ public class SalesAndPaymentController {
 		return new ModelAndView("viewPaymentDetails", "salesPaymenet", salesPaymenet);
 	}
 	
+	
+	@RequestMapping(value="/viewPaymentReminder/", method=RequestMethod.GET)
+	public ModelAndView viewPaymentReminder(HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		List<SalesAndPayment> salesPaymenet = salesAndPaymentDao.selectReminder();
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("salesPaymenet", salesPaymenet);
+		return new ModelAndView("viewPaymentDetails", "salesPaymenet", salesPaymenet);
+	}
+	
+	
 	@RequestMapping(value="/editPaymentDetails/{id}/", method=RequestMethod.GET)
 	public ModelAndView editPaymentDetails(@PathVariable("id") int id, HttpSession session) {
 		if (!utils.isValidSession(session))
@@ -223,8 +235,8 @@ public class SalesAndPaymentController {
 		if(addSalesObj != null) {
 			AddSales sales = addSalesObj[addSalesObj.length - 1];
 			if(!isEditSales)
-				return new SalesAndPayment(sales.getCustomerId(), sales.getDate(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
-			return new SalesAndPayment(sales.getId(), sales.getCustomerId(), sales.getDate(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
+				return new SalesAndPayment(sales.getCustomerId(), sales.getDate(), sales.getReminder(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
+			return new SalesAndPayment(sales.getId(), sales.getCustomerId(), sales.getDate(), sales.getReminder(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
 		}
 		return null;
 	}

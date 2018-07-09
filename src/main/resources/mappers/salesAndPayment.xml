@@ -9,6 +9,7 @@
         <result property="id" column="id"/>
         <result property="customerId" column="customerId"/>
         <result property="date" column="date"/>
+        <result property="reminder" column="reminder"/>
         <result property="amount" column="amount"/>
         <result property="comment" column="comment"/>
         <result property="type" column="type"/>
@@ -22,21 +23,25 @@
         SELECT * FROM sales_payment order by date, id desc;
     </select>
  
+ 	<select id="selectReminder" resultMap="salesPaymentResult">
+        select * from sales_payment where reminder = CURRENT_DATE ORDER BY customerId
+    </select>
+ 
     <select id="getSalesById" parameterType="int" resultMap="salesPaymentResult">
         SELECT * FROM sales_payment WHERE id = #{id};
     </select>
     
     <select id="getSalesByCustomerId" parameterType="int" resultMap="salesPaymentResult">
-        SELECT * FROM sales_payment WHERE customerId = #{id} order by date desc, id desc;
+        SELECT * FROM sales_payment WHERE customerId = #{id} order by date, id;
     </select>
  
     <insert id="insert" parameterType="SalesAndPayment" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sales_payment (customerId, date, amount, comment, type, mode, payment, updatedBy, updatedOn) VALUES (#{customerId}, #{date}, #{amount}, #{comment}, #{type}, #{mode}, #{payment}, #{updatedBy}, #{updatedOn});
+        INSERT INTO sales_payment (customerId, date, reminder, amount, comment, type, mode, payment, updatedBy, updatedOn) VALUES (#{customerId}, #{date}, #{reminder}, #{amount}, #{comment}, #{type}, #{mode}, #{payment}, #{updatedBy}, #{updatedOn});
     </insert>
  
     <update id="update" parameterType="SalesAndPayment">
         UPDATE sales_payment
-        SET customerId = #{customerId}, date = #{date}, amount = #{amount}, comment = #{comment}, type = #{type}, mode = #{mode}, payment = #{payment}, updatedOn = #{updatedOn}, updatedBy = #{updatedBy} 
+        SET customerId = #{customerId}, date = #{date}, reminder = #{reminder}, amount = #{amount}, comment = #{comment}, type = #{type}, mode = #{mode}, payment = #{payment}, updatedOn = #{updatedOn}, updatedBy = #{updatedBy} 
         WHERE id = #{id} 
     </update>
  

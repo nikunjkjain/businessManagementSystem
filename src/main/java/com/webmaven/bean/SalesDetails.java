@@ -9,7 +9,7 @@ public class SalesDetails{
 	private double quantity;
 	private double rate;
 	private double lessInQuantity;
-	private int bags;
+	private String bags;
 	private String description;
 	private String updatedBy = "";
 	private Date updatedOn = null;
@@ -60,10 +60,10 @@ public class SalesDetails{
 	public void setLessInQuantity(double lessInQuantity) {
 		this.lessInQuantity = lessInQuantity;
 	}
-	public int getBags() {
+	public String getBags() {
 		return bags;
 	}
-	public void setBags(int bags) {
+	public void setBags(String bags) {
 		this.bags = bags;
 	}
 	public String getDescription() {

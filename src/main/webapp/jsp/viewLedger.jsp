@@ -38,7 +38,7 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 			<c:set var="cid">${id}</c:set>
-				<h1>${sessionScope.CVALKEY[cid]} Ledger</h1>
+				<h1>${sessionScope.CVALKEY[cid]} Ledger </h1>
 				<ol class="breadcrumb">
 					<li><a href="index"><i class="fa fa-dashboard"></i> Home</a></li>
 					<li class="active">Ledger</li>

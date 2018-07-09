@@ -96,14 +96,20 @@
 							<div class="col-sm-12">
 							 	<label>Sales Id: </label>
 							 	<input type="text" name="salesAndPaymentId" id="salesAndPaymentId" value="${salesAndPayment.id}" readonly="readonly">
-							 	  <label>Party Name: </label>
+							 	&nbsp;&nbsp;
+							 	<label>Party Name: </label>
 								<c:set var="cid">${salesAndPayment.customerId}</c:set>
 								<input type="text" value="${sessionScope.CVALKEY[cid]}" name="cId" id="cId" readonly="readonly">
 								<input type="hidden" name="customerId" id="customerId" value="${salesAndPayment.customerId}" required> 
+								&nbsp;&nbsp;
 								<label>Sales Date: </label> 
 								<input type="date" name="date" id="date" value="${salesAndPayment.date}" required>
+								&nbsp;&nbsp;
+								<label>Reminder: </label> 
+								<input type="date" name="reminder" id="reminder" value="${salesAndPayment.reminder}" required>
 							</div>
 							<div class="col-sm-12">
+							<br/>
 								<label>Comment: </label> 
 								<input type="text" size="70" name="comment" id="comment" value="${salesAndPayment.comment}">
 							</div>
@@ -141,7 +147,7 @@
 											<td><input class="col-md-12" type="text" id="product1${count}" name="product1${count}" readonly="readonly" value="${sessionScope.PVALKEY[pid]}"></td>
 											<input class = "product" type ="hidden" id="product${count}" name="product${count}" value="${salesDetailsList.productId}"/>
 											<td><input class="col-md-12 quantity" type="number" onChange = "updateRowInfo(${count});" id="quantity${count}" name="quantity${count}" value="${salesDetailsList.quantity}"/></td>
-											<td><input class="col-md-12 bags" type="number" id="bags${count}" name="bags${count}" value="${salesDetailsList.bags}"/></td>
+											<td><input class="col-md-12 bags" type="text" id="bags${count}" name="bags${count}" value="${salesDetailsList.bags}"/></td>
 											<td><input class="col-md-12 less" type="number" onChange = "updateRowInfo(${count});" id="less${count}" name="less${count}" value="${salesDetailsList.lessInQuantity}"/></td>
 											<td><input class="col-md-12 rate" type="number" onChange = "updateRowInfo(${count});" id="rate${count}" name="rate${count}" value="${salesDetailsList.rate}"/></td>
 											<td><input class="col-md-12 description" type="text" id="description${count}" name="description${count}" value="${salesDetailsList.description}"/></td>

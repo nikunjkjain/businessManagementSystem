@@ -28,6 +28,9 @@
 <script type="text/javascript">
    function setDate(){
   	  document.getElementById('date').valueAsDate = new Date();
+  	  var today = new Date();
+  	  today.setDate(today.getDate() + 10); 
+  	  document.getElementById('reminder').valueAsDate = today;
   }
   window.onload = setDate;
   </script>
@@ -73,9 +76,12 @@
 								<input type="date" name="date" id="date" required>
 								
 								&nbsp;&nbsp;&nbsp;
-								<label>Comment: </label> 
-								<input type="text" size="80" name="comment" id="comment"/>
+								<label>Reminder: </label> 
+								<input type="date" name="reminder" id="reminder" required>
 								
+								&nbsp;&nbsp;&nbsp;
+								<label>Comment: </label> 
+								<input type="text" size="45" name="comment" id="comment"/>
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
@@ -106,7 +112,7 @@
 											</select></td>
 											<td><input class="col-md-12" type="number" id="quantity"
 												name="quantity"/></td>
-											<td><input class="col-md-12" type="number" id="bags"
+											<td><input class="col-md-12" type="text" id="bags"
 												name="bags"/></td>
 											<td><input class="col-md-12" type="number" id="less"
 												name="less" value="0"/></td>

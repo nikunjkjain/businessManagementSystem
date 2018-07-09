@@ -26,6 +26,11 @@
   <script type="text/javascript">
    function setDate(){
   	  document.getElementById('date').valueAsDate = new Date();
+  	  
+  	 var today = new Date();
+ 	  today.setDate(today.getDate() + 10); 
+ 	  document.getElementById('reminder').valueAsDate = today;
+  	  
   }
   window.onload = setDate;
   </script>
@@ -128,7 +133,13 @@
 
 										<div class="col-sm-4">
 											<input type="number" class="form-control" id="amount" name="amount"
-												placeholder="Amount" required="required">
+												placeholder="Amount" required="required">												
+										</div>
+										
+										<label for="reminder" class="col-sm-2 control-label">Reminder:</label>
+												<div class="col-sm-2">
+											<input type="date" name="reminder" id="reminder">
+										
 										</div>
 										
 										</div>

@@ -2,7 +2,9 @@ package com.webmaven.controller;
 
 import static com.webmaven.util.BmsConstants.LOGOUT_VIEW;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.Balance;
-import com.webmaven.bean.Master;
+import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.User;
 import com.webmaven.dao.MasterDAO;
+import com.webmaven.dao.SalesAndPaymentDAO;
 import com.webmaven.dao.UserDAO;
 import com.webmaven.dao.ViewsDAO;
 import com.webmaven.util.BmsConstants;
@@ -58,6 +61,17 @@ public class UserController {
 		this.masterDao = masterDao;
 	}
 	
+	@Autowired
+    private SalesAndPaymentDAO salesAndPaymentDao;
+	
+	public SalesAndPaymentDAO getSalesAndPaymentDao() {
+		return salesAndPaymentDao;
+	}
+
+	public void setSalesAndPaymentDao(SalesAndPaymentDAO salesAndPaymentDao) {
+		this.salesAndPaymentDao = salesAndPaymentDao;
+	}
+	
 	@RequestMapping(value="/viewUsers", method=RequestMethod.GET)
 	public ModelAndView getAllUsers(HttpSession session) {
 		if(!utils.isValidSession(session))
@@ -89,8 +103,13 @@ public class UserController {
 		if(!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		List<Balance> balance;
+		List<SalesAndPayment> reminder;
 		balance = viewsDao.selectAll();
-		return new ModelAndView("index","balance", balance);
+		reminder = salesAndPaymentDao.selectReminder();
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("balance", balance);
+		models.put("reminder", reminder);
+		return new ModelAndView("index", models);
 	}
 	
 	@RequestMapping(value="/addUser", method=RequestMethod.GET)
@@ -171,6 +190,8 @@ public class UserController {
 		}
 		User userDetails = userDao.validateUser(user);
 		List<Balance> balance;
+		List<SalesAndPayment> reminder;
+		Map<String, Object> models = new HashMap<String, Object>();
 		if(userDetails == null) {
 			return new ModelAndView(LOGOUT_VIEW);
 		}else {
@@ -186,6 +207,9 @@ public class UserController {
 				session.setAttribute(BmsConstants.PVALKEY, utils.getProductIdKeyMap());
 				session.setAttribute(BmsConstants.CVALKEY, utils.getCustomerIdKeyMap());
 				balance = viewsDao.selectAll();
+				reminder = salesAndPaymentDao.selectReminder();
+				models.put("balance", balance);
+				models.put("reminder", reminder);
 				}else {
 					return new ModelAndView(LOGOUT_VIEW);
 				}
@@ -193,7 +217,7 @@ public class UserController {
 				return new ModelAndView(LOGOUT_VIEW);
 			}
 		}
-		return new ModelAndView("index","balance", balance);
+		return new ModelAndView("index", models);
 	}
 	
 }

@@ -7,6 +7,7 @@ public class SalesAndPayment{
 	private int id;
 	private int customerId;
 	private String date;
+	private String reminder;
 	private double amount;
 	private String comment;
 	private String type;
@@ -25,9 +26,10 @@ public class SalesAndPayment{
 		this.date = date;
 	}
 	
-	public SalesAndPayment(int customerId, String date, double amount, String comment, String type, String mode, int payment) {
+	public SalesAndPayment(int customerId, String date, String reminder, double amount, String comment, String type, String mode, int payment) {
 		this.customerId = customerId;
 		this.date = date;
+		this.reminder = reminder;
 		this.amount = amount;
 		this.comment = comment;
 		this.type = type;
@@ -35,10 +37,11 @@ public class SalesAndPayment{
 		this.payment = payment;
 	}
 
-	public SalesAndPayment(int id, int customerId, String date, double amount, String comment, String type, String mode, int payment) {
+	public SalesAndPayment(int id, int customerId, String date, String reminder, double amount, String comment, String type, String mode, int payment) {
 		this.id = id;
 		this.customerId = customerId;
 		this.date = date;
+		this.reminder = reminder;
 		this.amount = amount;
 		this.comment = comment;
 		this.type = type;
@@ -64,6 +67,14 @@ public class SalesAndPayment{
 	}
 	public void setDate(String salesDate) {
 		this.date = salesDate;
+	}
+
+	public String getReminder() {
+		return reminder;
+	}
+
+	public void setReminder(String reminder) {
+		this.reminder = reminder;
 	}
 
 	public double getAmount() {
@@ -124,7 +135,7 @@ public class SalesAndPayment{
 
 	@Override
 	public String toString() {
-		return "SalesAndPayment [id=" + id + ", customerId=" + customerId + ", date=" + date + ", amount=" + amount
+		return "SalesAndPayment [id=" + id + ", customerId=" + customerId + ", date=" + date + ", reminder=" + reminder + " , amount=" + amount
 				+ ", comment=" + comment + ", type=" + type + ", mode=" + mode + ", payment=" + payment + ", updatedBy="
 				+ updatedBy + ", updatedOn=" + updatedOn + "]";
 	}
