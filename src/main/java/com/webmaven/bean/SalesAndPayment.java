@@ -6,7 +6,7 @@ public class SalesAndPayment{
 	
 	private int id;
 	private int customerId;
-	private String date;
+	private String salesDate;
 	private String reminder;
 	private double amount;
 	private String comment;
@@ -23,12 +23,12 @@ public class SalesAndPayment{
 	
 	public SalesAndPayment(int customerId, String date) {
 		this.customerId = customerId;
-		this.date = date;
+		this.salesDate = date;
 	}
 	
 	public SalesAndPayment(int customerId, String date, String reminder, double amount, String comment, String type, String mode, int payment) {
 		this.customerId = customerId;
-		this.date = date;
+		this.salesDate = date;
 		this.reminder = reminder;
 		this.amount = amount;
 		this.comment = comment;
@@ -40,7 +40,7 @@ public class SalesAndPayment{
 	public SalesAndPayment(int id, int customerId, String date, String reminder, double amount, String comment, String type, String mode, int payment) {
 		this.id = id;
 		this.customerId = customerId;
-		this.date = date;
+		this.salesDate = date;
 		this.reminder = reminder;
 		this.amount = amount;
 		this.comment = comment;
@@ -62,11 +62,13 @@ public class SalesAndPayment{
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	public String getDate() {
-		return date;
+
+	public String getSalesDate() {
+		return salesDate;
 	}
-	public void setDate(String salesDate) {
-		this.date = salesDate;
+
+	public void setSalesDate(String salesDate) {
+		this.salesDate = salesDate;
 	}
 
 	public String getReminder() {
@@ -135,7 +137,7 @@ public class SalesAndPayment{
 
 	@Override
 	public String toString() {
-		return "SalesAndPayment [id=" + id + ", customerId=" + customerId + ", date=" + date + ", reminder=" + reminder + " , amount=" + amount
+		return "SalesAndPayment [id=" + id + ", customerId=" + customerId + ", salesDate=" + salesDate + ", reminder=" + reminder + " , amount=" + amount
 				+ ", comment=" + comment + ", type=" + type + ", mode=" + mode + ", payment=" + payment + ", updatedBy="
 				+ updatedBy + ", updatedOn=" + updatedOn + "]";
 	}

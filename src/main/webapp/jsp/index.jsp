@@ -121,7 +121,7 @@
 							<h5 class="box-title">Today's Reminder</h5>
 						</div>
 						<div class="box-body">
-							<table id="example1" class="table table-bordered table-striped">
+							<table id="ledger1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th>Party Name</th>
@@ -135,7 +135,7 @@
 										<tr>
 											<td>${sessionScope.CVALKEY[cid]}</td>
 											<td>${reminder.type}</td>
-											<td>${reminder.date}</td>
+											<td>${reminder.salesDate}</td>
 										</tr>
 									</c:forEach>
 								</tbody>

@@ -63,7 +63,7 @@
 										<label for="date" class="col-sm-2 control-label">Payment Date:</label>
 
 										<div class="col-sm-4">
-											<input type="date" name="date" id="date" value="${salesPaymenet.date}">
+											<input type="date" name="date" id="date" value="${salesPaymenet.salesDate}">
 										</div>
 										
 										<label for="Party" class="col-sm-2 control-label">Party:</label>

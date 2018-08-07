@@ -191,6 +191,7 @@ public class SalesAndPaymentController {
 		if (!utils.isValidSession(session))
 			return new ModelAndView(LOGOUT_VIEW);
 		List<SalesAndPayment> salesPaymenet = salesAndPaymentDao.getSalesByCustomerId(id);
+		System.out.println("salesPayemnt toString:" + salesPaymenet.toString());
 		Map<String, Object> models = new HashMap<String, Object>();
 		models.put("salesPaymenet", salesPaymenet);
 		models.put("customerId", id);

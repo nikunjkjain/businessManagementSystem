@@ -73,7 +73,7 @@
 											<c:set var="balCr" scope="session" value="0" />
 											<c:set var="balDr" scope="session" value="0" />
 											<tr>
-												<td>${salesPaymenet.date}</td>
+												<td>${salesPaymenet.salesDate}</td>
 												<td>${salesPaymenet.comment}</td>
 												<td>${salesPaymenet.type}</td>
 												<td>${salesPaymenet.id}</td>

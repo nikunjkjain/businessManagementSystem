@@ -103,7 +103,7 @@
 								<input type="hidden" name="customerId" id="customerId" value="${salesAndPayment.customerId}" required> 
 								&nbsp;&nbsp;
 								<label>Sales Date: </label> 
-								<input type="date" name="date" id="date" value="${salesAndPayment.date}" required>
+								<input type="date" name="date" id="date" value="${salesAndPayment.salesDate}" required>
 								&nbsp;&nbsp;
 								<label>Reminder: </label> 
 								<input type="date" name="reminder" id="reminder" value="${salesAndPayment.reminder}" required>

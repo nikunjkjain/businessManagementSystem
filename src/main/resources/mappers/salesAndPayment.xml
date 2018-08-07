@@ -20,32 +20,32 @@
     </resultMap>
     
     <select id="selectAll" resultMap="salesPaymentResult">
-        SELECT id, customerId, DATE_FORMAT(date, "%d-%m-%Y") as date, DATE_FORMAT(reminder, "%d-%m-%Y") as reminder, amount, comment,
+        SELECT id, customerId, DATE_FORMAT(date, "%d-%m-%Y") as salesDate, DATE_FORMAT(reminder, "%d-%m-%Y") as reminder, amount, comment,
         type, mode, payment, updatedBy, updatedOn FROM sales_payment order by date, id desc;
     </select>
  
  	<select id="selectReminder" resultMap="salesPaymentResult">
-        SELECT id, customerId, DATE_FORMAT(date, "%d-%m-%Y") as date, DATE_FORMAT(reminder, "%d-%m-%Y") as reminder, amount, comment,
-        type, mode, payment, updatedBy, updatedOn from sales_payment where reminder = CURRENT_DATE ORDER BY customerId
+        SELECT id, customerId, DATE_FORMAT(date, "%d-%m-%Y") as salesDate, DATE_FORMAT(reminder, "%d-%m-%Y") as reminder, amount, comment,
+        type, mode, payment, updatedBy, updatedOn from sales_payment where reminder = CURRENT_DATE ORDER BY date, customerId
     </select>
  
     <select id="getSalesById" parameterType="int" resultMap="salesPaymentResult">
-        SELECT id, customerId, date, reminder, amount, comment,
+        SELECT id, customerId, date salesDate, reminder, amount, comment,
         type, mode, payment, updatedBy, updatedOn FROM sales_payment WHERE id = #{id};
     </select>
     
     <select id="getSalesByCustomerId" parameterType="int" resultMap="salesPaymentResult">
-        SELECT id, customerId, DATE_FORMAT(date, "%d-%m-%Y") as date, DATE_FORMAT(reminder, "%d-%m-%Y") as reminder, amount, comment,
+        SELECT id, customerId, DATE_FORMAT(date, "%d-%m-%Y") as salesDate, DATE_FORMAT(reminder, "%d-%m-%Y") as reminder, amount, comment,
         type, mode, payment, updatedBy, updatedOn FROM sales_payment WHERE customerId = #{id} order by date, id;
     </select>
  
     <insert id="insert" parameterType="SalesAndPayment" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sales_payment (customerId, date, reminder, amount, comment, type, mode, payment, updatedBy, updatedOn) VALUES (#{customerId}, #{date}, #{reminder}, #{amount}, #{comment}, #{type}, #{mode}, #{payment}, #{updatedBy}, #{updatedOn});
+        INSERT INTO sales_payment (customerId, date, reminder, amount, comment, type, mode, payment, updatedBy, updatedOn) VALUES (#{customerId}, #{salesDate}, #{reminder}, #{amount}, #{comment}, #{type}, #{mode}, #{payment}, #{updatedBy}, #{updatedOn});
     </insert>
  
     <update id="update" parameterType="SalesAndPayment">
         UPDATE sales_payment
-        SET customerId = #{customerId}, date = #{date}, reminder = #{reminder}, amount = #{amount}, comment = #{comment}, type = #{type}, mode = #{mode}, payment = #{payment}, updatedOn = #{updatedOn}, updatedBy = #{updatedBy} 
+        SET customerId = #{customerId}, date = #{salesDate}, reminder = #{reminder}, amount = #{amount}, comment = #{comment}, type = #{type}, mode = #{mode}, payment = #{payment}, updatedOn = #{updatedOn}, updatedBy = #{updatedBy} 
         WHERE id = #{id} 
     </update>
  
