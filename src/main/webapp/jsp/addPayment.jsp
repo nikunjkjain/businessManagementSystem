@@ -25,7 +25,7 @@
   
   <script type="text/javascript">
    function setDate(){
-  	  document.getElementById('date').valueAsDate = new Date();
+  	  document.getElementById('salesDate').valueAsDate = new Date();
   	  
   	 var today = new Date();
  	  today.setDate(today.getDate() + 10); 
@@ -74,7 +74,7 @@
 										<label for="date" class="col-sm-2 control-label">Payment Date:</label>
 
 										<div class="col-sm-4">
-											<input type="date" name="date" id="date">
+											<input type="date" name="salesDate" id="salesDate">
 										</div>
 										
 										<label for="Party" class="col-sm-2 control-label">Party:</label>
