@@ -13,6 +13,7 @@
 		<typeAlias alias="Payment" type="com.webmaven.bean.Payment" />
 		<typeAlias alias="Balance" type="com.webmaven.bean.Balance" />
 		<typeAlias alias="Master" type="com.webmaven.bean.Master" />
+		<typeAlias alias="LedgerDetail" type="com.webmaven.bean.LedgerDetail" />
 	</typeAliases>
 
 	<mappers>
@@ -24,5 +25,6 @@
 		<mapper resource="mappers/payment.xml" />
 		<mapper resource="mappers/balance.xml" />
 		<mapper resource="mappers/master.xml" />
+		<mapper resource="mappers/ledgerDetail.xml" />
 	</mappers>
 </configuration>

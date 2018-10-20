@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.webmaven.bean.AddSales;
 import com.webmaven.bean.Customer;
+import com.webmaven.bean.LedgerDetail;
 import com.webmaven.bean.Product;
 import com.webmaven.bean.SalesAndPayment;
 import com.webmaven.bean.SalesDetails;
@@ -29,6 +30,7 @@ import com.webmaven.dao.CustomerDAO;
 import com.webmaven.dao.ProductDAO;
 import com.webmaven.dao.SalesAndPaymentDAO;
 import com.webmaven.dao.SalesDetailsDAO;
+import com.webmaven.dao.ViewsDAO;
 import com.webmaven.util.Utility;
 
 @Controller
@@ -77,6 +79,13 @@ public class SalesAndPaymentController {
 
 	public void setSalesDetailsDao(SalesDetailsDAO salesDetailsDao) {
 		this.salesDetailsDao = salesDetailsDao;
+	}
+	
+	@Autowired
+    private ViewsDAO viewsDao;
+	
+	public void setViewDao(ViewsDAO viewsDao) {
+		this.viewsDao = viewsDao;
 	}
 
 	@RequestMapping(value="/addSales", method=RequestMethod.GET)
@@ -198,6 +207,17 @@ public class SalesAndPaymentController {
 		return new ModelAndView("viewLedger", "salesPaymenet", salesPaymenet);
 	}
 	
+	@RequestMapping(value="/viewLedgerDetail/{customerId}/", method=RequestMethod.GET)
+	public ModelAndView viewLedgerDetail(@PathVariable("customerId") int customerId, HttpSession session) {
+		if (!utils.isValidSession(session))
+			return new ModelAndView(LOGOUT_VIEW);
+		List<LedgerDetail> ledgerDetailList = viewsDao.selectLedgerDetail(customerId);
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("ledgerDetailList", ledgerDetailList);
+		models.put("id", customerId);
+		return new ModelAndView("viewLedgerDetail", models);
+	}
+	
 	@RequestMapping(value="/viewPaymentDetails/{id}/", method=RequestMethod.GET)
 	public ModelAndView viewPaymentDetails(@PathVariable("id") int id, HttpSession session) {
 		if (!utils.isValidSession(session))
@@ -231,7 +251,7 @@ public class SalesAndPaymentController {
 		models.put("customerList", customerList);
 		return new ModelAndView("editPaymentDetails", models);
 	}
-
+	
 	private SalesAndPayment getSalesObj(AddSales[] addSalesObj, boolean isEditSales) {
 		if(addSalesObj != null) {
 			AddSales sales = addSalesObj[addSalesObj.length - 1];

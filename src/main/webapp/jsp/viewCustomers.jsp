@@ -76,7 +76,16 @@
 												<td>${CustomerList.mobileNo}</td>
 												<td>${CustomerList.email}</td>
 												<td>
-												<a href="viewLedger/${CustomerList.id}/" class="btn btn-info btn-xs"> Ledger <i class="fa fa-book"></i></a>
+												<div class="btn-group">
+	                  								<a href="viewLedger/${CustomerList.id}/" class="btn btn-info btn-xs"> Ledger <i class="fa fa-book"></i></a>
+	                  								<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+								                    <span class="caret"></span>
+								                    <span class="sr-only">Toggle Dropdown</span>
+								                  	</button>
+								                	<ul class="dropdown-menu" role="menu">
+								                    <li><a href="viewLedgerDetail/${CustomerList.id}/"><i class="fa fa-search-plus"></i>Detail Ledger</a></li>
+								                  </ul>
+								                </div>
 												<a href="addPayment/${CustomerList.id}/" class="btn btn-primary btn-xs"> Payment <i class="fa fa-rupee"></i></a>
 												<div class="btn-group">
 	                  								<button type="button" class="btn btn-success btn-xs">Action</button>

@@ -8,8 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webmaven.bean.Balance;
-import com.webmaven.bean.Product;
-import com.webmaven.controller.UserController;
+import com.webmaven.bean.LedgerDetail;
 import com.webmaven.util.Utility;
 
 public class ViewsDAO {
@@ -46,6 +45,22 @@ public class ViewsDAO {
 			session.close();
 		}
 		logger.info("selectAll() --> " + list);
+		return list;
+
+	}
+	
+	public List<LedgerDetail> selectLedgerDetail(Integer customerId) {
+		List<LedgerDetail> list = null;
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			list = session.selectList("LedgerDetail.selectLedgerDetail", customerId);
+		}catch(Exception e){
+			logger.info("Msg:" + utils.getExceptionStackString(e));
+		} finally {
+			session.close();
+		}
+		logger.info("selectLedgerDetail() --> " + list);
 		return list;
 
 	}

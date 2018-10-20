@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="LedgerDetail">
+ 
+    <resultMap id="ledgerDetailResult" type="LedgerDetail">
+        <result property="customerId" column="customerId"/>
+        <result property="id" column="id"/>
+        <result property="date" column="date"/>
+        <result property="productId" column="productId"/>
+        <result property="quantity" column="quantity"/>
+        <result property="rate" column="rate"/>
+        <result property="lessInQuantity" column="lessInQuantity"/>
+        <result property="bags" column="bags"/>
+        <result property="description" column="description"/>
+        <result property="type" column="type"/>
+        <result property="total" column="total"/>
+        <result property="amount" column="amount"/>
+    </resultMap>
+ 
+    <select id="selectLedgerDetail" parameterType="int" resultMap="ledgerDetailResult">
+        SELECT customerId, id, DATE_FORMAT(date, "%d-%m-%Y") as date, productId, quantity, rate, lessInQuantity, bags, description, type, total, amount FROM vw_ledger_details where customerId = #{customerId};
+    </select>
+    
+</mapper>
