@@ -20,6 +20,7 @@ public class AddSales implements Serializable{
 	private String date = "";
 	private String reminder;
 	private double totalAmount = 0;
+	private double eCharge = 0;
 	private String comment = "";
 	private String type;
 	private String mode;
@@ -96,6 +97,13 @@ public class AddSales implements Serializable{
 	public void setTotalAmount(double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	
+	public double geteCharge() {
+		return eCharge;
+	}
+	public void seteCharge(double eCharge) {
+		this.eCharge = eCharge;
+	}
 	public String getComment() {
 		return comment;
 	}
@@ -138,9 +146,10 @@ public class AddSales implements Serializable{
 	public String toString() {
 		return "AddSales [id=" + id + ", rate=" + rate + ", product=" + product + ", description=" + description
 				+ ", quantity=" + quantity + ", bags=" + bags + ", less=" + less + ", customerId=" + customerId
-				+ ", date=" + date + ", reminder=" + reminder + ", totalAmount=" + totalAmount + ", comment=" + comment + ", type=" + type
-				+ ", mode=" + mode + ", payment=" + payment + ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn
-				+ "]";
-	}	
+				+ ", date=" + date + ", reminder=" + reminder + ", totalAmount=" + totalAmount + ", eCharge=" + eCharge
+				+ ", comment=" + comment + ", type=" + type + ", mode=" + mode + ", payment=" + payment + ", updatedBy="
+				+ updatedBy + ", updatedOn=" + updatedOn + "]";
+	}
+	
 	
 }

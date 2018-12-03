@@ -8,6 +8,7 @@ public class SalesAndPayment{
 	private int customerId;
 	private String salesDate;
 	private String reminder;
+	private double eCharge;
 	private double amount;
 	private String comment;
 	private String type;
@@ -27,8 +28,7 @@ public class SalesAndPayment{
 	}
 	
 	public SalesAndPayment(int customerId, String date, String reminder, double amount, String comment, String type, String mode, int payment) {
-		this.customerId = customerId;
-		this.salesDate = date;
+		this(customerId, date);
 		this.reminder = reminder;
 		this.amount = amount;
 		this.comment = comment;
@@ -38,15 +38,18 @@ public class SalesAndPayment{
 	}
 
 	public SalesAndPayment(int id, int customerId, String date, String reminder, double amount, String comment, String type, String mode, int payment) {
+		this(customerId, date, reminder, amount, comment, type, mode, payment);
 		this.id = id;
-		this.customerId = customerId;
-		this.salesDate = date;
-		this.reminder = reminder;
-		this.amount = amount;
-		this.comment = comment;
-		this.type = type;
-		this.mode = mode;
-		this.payment = payment;
+	}
+	
+	public SalesAndPayment(int id, AddSales addSalesObj) {
+		this(id, addSalesObj.getCustomerId(), addSalesObj.getDate(), addSalesObj.getReminder(), addSalesObj.getTotalAmount(), addSalesObj.getComment(), addSalesObj.getType(), addSalesObj.getMode(), addSalesObj.getPayment());
+		this.seteCharge(addSalesObj.geteCharge());
+	}
+	
+	public SalesAndPayment(AddSales addSalesObj) {
+		this(addSalesObj.getCustomerId(), addSalesObj.getDate(), addSalesObj.getReminder(), addSalesObj.getTotalAmount(), addSalesObj.getComment(), addSalesObj.getType(), addSalesObj.getMode(), addSalesObj.getPayment());
+		this.seteCharge(addSalesObj.geteCharge());
 	}
 	
 	public int getId() {
@@ -77,6 +80,14 @@ public class SalesAndPayment{
 
 	public void setReminder(String reminder) {
 		this.reminder = reminder;
+	}
+
+	public double geteCharge() {
+		return eCharge;
+	}
+
+	public void seteCharge(double eCharge) {
+		this.eCharge = eCharge;
 	}
 
 	public double getAmount() {
@@ -137,9 +148,11 @@ public class SalesAndPayment{
 
 	@Override
 	public String toString() {
-		return "SalesAndPayment [id=" + id + ", customerId=" + customerId + ", salesDate=" + salesDate + ", reminder=" + reminder + " , amount=" + amount
-				+ ", comment=" + comment + ", type=" + type + ", mode=" + mode + ", payment=" + payment + ", updatedBy="
-				+ updatedBy + ", updatedOn=" + updatedOn + "]";
+		return "SalesAndPayment [id=" + id + ", customerId=" + customerId + ", salesDate=" + salesDate + ", reminder="
+				+ reminder + ", eCharge=" + eCharge + ", amount=" + amount + ", comment=" + comment + ", type=" + type
+				+ ", mode=" + mode + ", payment=" + payment + ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn
+				+ "]";
 	}
+
 	
 }

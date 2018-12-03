@@ -110,6 +110,7 @@
 											</c:choose>
 											</tr>
 											<c:set var="amtPrev" scope="session" value="${ledgerDetailList.amount}" />
+											<c:set var="extraCharge" scope="session" value="${ledgerDetailList.extraCharge}" />
 											</c:when>
 											<c:otherwise>
 											<tr>
@@ -118,9 +119,9 @@
 												<td></td>
 												<td></td>
 												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td align="right"><b>Extra Charge:</b></td>
+												<td><b>${extraCharge}</b></td>
+												<td align="right"><b>Total:</b></td>
 												<td><b>${amtPrev}</b></td>
 												<td></td>
 												<td></td>
@@ -154,6 +155,7 @@
 											</tr>
 											<c:set var="idPrev" scope="request" value="${ledgerDetailList.id}" />
 											<c:set var="amtPrev" scope="request" value="${ledgerDetailList.amount}" />
+											<c:set var="extraCharge" scope="session" value="${ledgerDetailList.extraCharge}" />
 											</c:otherwise>
 											</c:choose>
 										</c:forEach>

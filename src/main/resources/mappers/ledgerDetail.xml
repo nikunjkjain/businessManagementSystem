@@ -17,11 +17,12 @@
         <result property="description" column="description"/>
         <result property="type" column="type"/>
         <result property="total" column="total"/>
+        <result property="extraCharge" column="extraCharge"/>
         <result property="amount" column="amount"/>
     </resultMap>
  
     <select id="selectLedgerDetail" parameterType="int" resultMap="ledgerDetailResult">
-        SELECT customerId, id, DATE_FORMAT(date, "%d-%m-%Y") as date, productId, quantity, rate, lessInQuantity, bags, description, type, total, amount FROM vw_ledger_details where customerId = #{customerId};
+        SELECT customerId, id, DATE_FORMAT(date, "%d-%m-%Y") as date, productId, quantity, rate, lessInQuantity, bags, description, type, total, extraCharge, amount FROM vw_ledger_details where customerId = #{customerId};
     </select>
     
 </mapper>

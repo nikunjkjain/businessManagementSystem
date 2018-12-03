@@ -86,16 +86,17 @@
 												<td>${salesDetails.updatedOn}</td>
 											</tr>
 											<c:set var="total" value="${total + (salesDetails.quantity - salesDetails.lessInQuantity) * salesDetails.rate}" />
+											<c:set var="eCharge" value="${salesDetails.extraCharge}" />
 										</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
 											<th></th>
 											<th></th>
-											<th></th>
-											<th></th>
+											<th>Extra Charge</th>
+											<th>${eCharge}</th>
 											<th>Grand total:</th>
-											<th>${total}</th>
+											<th>${total + eCharge}</th>
 											<th></th>
 											<th></th>
 											<th></th>

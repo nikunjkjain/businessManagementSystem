@@ -1,5 +1,5 @@
 <base href="<c:url value ="http://kardhar.in/bms/"/>"/>
-<%-- <base href="<c:url value ="http://localhost:8080/businessManagementSystem/"/>"/> --%>
+<%--<base href="<c:url value ="http://localhost:8080/businessManagementSystem/"/>"/> --%>
 
 <link rel="stylesheet" href="<c:url value ="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"/>">
 <!-- Font Awesome -->
@@ -227,7 +227,8 @@
 			"comment" : document.getElementById('comment').value,
 			"type" : "SALES",
 			"mode" : "CASH",
-			"payment" : 0
+			"payment" : 0,
+			"eCharge" : document.getElementById('echarge').value,
 		}
 		products.push(details);
 		console.log('Printing products Json in getElementsById');

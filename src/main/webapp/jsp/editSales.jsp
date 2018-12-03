@@ -129,6 +129,7 @@
 											<th>Desc</th>
 											<th>Nt.Wt (kg)</th>
 											<th>Total (&#x20B9;)</th>
+											<td></td>
 										</tr>
 									</thead>
 									<tbody>
@@ -153,15 +154,22 @@
 											<td><input class="col-md-12 description" type="text" id="description${count}" name="description${count}" value="${salesDetailsList.description}"/></td>
 											<td><input class="col-md-12 ntWt" type="text" id="ntWt${count}" name="ntWt${count}" readonly="readonly" value="${netWeight}"/></td>
 											<td><input class="col-md-12 total" type="text" id="total${count}" name="total${count}" readonly="readonly" value="${(salesDetailsList.quantity - salesDetailsList.lessInQuantity) * salesDetailsList.rate}"></td>
+											<td></td>
 										</tr>
 										</c:forEach>
 									</tbody>
 									<tfoot>
 										<tr>
-										<!-- <td><input type="button" onclick="editSalesfun();" value="Submit" /></td> -->
+										<td colspan="8" align="right"><b>Extra Charge:</b></td>
+										<td><input type="number" value="${salesAndPayment.eCharge}" id="echarge" required ></td>
+										<td>
+										<input type="button" id ="buttonC" onclick="calculateTotal(this)" value="-" required/>
+										</td>
+										</tr>
+										<tr>
+										<td colspan="8" align="right"><b>Total Amount:</b></td>
+										<td ><input class="col-md-12" type="number" id="tamount" value="${grandTotal + salesAndPayment.eCharge}" readonly="readonly"></td>
 										<td><input type="submit" value="Submit" /></td>
-										<td colspan="7" align="right"><b>Total Amount:</b></td>
-										<td ><input class="col-md-12" type="number" id="tamount" value="${grandTotal}" readonly="readonly"></td>
 										</tr>
 									</tfoot>
 								</table>

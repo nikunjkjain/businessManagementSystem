@@ -46,7 +46,8 @@ function fillSalesDetailsInArray() {
 			"type" : "SALES",
 			"mode" : "CASH",
 			"payment" : 0,
-			"id" : document.getElementById('salesAndPaymentId').value
+			"id" : document.getElementById('salesAndPaymentId').value,
+			"eCharge" : document.getElementById('echarge').value,
 		}
 	products.push(details);
 	console.log(JSON.stringify(products));
@@ -96,6 +97,23 @@ function updateTotalInfo() {
 		grandtotal = grandtotal + parseInt(total[i].value)
 	}
 	document.getElementById('tamount').value = grandtotal;
+}
+
+function calculateTotal(buttonC){
+	  var txtFirstNumberValue = document.getElementById('tamount').value;
+      var txtSecondNumberValue = document.getElementById('echarge').value;
+	  var result
+      if(buttonC.value == '+'){
+		  result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+		  buttonC.value = '-';
+	  }else{
+		  buttonC.value = '+';
+		  result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+		  document.getElementById('echarge').value = 0;
+	  }
+      if (!isNaN(result)) {
+          document.getElementById('tamount').value = result;
+	}
 }
 
 function validatePasswords(){

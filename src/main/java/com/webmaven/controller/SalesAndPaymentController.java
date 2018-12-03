@@ -256,8 +256,8 @@ public class SalesAndPaymentController {
 		if(addSalesObj != null) {
 			AddSales sales = addSalesObj[addSalesObj.length - 1];
 			if(!isEditSales)
-				return new SalesAndPayment(sales.getCustomerId(), sales.getDate(), sales.getReminder(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
-			return new SalesAndPayment(sales.getId(), sales.getCustomerId(), sales.getDate(), sales.getReminder(), sales.getTotalAmount(), sales.getComment(), sales.getType(), sales.getMode(), sales.getPayment());
+				return new SalesAndPayment(sales);
+			return new SalesAndPayment(sales.getId(), sales);
 		}
 		return null;
 	}

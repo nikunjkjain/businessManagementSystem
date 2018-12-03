@@ -14,6 +14,7 @@ public class LedgerDetail {
 	private String type;
 	private double total;
 	private double amount;
+	private double extraCharge;
 	
 	public int getCustomerId() {
 		return customerId;
@@ -86,6 +87,19 @@ public class LedgerDetail {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	public double getExtraCharge() {
+		return extraCharge;
+	}
+	public void setExtraCharge(double extraCharge) {
+		this.extraCharge = extraCharge;
+	}
+	@Override
+	public String toString() {
+		return "LedgerDetail [customerId=" + customerId + ", id=" + id + ", date=" + date + ", productId=" + productId
+				+ ", quantity=" + quantity + ", rate=" + rate + ", lessInQuantity=" + lessInQuantity + ", bags=" + bags
+				+ ", description=" + description + ", type=" + type + ", total=" + total + ", amount=" + amount
+				+ ", extraCharge=" + extraCharge + "]";
 	}
 	
 	

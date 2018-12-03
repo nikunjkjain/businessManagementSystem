@@ -33,6 +33,7 @@
   	  document.getElementById('reminder').valueAsDate = today;
   }
   window.onload = setDate;
+  
   </script>
 
 </head>
@@ -126,11 +127,17 @@
 										</tr>
 									</tbody>
 									<tfoot>
+									<tr>
+										<td colspan="8" align="right"><b>Extra Charge:</b></td>
+										<td><input type="number" id="echarge" required ></td>
+										<td>
+										<input type="button" id ="buttonC" onclick="calculateTotal(this)" value="+" required/>
+										</td>
+										</tr>
 										<tr>
-										<!-- <td ><input type="button" onclick="callController()" value="Call" /></td> -->
-										<td ><input type="submit" value="Submit" /></td>
-										<td colspan="7" align="right"><b>Total Amount:</b></td>
-										<td ><input type="number" id="tamount" required></td>
+										<td colspan="8" align="right"><b>Total Amount:</b></td>
+										<td><input type="number" id="tamount" required readonly="readonly"></td>
+										<td><input type="submit" value="Submit" /></td>
 										</tr>
 									</tfoot>
 								</table>

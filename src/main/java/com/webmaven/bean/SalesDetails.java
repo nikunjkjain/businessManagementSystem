@@ -13,6 +13,7 @@ public class SalesDetails{
 	private String description;
 	private String updatedBy = "";
 	private Date updatedOn = null;
+	private double extraCharge=0;
 	
 	
 	public SalesDetails() {
@@ -28,6 +29,7 @@ public class SalesDetails{
 		this.bags = addSales.getBags();
 		this.description = addSales.getDescription();
 		this.updatedBy = addSales.getUpdatedBy();
+		this.extraCharge = addSales.geteCharge();
 	}
 	
 	public int getSalesId() {
@@ -89,11 +91,19 @@ public class SalesDetails{
 		this.updatedOn = updatedOn;
 	}
 
+	public double getExtraCharge() {
+		return extraCharge;
+	}
+
+	public void setExtraCharge(double extraCharge) {
+		this.extraCharge = extraCharge;
+	}
+
 	@Override
 	public String toString() {
 		return "SalesDetails [salesId=" + salesId + ", productId=" + productId + ", quantity=" + quantity + ", rate="
 				+ rate + ", lessInQuantity=" + lessInQuantity + ", bags=" + bags + ", description=" + description
-				+ ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn + "]";
+				+ ", updatedBy=" + updatedBy + ", updatedOn=" + updatedOn + ", extraCharge=" + extraCharge + "]";
 	}
-	
+
 }

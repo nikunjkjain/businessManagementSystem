@@ -15,6 +15,7 @@
         <result property="description" column="description"/>
         <result property="updatedBy" column="updatedBy"/>
         <result property="updatedOn" column="updatedOn"/>
+        <result property="extraCharge" column="extraCharge"/>
     </resultMap>
  
     <select id="selectAll" resultMap="salesDetailsResult">
@@ -22,7 +23,7 @@
     </select>
  
     <select id="getSalesDetailsBySalesId" parameterType="int" resultMap="salesDetailsResult">
-        SELECT * FROM sales_details WHERE salesId = #{salesId};
+        SELECT sd.*, sp.extraCharge FROM sales_details sd, sales_payment sp WHERE sd.salesId = sp.id and sd.salesId = #{salesId};
     </select>
  
     <insert id="insert" parameterType="java.util.List">
