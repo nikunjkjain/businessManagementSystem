@@ -83,7 +83,7 @@ function updateRowInfo(id) {
 	var qty = document.getElementById('quantity' + id).value;
 	var less = document.getElementById('less' + id).value;
 	var rate = document.getElementById('rate' + id).value;
-	document.getElementById('ntWt' + id).value = (qty - less);
+	document.getElementById('ntWt' + id).value = (qty - less).toFixed(2);
 	document.getElementById('total' + id).value = (qty - less) * rate;
 	updateTotalInfo();
 }
@@ -94,9 +94,9 @@ function updateTotalInfo() {
 	var i;
 	var grandtotal = 0;
 	for (i = 0; i < total.length; i++) {
-		grandtotal = grandtotal + parseInt(total[i].value)
+		grandtotal = grandtotal + parseFloat(total[i].value)
 	}
-	document.getElementById('tamount').value = grandtotal;
+	document.getElementById('tamount').value = grandtotal.toFixed(2);
 }
 
 function calculateTotal(buttonC){
@@ -104,15 +104,15 @@ function calculateTotal(buttonC){
       var txtSecondNumberValue = document.getElementById('echarge').value;
 	  var result
       if(buttonC.value == '+'){
-		  result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+		  result = parseFloat(txtFirstNumberValue) + parseFloat(txtSecondNumberValue);
 		  buttonC.value = '-';
 	  }else{
 		  buttonC.value = '+';
-		  result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
+		  result = parseFloat(txtFirstNumberValue) - parseFloat(txtSecondNumberValue);
 		  document.getElementById('echarge').value = 0;
 	  }
       if (!isNaN(result)) {
-          document.getElementById('tamount').value = result;
+          document.getElementById('tamount').value = result.toFixed(2);
 	}
 }
 

@@ -80,7 +80,7 @@
 												<td>${salesDetails.rate}</td>
 												<td>${salesDetails.bags}</td>
 												<td>${salesDetails.lessInQuantity}</td>
-												<td>${(salesDetails.quantity - salesDetails.lessInQuantity) * salesDetails.rate}</td>
+												<td><fmt:formatNumber value="${((salesDetails.quantity - salesDetails.lessInQuantity) * salesDetails.rate)}" maxFractionDigits="2"/></td>
 												<td>${salesDetails.description}</td>
 												<td>${salesDetails.updatedBy}</td>
 												<td>${salesDetails.updatedOn}</td>
@@ -96,7 +96,7 @@
 											<th>Extra Charge</th>
 											<th>${eCharge}</th>
 											<th>Grand total:</th>
-											<th>${total + eCharge}</th>
+											<th><fmt:formatNumber value="${total + eCharge}" maxFractionDigits="2"/></th>
 											<th></th>
 											<th></th>
 											<th></th>

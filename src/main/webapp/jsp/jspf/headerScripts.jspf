@@ -145,11 +145,11 @@
 
 		//Add ntWt cell.
 		cell = $(row.insertCell(-1));
-		cell.html(quantity - less);
+		cell.html((quantity - less).toFixed(2));
 
 		//Add total cell.
 		cell = $(row.insertCell(-1));
-		cell.html((quantity - less) * rate);
+		cell.html(((quantity - less) * rate).toFixed(2));
 
 		//Add Button cell.
 		cell = $(row.insertCell(-1));
@@ -161,7 +161,7 @@
 		
 		totalAmount += (quantity - less) * rate;
 		
-		$("#tamount").val(totalAmount);
+		$("#tamount").val(totalAmount.toFixed(2));
 		
 		console.log("<=== function AddRow");
 	};
@@ -190,7 +190,7 @@
 
 			//subtracting current row total from total amount
 			totalAmount = totalAmount - ((pqty - pless) * prate);
-			$("#tamount").val(totalAmount);
+			$("#tamount").val(totalAmount.toFixed(2));
 			
 			// function to remove the element from the array
 			removeElementFromArrary(rowID)
